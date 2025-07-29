@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for energy flow visualization */
+.link {
+  @apply stroke-current stroke-2 transition-all duration-300;
+}
+
+.link-flow {
+  animation: flow 2s linear infinite;
+}
+
+.node {
+  @apply cursor-pointer transition-transform duration-300;
+}
+
+.node:hover {
+  @apply scale-110;
+}
+
+@keyframes flow {
+  0% {
+    stroke-dashoffset: 24;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
