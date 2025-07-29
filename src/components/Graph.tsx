@@ -136,11 +136,13 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
 
     // Add hover events to links
     linkSelection
-      .on('mouseover', (event, d: Link) => {
+      .on('mouseover', (event, d: any) => {
         const flow = Math.abs(d.flow[currentHour]).toFixed(2);
+        const sourceName = d.source.name || d.source.id;
+        const targetName = d.target.name || d.target.id;
         tooltip
           .style('visibility', 'visible')
-          .html(`${d.source} → ${d.target}<br/>${flow} kWh`);
+          .html(`${sourceName} → ${targetName}<br/>${flow} kWh`);
       })
       .on('mousemove', (event) => {
         tooltip
