@@ -4,8 +4,19 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'flow': 'flow 2s linear infinite',
+      },
+      keyframes: {
+        flow: {
+          '0%': { strokeDashoffset: '24' },
+          '100%': { strokeDashoffset: '0' },
+        },
+      },
+    },
   },
   plugins: [],
 }
