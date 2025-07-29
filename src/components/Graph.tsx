@@ -116,7 +116,7 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
       .attr('fill', '#fff')
       .attr('font-size', '12px')
       .attr('font-weight', 'bold')
-      .text((d: Node) => d.id);
+      .text((d: Node) => d.name || d.id);
 
     // Add tooltips
     const tooltip = d3.select('body').append('div')
@@ -151,9 +151,10 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
     // Add hover events to nodes
     nodeSelection
       .on('mouseover', (event, d: Node) => {
+        const displayName = d.name || d.id;
         tooltip
           .style('visibility', 'visible')
-          .html(`${d.id}<br/>Type: ${d.type}`);
+          .html(`${displayName}<br/>Type: ${d.type}<br/>ID: ${d.id}`);
       })
       .on('mousemove', (event) => {
         tooltip

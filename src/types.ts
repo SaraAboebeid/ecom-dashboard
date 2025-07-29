@@ -1,6 +1,7 @@
 export interface Node {
   id: string;
   type: 'building' | 'pv' | 'grid' | 'battery' | 'charge_point';
+  name?: string;
   x?: number;
   y?: number;
 }
@@ -8,6 +9,7 @@ export interface Node {
 export interface Link {
   source: string;
   target: string;
+  type?: string;
   flow: number[];  // Array of 48 hourly values
 }
 
