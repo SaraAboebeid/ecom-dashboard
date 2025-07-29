@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Graph } from './components/Graph';
 import { Timeline } from './components/Timeline';
 import { Legend } from './components/Legend';
@@ -47,6 +47,29 @@ function App() {
     setIsPlaying(!isPlaying);
   };
 
+  const filteredData = useMemo(() => {
+    if (!data) return { nodes: [], links: [] };
+    return {
+      nodes: data.nodes.filter(node => activeTypes.has(node.type)),
+      links: data.links.filter(link => {
+        const sourceNode = data.nodes.find(n => n.id === link.source);
+        const targetNode = data.nodes.find(n => n.id === link.target);
+        return (
+          sourceNode &&
+          targetNode &&
+          activeTypes.has(sourceNode.type) &&
+          activeTypes.has(targetNode.type) &&
+          Math.abs(link.flow[currentHour]) >= minFlow
+        );
+      }),
+    };
+  }, [data, activeTypes, currentHour, minFlow]);
+
+  const filters = useMemo(() => ({
+    nodeTypes: activeTypes,
+    minFlow
+  }), [activeTypes, minFlow]);
+
   if (!data) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -54,21 +77,6 @@ function App() {
       </div>
     );
   }
-
-  const filteredData = {
-    nodes: data.nodes.filter(node => activeTypes.has(node.type)),
-    links: data.links.filter(link => {
-      const sourceNode = data.nodes.find(n => n.id === link.source);
-      const targetNode = data.nodes.find(n => n.id === link.target);
-      return (
-        sourceNode &&
-        targetNode &&
-        activeTypes.has(sourceNode.type) &&
-        activeTypes.has(targetNode.type) &&
-        link.flow[currentHour] >= minFlow
-      );
-    }),
-  };
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'dark' : ''}`}>
@@ -87,7 +95,7 @@ function App() {
         <Graph
           data={filteredData}
           currentHour={currentHour}
-          filters={{ nodeTypes: activeTypes, minFlow }}
+          filters={filters}
         />
 
         <Legend

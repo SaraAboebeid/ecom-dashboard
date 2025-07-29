@@ -13,6 +13,7 @@ interface GraphProps {
 
 export const Graph = ({ data, currentHour, filters }: GraphProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
+  const simulationRef = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Initialize the simulation only once
   useEffect(() => {
     if (!svgRef.current || !data.nodes.length) return;
 
@@ -36,12 +38,18 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
 
     const { width, height } = dimensions;
 
+    // Create deep copies to avoid modifying original data
+    const nodeData = data.nodes.map(d => ({ ...d }));
+    const linkData = data.links.map(d => ({ ...d }));
+
     // Create force simulation
-    const simulation = d3.forceSimulation(data.nodes as d3.SimulationNodeDatum[])
-      .force('link', d3.forceLink(data.links).id((d: any) => d.id))
+    const simulation = d3.forceSimulation(nodeData as d3.SimulationNodeDatum[])
+      .force('link', d3.forceLink(linkData).id((d: any) => d.id).distance(100))
       .force('charge', d3.forceManyBody().strength(-400))
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(50));
+      .force('collision', d3.forceCollide().radius(30));
+
+    simulationRef.current = simulation;
 
     // Create container for zoom
     const container = svg.append('g');
@@ -71,70 +79,101 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
       .attr('d', 'M0,-5L10,0L0,5');
 
     // Draw links
-    const links = container.append('g')
+    const linkSelection = container.append('g')
       .selectAll('path')
-      .data(data.links)
+      .data(linkData)
       .enter().append('path')
       .attr('class', 'link')
       .attr('stroke', '#999')
       .attr('stroke-opacity', 0.6)
-      .attr('stroke-width', (d: Link) => Math.max(1, d.flow[currentHour]))
+      .attr('stroke-width', (d: Link) => Math.max(1, Math.abs(d.flow[currentHour]) * 2))
       .attr('marker-end', 'url(#flow)')
-      .style('stroke-dasharray', '4,4');
+      .attr('fill', 'none');
 
     // Draw nodes
-    const nodes = container.append('g')
+    const nodeSelection = container.append('g')
       .selectAll('g')
-      .data(data.nodes)
+      .data(nodeData)
       .enter().append('g')
       .attr('class', 'node')
+      .style('cursor', 'pointer')
       .call(d3.drag()
         .on('start', dragstarted)
         .on('drag', dragged)
         .on('end', dragended) as any);
 
     // Add circles for nodes
-    nodes.append('circle')
+    nodeSelection.append('circle')
       .attr('r', 20)
       .attr('fill', (d: Node) => NODE_COLORS[d.type])
       .attr('stroke', '#fff')
       .attr('stroke-width', 2);
 
     // Add labels
-    nodes.append('text')
+    nodeSelection.append('text')
       .attr('text-anchor', 'middle')
       .attr('dy', '.35em')
       .attr('fill', '#fff')
+      .attr('font-size', '12px')
+      .attr('font-weight', 'bold')
       .text((d: Node) => d.id);
 
     // Add tooltips
     const tooltip = d3.select('body').append('div')
-      .attr('class', 'absolute invisible bg-gray-800 text-white p-2 rounded shadow-lg text-sm')
-      .style('pointer-events', 'none');
+      .attr('class', 'tooltip')
+      .style('position', 'absolute')
+      .style('visibility', 'hidden')
+      .style('background', 'rgba(0, 0, 0, 0.8)')
+      .style('color', 'white')
+      .style('padding', '8px')
+      .style('border-radius', '4px')
+      .style('font-size', '12px')
+      .style('pointer-events', 'none')
+      .style('z-index', '1000');
 
-    links
+    // Add hover events to links
+    linkSelection
       .on('mouseover', (event, d: Link) => {
-        const flow = d.flow[currentHour].toFixed(2);
+        const flow = Math.abs(d.flow[currentHour]).toFixed(2);
         tooltip
-          .html(`${d.source} → ${d.target}<br/>${flow} kWh`)
-          .classed('invisible', false)
+          .style('visibility', 'visible')
+          .html(`${d.source} → ${d.target}<br/>${flow} kWh`);
+      })
+      .on('mousemove', (event) => {
+        tooltip
           .style('left', (event.pageX + 10) + 'px')
           .style('top', (event.pageY - 10) + 'px');
       })
       .on('mouseout', () => {
-        tooltip.classed('invisible', true);
+        tooltip.style('visibility', 'hidden');
       });
 
-    // Update link positions
+    // Add hover events to nodes
+    nodeSelection
+      .on('mouseover', (event, d: Node) => {
+        tooltip
+          .style('visibility', 'visible')
+          .html(`${d.id}<br/>Type: ${d.type}`);
+      })
+      .on('mousemove', (event) => {
+        tooltip
+          .style('left', (event.pageX + 10) + 'px')
+          .style('top', (event.pageY - 10) + 'px');
+      })
+      .on('mouseout', () => {
+        tooltip.style('visibility', 'hidden');
+      });
+
+    // Update positions on simulation tick
     simulation.on('tick', () => {
-      links.attr('d', (d: any) => {
+      linkSelection.attr('d', (d: any) => {
         const dx = d.target.x - d.source.x;
         const dy = d.target.y - d.source.y;
         const dr = Math.sqrt(dx * dx + dy * dy);
         return `M${d.source.x},${d.source.y}A${dr},${dr} 0 0,1 ${d.target.x},${d.target.y}`;
       });
 
-      nodes.attr('transform', (d: any) => `translate(${d.x},${d.y})`);
+      nodeSelection.attr('transform', (d: any) => `translate(${d.x},${d.y})`);
     });
 
     // Drag functions
@@ -155,11 +194,37 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
       d.fy = null;
     }
 
-    // Cleanup
+    // Cleanup function
     return () => {
       simulation.stop();
+      d3.select('body').selectAll('.tooltip').remove();
     };
-  }, [data, dimensions, currentHour, filters]);
+  }, [data, dimensions]); // Remove filters and currentHour from dependencies
+
+  // Update link widths and colors when currentHour changes (without recreating the entire graph)
+  useEffect(() => {
+    if (!svgRef.current) return;
+
+    const svg = d3.select(svgRef.current);
+    const linkSelection = svg.selectAll('.link');
+    
+    linkSelection
+      .transition()
+      .duration(300)
+      .attr('stroke-width', (d: any) => Math.max(1, Math.abs(d.flow[currentHour]) * 2))
+      .attr('stroke-opacity', (d: any) => Math.abs(d.flow[currentHour]) > 0 ? 0.8 : 0.3);
+
+  }, [currentHour]); // Only update visual properties when hour changes
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (simulationRef.current) {
+        simulationRef.current.stop();
+      }
+      d3.select('body').selectAll('.tooltip').remove();
+    };
+  }, []);
 
   return (
     <div className="w-full h-full">
