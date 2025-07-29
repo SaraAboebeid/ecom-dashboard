@@ -15,6 +15,9 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const simulationRef = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+  
+  // Create a stable key for the graph structure
+  const graphStructureKey = `${data.nodes.map(n => n.id).sort().join(',')}-${data.links.map(l => `${l.source}-${l.target}`).sort().join(',')}`;
 
   useEffect(() => {
     const handleResize = () => {
@@ -200,7 +203,7 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
       simulation.stop();
       d3.select('body').selectAll('.tooltip').remove();
     };
-  }, [data, dimensions]); // Remove filters and currentHour from dependencies
+  }, [graphStructureKey, dimensions]); // Only recreate when actual structure changes
 
   // Update link widths and colors when currentHour changes (without recreating the entire graph)
   useEffect(() => {
