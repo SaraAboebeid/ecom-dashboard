@@ -47,7 +47,7 @@ export const Timeline = ({
       <div className="max-w-7xl mx-auto flex items-center gap-4">
         <button
           onClick={onPlayPause}
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2"
+          className="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors duration-300"
         >
           {isPlaying ? (
             <>

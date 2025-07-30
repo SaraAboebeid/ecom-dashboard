@@ -20,17 +20,39 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDarkMode(mediaQuery.matches);
+    // Check localStorage first, then system preference
+    const storedTheme = localStorage.getItem('theme');
+    
+    if (storedTheme) {
+      setIsDarkMode(storedTheme === 'dark');
+      document.documentElement.classList.toggle('dark', storedTheme === 'dark');
+    } else {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const isDark = mediaQuery.matches;
+      setIsDarkMode(isDark);
+      document.documentElement.classList.toggle('dark', isDark);
+    }
 
-    const handler = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
+    // Listen for system preference changes
+    const handler = (e: MediaQueryListEvent) => {
+      // Only update if no theme is stored in localStorage
+      if (!localStorage.getItem('theme')) {
+        setIsDarkMode(e.matches);
+        document.documentElement.classList.toggle('dark', e.matches);
+      }
+    };
+    
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     mediaQuery.addEventListener('change', handler);
     return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark');
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+    document.documentElement.classList.toggle('dark', newDarkMode);
+    // Save preference to localStorage
+    localStorage.setItem('theme', newDarkMode ? 'dark' : 'light');
   };
 
   const toggleNodeType = (type: string) => {
@@ -79,11 +101,13 @@ function App() {
   }
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'dark' : ''}`}>
-      <div className="relative w-full h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-screen transition-colors duration-300 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <div className="relative w-full h-screen">
         <button
           onClick={toggleDarkMode}
-          className="absolute top-4 right-4 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
+          className="absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-md transition-all duration-300 z-50"
+          aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+          title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
         >
           {isDarkMode ? (
             <SunIcon className="w-6 h-6 text-yellow-500" />
