@@ -12,11 +12,7 @@
 }
 
 .node {
-  @apply cursor-pointer transition-transform duration-300;
-}
-
-.node:hover {
-  @apply scale-110;
+  @apply cursor-pointer;
 }
 
 @keyframes flow {

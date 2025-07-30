@@ -15,21 +15,64 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const simulationRef = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+  // Tooltip div ref (created only once)
+  const tooltipRef = useRef<HTMLDivElement | null>(null);
   
   // Create a stable key for the graph structure
   const graphStructureKey = `${data.nodes.map(n => n.id).sort().join(',')}-${data.links.map(l => `${l.source}-${l.target}`).sort().join(',')}`;
+  
+  // Create stable keys for filters to prevent unnecessary re-renders
+  const nodeTypesKey = Array.from(filters.nodeTypes).sort().join(',');
+  const filtersKey = `${nodeTypesKey}-${filters.minFlow}`;
 
   useEffect(() => {
     const handleResize = () => {
       if (svgRef.current) {
         const { width, height } = svgRef.current.getBoundingClientRect();
-        setDimensions({ width, height });
+        setDimensions(prev => {
+          // Only update if dimensions actually changed to prevent unnecessary re-renders
+          if (prev.width !== width || prev.height !== height) {
+            return { width, height };
+          }
+          return prev;
+        });
       }
     };
 
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Create tooltip div only once
+  useEffect(() => {
+    if (!tooltipRef.current) {
+      const div = document.createElement('div');
+      div.className = 'tooltip';
+      div.style.position = 'absolute';
+      div.style.visibility = 'hidden';
+      div.style.background = 'rgba(0, 0, 0, 0.8)';
+      div.style.color = 'white';
+      div.style.padding = '8px';
+      div.style.borderRadius = '4px';
+      div.style.fontSize = '12px';
+      div.style.pointerEvents = 'none'; // Ensures tooltip never captures pointer events
+      div.style.zIndex = '1000';
+      div.style.userSelect = 'none'; // Prevent text selection
+      div.style.maxWidth = '200px';
+      div.style.wordWrap = 'break-word';
+      document.body.appendChild(div);
+      tooltipRef.current = div;
+    } else {
+      // Always ensure pointer-events is none
+      tooltipRef.current.style.pointerEvents = 'none';
+    }
+    return () => {
+      if (tooltipRef.current) {
+        tooltipRef.current.remove();
+        tooltipRef.current = null;
+      }
+    };
   }, []);
 
   // Initialize the simulation only once
@@ -121,53 +164,69 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
       .attr('font-weight', 'bold')
       .text((d: Node) => d.name || d.id);
 
-    // Add tooltips
-    const tooltip = d3.select('body').append('div')
-      .attr('class', 'tooltip')
-      .style('position', 'absolute')
-      .style('visibility', 'hidden')
-      .style('background', 'rgba(0, 0, 0, 0.8)')
-      .style('color', 'white')
-      .style('padding', '8px')
-      .style('border-radius', '4px')
-      .style('font-size', '12px')
-      .style('pointer-events', 'none')
-      .style('z-index', '1000');
+    // Use tooltipRef for tooltip
+    const tooltip = tooltipRef.current;
+    let hideTooltipTimeout: number | null = null;
+
+    // Helper to show tooltip
+    function showTooltip(html: string, event: any) {
+      if (!tooltip) return;
+      if (hideTooltipTimeout) {
+        clearTimeout(hideTooltipTimeout);
+        hideTooltipTimeout = null;
+      }
+      tooltip.innerHTML = html;
+      tooltip.style.visibility = 'visible';
+      // Position tooltip away from cursor to prevent interference
+      tooltip.style.left = (event.pageX + 15) + 'px';
+      tooltip.style.top = (event.pageY - 35) + 'px';
+    }
+    // Helper to hide tooltip with debounce
+    function hideTooltip() {
+      if (!tooltip) return;
+      if (hideTooltipTimeout) clearTimeout(hideTooltipTimeout);
+      hideTooltipTimeout = setTimeout(() => {
+        if (tooltip) tooltip.style.visibility = 'hidden';
+      }, 80); // 80ms debounce
+    }
 
     // Add hover events to links
     linkSelection
       .on('mouseover', (event, d: any) => {
+        event.stopPropagation();
         const flow = Math.abs(d.flow[currentHour]).toFixed(2);
         const sourceName = d.source.name || d.source.id;
         const targetName = d.target.name || d.target.id;
-        tooltip
-          .style('visibility', 'visible')
-          .html(`${sourceName} → ${targetName}<br/>${flow} kWh`);
+        showTooltip(`${sourceName} → ${targetName}<br/>${flow} kWh`, event);
       })
       .on('mousemove', (event) => {
-        tooltip
-          .style('left', (event.pageX + 10) + 'px')
-          .style('top', (event.pageY - 10) + 'px');
+        event.stopPropagation();
+        if (!tooltip) return;
+        tooltip.style.left = (event.pageX + 15) + 'px';
+        tooltip.style.top = (event.pageY - 35) + 'px';
       })
-      .on('mouseout', () => {
-        tooltip.style('visibility', 'hidden');
+      .on('mouseout', (event) => {
+        event.stopPropagation();
+        hideTooltip();
       });
 
     // Add hover events to nodes
     nodeSelection
       .on('mouseover', (event, d: Node) => {
+        // Prevent event bubbling that could cause flickering
+        event.stopPropagation();
         const displayName = d.name || d.id;
-        tooltip
-          .style('visibility', 'visible')
-          .html(`${displayName}<br/>Type: ${d.type}<br/>ID: ${d.id}`);
+        showTooltip(`${displayName}<br/>Type: ${d.type}<br/>ID: ${d.id}`, event);
       })
       .on('mousemove', (event) => {
-        tooltip
-          .style('left', (event.pageX + 10) + 'px')
-          .style('top', (event.pageY - 10) + 'px');
+        event.stopPropagation();
+        if (!tooltip) return;
+        tooltip.style.left = (event.pageX + 15) + 'px';
+        tooltip.style.top = (event.pageY - 35) + 'px';
       })
-      .on('mouseout', () => {
-        tooltip.style('visibility', 'hidden');
+      .on('mouseout', (event) => {
+        event.stopPropagation();
+        hideTooltip();
       });
 
     // Update positions on simulation tick
@@ -203,9 +262,9 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
     // Cleanup function
     return () => {
       simulation.stop();
-      d3.select('body').selectAll('.tooltip').remove();
+      // Do not remove tooltip here; it's managed by the outer effect
     };
-  }, [graphStructureKey, dimensions]); // Only recreate when actual structure changes
+  }, [graphStructureKey, dimensions.width, dimensions.height, filtersKey]); // Only recreate when actual structure or filters change
 
   // Update link widths and colors when currentHour changes (without recreating the entire graph)
   useEffect(() => {
@@ -228,7 +287,7 @@ export const Graph = ({ data, currentHour, filters }: GraphProps) => {
       if (simulationRef.current) {
         simulationRef.current.stop();
       }
-      d3.select('body').selectAll('.tooltip').remove();
+      // Tooltip is removed by the tooltip effect above
     };
   }, []);
 
