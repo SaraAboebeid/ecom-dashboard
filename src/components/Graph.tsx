@@ -196,8 +196,43 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
 
     svg.call(zoom as any);
 
+    // Create SVG filter for glow effect
+    const defs = svg.append('defs');
+    
+    // Create filter
+    const filter = defs.append('filter')
+      .attr('id', 'glow')
+      .attr('x', '-40%')
+      .attr('y', '-40%')
+      .attr('width', '180%')
+      .attr('height', '180%');
+    
+    // Add blur effect
+    filter.append('feGaussianBlur')
+      .attr('stdDeviation', '3')
+      .attr('result', 'blur');
+      
+    // Add color overlay
+    filter.append('feFlood')
+      .attr('flood-color', '#4db8ff')
+      .attr('flood-opacity', '0.3')
+      .attr('result', 'color');
+      
+    filter.append('feComposite')
+      .attr('in', 'color')
+      .attr('in2', 'blur')
+      .attr('operator', 'in')
+      .attr('result', 'coloredBlur');
+      
+    // Merge the original and the colored blur
+    const feMerge = filter.append('feMerge');
+    feMerge.append('feMergeNode')
+      .attr('in', 'coloredBlur');
+    feMerge.append('feMergeNode')
+      .attr('in', 'SourceGraphic');
+    
     // Create arrow marker for links
-    svg.append('defs').selectAll('marker')
+    defs.selectAll('marker')
       .data(['flow'])
       .enter().append('marker')
       .attr('id', d => d)
@@ -216,11 +251,18 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       .selectAll('path')
       .data(linkData)
       .enter().append('path')
-      .attr('class', 'link')
+      .attr('class', (d: Link) => {
+        // Set appropriate class based on flow direction
+        if (Math.abs(d.flow[currentHour]) > 0) {
+          return d.flow[currentHour] > 0 ? 'link link-flow' : 'link link-flow-reverse';
+        }
+        return 'link';
+      })
       .attr('stroke', '#999')
       .attr('stroke-opacity', 0.6)
       .attr('stroke-width', (d: Link) => Math.max(1, Math.abs(d.flow[currentHour]) * 2))
       .attr('marker-end', 'url(#flow)')
+      .attr('stroke-dasharray', '12 12')  // Create dashed line pattern for animation
       .attr('fill', 'none');
 
     // Draw nodes
@@ -523,7 +565,14 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       .transition()
       .duration(300)
       .attr('stroke-width', (d: any) => Math.max(1, Math.abs(d.flow[currentHour]) * 2))
-      .attr('stroke-opacity', (d: any) => Math.abs(d.flow[currentHour]) > 0 ? 0.8 : 0.3);
+      .attr('stroke-opacity', (d: any) => Math.abs(d.flow[currentHour]) > 0 ? 0.8 : 0.3)
+      .attr('class', (d: any) => {
+        // Update animation class based on flow direction
+        if (Math.abs(d.flow[currentHour]) > 0) {
+          return d.flow[currentHour] > 0 ? 'link link-flow' : 'link link-flow-reverse';
+        }
+        return 'link';
+      });
 
   }, [currentHour]); // Only update visual properties when hour changes
 

@@ -5,10 +5,17 @@
 /* Custom styles for energy flow visualization */
 .link {
   @apply stroke-current stroke-2 transition-all duration-300;
+  stroke-dasharray: 12 12;
 }
 
 .link-flow {
   animation: flow 2s linear infinite;
+  filter: url(#glow);
+}
+
+.link-flow-reverse {
+  animation: flow-reverse 2s linear infinite;
+  filter: url(#glow);
 }
 
 .node {
@@ -22,4 +29,19 @@
   100% {
     stroke-dashoffset: 0;
   }
+}
+
+@keyframes flow-reverse {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 24;
+  }
+}
+
+/* Glow effect when hovering over links */
+.link:hover {
+  filter: url(#glow);
+  stroke-width: calc(100% + 2px);
 }
