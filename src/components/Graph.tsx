@@ -402,9 +402,9 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
 
     // Draw links
     const linkSelection = container.append('g')
-      .selectAll('path')
+      .selectAll('line')
       .data(linkData)
-      .enter().append('path')
+      .enter().append('line')
       .attr('class', (d: Link) => {
         // Set appropriate class based on flow direction
         if (Math.abs(d.flow[currentHour]) > 0) {
@@ -445,7 +445,10 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         return 'url(#flow)';
       })
       .attr('stroke-dasharray', '12 12')  // Create dashed line pattern for animation
-      .attr('fill', 'none');
+      .attr('x1', 0)
+      .attr('y1', 0)
+      .attr('x2', 0)
+      .attr('y2', 0);
 
     // Draw nodes
     const nodeSelection = container.append('g')
@@ -801,12 +804,11 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
 
     // Update positions on simulation tick
     simulation.on('tick', () => {
-      linkSelection.attr('d', (d: any) => {
-        const dx = d.target.x - d.source.x;
-        const dy = d.target.y - d.source.y;
-        const dr = Math.sqrt(dx * dx + dy * dy);
-        return `M${d.source.x},${d.source.y}A${dr},${dr} 0 0,1 ${d.target.x},${d.target.y}`;
-      });
+      linkSelection
+        .attr('x1', (d: any) => d.source.x)
+        .attr('y1', (d: any) => d.source.y)
+        .attr('x2', (d: any) => d.target.x)
+        .attr('y2', (d: any) => d.target.y);
 
       nodeSelection.attr('transform', (d: any) => `translate(${d.x},${d.y})`);
     });
