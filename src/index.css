@@ -96,11 +96,6 @@
 }
 
 /* Node type-specific styles */
-.node-building circle { fill: #4B5563; }
-.node-pv circle { fill: #F59E0B; }
-.node-grid circle { fill: #10B981; }
-.node-battery circle { fill: #3B82F6; }
-.node-charge_point circle { fill: #8B5CF6; }
 
 /* Type-specific glow effects */
 .node-building:hover circle { filter: url(#glow-building); }

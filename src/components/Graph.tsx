@@ -178,7 +178,7 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
 
     // Create force simulation
     const simulation = d3.forceSimulation(nodeData as d3.SimulationNodeDatum[])
-      .force('link', d3.forceLink(linkData).id((d: any) => d.id).distance(150)) // Increased distance between connected nodes
+      .force('link', d3.forceLink(linkData).id((d: any) => d.id).distance(300)) // Increased distance between connected nodes
       .force('charge', d3.forceManyBody().strength(-600)) // Increased repulsion between nodes
       .force('center', d3.forceCenter(width / 2, height / 2))
       .force('collision', d3.forceCollide().radius(55)); // Increased collision radius for larger nodes
@@ -503,7 +503,7 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         return r * 1.25;
       })
       .attr('fill', 'none')
-      .attr('stroke', d => NODE_COLORS[d.type] || '#fff')
+      .attr('stroke', d => NODE_COLORS[d.type])
       .attr('stroke-width', 4)
       .attr('opacity', 1)
       .attr('filter', d => `url(#neon-glow-${d.type})`);
@@ -527,8 +527,8 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
             return baseRadius;
         }
       })
-      .attr('fill', d => NODE_COLORS[d.type] || '#fff')
-      .attr('stroke', d => NODE_COLORS[d.type] || '#fff')
+      .attr('fill', d => NODE_COLORS[d.type])
+      .attr('stroke', d => NODE_COLORS[d.type])
       .attr('stroke-width', 2)
       .attr('filter', d => `url(#neon-glow-${d.type})`);
 
