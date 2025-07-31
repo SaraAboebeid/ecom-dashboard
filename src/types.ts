@@ -43,11 +43,11 @@ export interface GraphState {
   };
 }
 
-// Color scheme for different node types
+// Color scheme for different node types - Neon colors
 export const NODE_COLORS = {
-  building: '#4B5563',    // Gray
-  pv: '#F59E0B',         // Yellow
-  grid: '#10B981',       // Green
-  battery: '#3B82F6',    // Blue
-  charge_point: '#8B5CF6' // Purple
+  building: '#FF00FF',    // Neon Magenta/Pink
+  pv: '#FFFF00',          // Neon Yellow
+  grid: '#00FF00',        // Neon Green
+  battery: '#00FFFF',     // Neon Cyan
+  charge_point: '#FF6600' // Neon Orange
 };
