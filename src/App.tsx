@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Graph } from './components/Graph';
 import { Timeline } from './components/Timeline';
 import { Legend } from './components/Legend';
+import { DashboardHeader } from './components/DashboardHeader';
 import { GraphData } from './types';
 
 function App() {
@@ -183,7 +184,10 @@ function App() {
 
   return (
     <div className="min-h-screen transition-colors duration-300 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-      <div className="relative w-full h-screen">
+      {/* Dashboard Header */}
+      <DashboardHeader data={data} currentHour={currentHour} />
+      
+      <div className="relative w-full" style={{ height: 'calc(100vh - 120px)' }}>
         <button
           onClick={toggleDarkMode}
           className="absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-md transition-all duration-300 z-50"
