@@ -25,6 +25,7 @@ interface GraphProps {
 export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const simulationRef = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null);
+  const particleTimeoutsRef = useRef<number[]>([]);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
   // Tooltip div ref (created only once)
   const tooltipRef = useRef<HTMLDivElement | null>(null);
@@ -454,6 +455,114 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       .attr('x2', 0)
       .attr('y2', 0);
 
+    // Create particle system for energy flow visualization
+    const particleContainer = container.append('g').attr('class', 'particles');
+    
+    const createParticles = () => {
+      // Clear existing timeouts
+      particleTimeoutsRef.current.forEach(clearTimeout);
+      particleTimeoutsRef.current = [];
+      
+      // Remove existing particles
+      particleContainer.selectAll('.particle').remove();
+      
+      // Create particles for links with active flow
+      linkData.forEach((link: any, linkIndex: number) => {
+        const flowValue = Math.abs(link.flow[currentHour]);
+        if (flowValue < 0.01) return; // Skip links with minimal flow
+        
+        // Number of particles based on flow intensity (1-5 particles)
+        const numParticles = Math.min(5, Math.max(1, Math.floor(flowValue * 3)));
+        
+        // Get source node color for particles
+        const sourceNode = link.source.type ? link.source : data.nodes.find(n => n.id === link.source);
+        const particleColor = sourceNode ? NODE_COLORS[sourceNode.type] : '#999';
+        
+        for (let i = 0; i < numParticles; i++) {
+          const particle = particleContainer.append('circle')
+            .attr('class', `particle particle-${linkIndex}-${i}`)
+            .attr('r', 2 + (flowValue * 2)) // Particle size based on flow
+            .attr('fill', particleColor)
+            .attr('stroke', particleColor)
+            .attr('stroke-width', 1)
+            .attr('opacity', 0.8)
+            .attr('filter', 'url(#glow)')
+            .style('pointer-events', 'none');
+          
+          // Initial position offset for multiple particles on same link
+          const offset = (i / numParticles) * 1.0;
+          
+          // Animation function for particle movement
+          const animateParticle = () => {
+            const sourceX = link.source.x || 0;
+            const sourceY = link.source.y || 0;
+            const targetX = link.target.x || 0;
+            const targetY = link.target.y || 0;
+            
+            // Calculate direction based on flow direction
+            const isReverse = link.flow[currentHour] < 0;
+            const startX = isReverse ? targetX : sourceX;
+            const startY = isReverse ? targetY : sourceY;
+            const endX = isReverse ? sourceX : targetX;
+            const endY = isReverse ? sourceY : targetY;
+            
+            // Calculate node radius to start/end particles at edge of nodes
+            const nodeRadius = 35; // Approximate node radius
+            const dx = endX - startX;
+            const dy = endY - startY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance === 0) return;
+            
+            const unitX = dx / distance;
+            const unitY = dy / distance;
+            
+            // Adjust start and end positions to node edges
+            const adjustedStartX = startX + (unitX * nodeRadius);
+            const adjustedStartY = startY + (unitY * nodeRadius);
+            const adjustedEndX = endX - (unitX * nodeRadius);
+            const adjustedEndY = endY - (unitY * nodeRadius);
+            
+            // Set initial position with offset
+            const initialProgress = offset;
+            const initialX = adjustedStartX + (adjustedEndX - adjustedStartX) * initialProgress;
+            const initialY = adjustedStartY + (adjustedEndY - adjustedStartY) * initialProgress;
+            
+            particle
+              .attr('cx', initialX)
+              .attr('cy', initialY);
+            
+            // Animation duration based on flow intensity (faster for higher flow)
+            const duration = Math.max(1000, 3000 - (flowValue * 500));
+            
+            // Animate particle movement
+            particle
+              .transition()
+              .duration(duration)
+              .ease(d3.easeLinear)
+              .attr('cx', adjustedEndX)
+              .attr('cy', adjustedEndY)
+              .on('end', function() {
+                // Reset particle to start position and restart animation
+                d3.select(this)
+                  .attr('cx', adjustedStartX)
+                  .attr('cy', adjustedStartY);
+                
+                // Restart animation after a small delay
+                setTimeout(animateParticle, i * 200); // Stagger restart times
+              });
+          };
+          
+          // Start animation with initial delay
+          const timeoutId = setTimeout(animateParticle, i * 200);
+          particleTimeoutsRef.current.push(timeoutId);
+        }
+      });
+    };
+    
+    // Create initial particles
+    createParticles();
+
     // Draw nodes
     const nodeSelection = container.append('g')
       .selectAll('g')
@@ -838,6 +947,17 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
     // Cleanup function
     return () => {
       simulation.stop();
+      // Clear all particle timeouts
+      particleTimeoutsRef.current.forEach(clearTimeout);
+      particleTimeoutsRef.current = [];
+      // Stop all particle animations
+      if (svgRef.current) {
+        const svg = d3.select(svgRef.current);
+        const particleContainer = svg.select('.particles');
+        if (!particleContainer.empty()) {
+          particleContainer.selectAll('.particle').interrupt().remove();
+        }
+      }
       // Do not remove tooltip here; it's managed by the outer effect
     };
   }, [graphStructureKey, dimensions.width, dimensions.height, filtersKey, selectedNode]); // Only recreate when actual structure or filters change
@@ -912,6 +1032,125 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       d3.select(this)
         .classed('pulse', hasActiveFlow);
     });
+
+    // Update particles for current hour
+    const particleContainer = svg.select('.particles');
+    if (!particleContainer.empty()) {
+      const updateParticles = () => {
+        // Clear existing timeouts
+        particleTimeoutsRef.current.forEach(clearTimeout);
+        particleTimeoutsRef.current = [];
+        
+        // Remove existing particles
+        particleContainer.selectAll('.particle').remove();
+        
+        // Create particles for links with active flow
+        data.links.forEach((link: any, linkIndex: number) => {
+          const flowValue = Math.abs(link.flow[currentHour]);
+          if (flowValue < 0.01) return; // Skip links with minimal flow
+          
+          // Find actual link data with positions
+          const linkWithPositions = linkSelection.data().find((l: any) => 
+            l.source.id === link.source && l.target.id === link.target
+          );
+          if (!linkWithPositions) return;
+          
+          // Number of particles based on flow intensity (1-5 particles)
+          const numParticles = Math.min(5, Math.max(1, Math.floor(flowValue * 3)));
+          
+          // Get source node color for particles
+          const sourceNode = data.nodes.find(n => n.id === link.source);
+          const particleColor = sourceNode ? NODE_COLORS[sourceNode.type] : '#999';
+          
+          for (let i = 0; i < numParticles; i++) {
+            const particle = particleContainer.append('circle')
+              .attr('class', `particle particle-${linkIndex}-${i}`)
+              .attr('r', 2 + (flowValue * 2)) // Particle size based on flow
+              .attr('fill', particleColor)
+              .attr('stroke', particleColor)
+              .attr('stroke-width', 1)
+              .attr('opacity', 0.8)
+              .attr('filter', 'url(#glow)')
+              .style('pointer-events', 'none');
+            
+            // Initial position offset for multiple particles on same link
+            const offset = (i / numParticles) * 1.0;
+            
+            // Animation function for particle movement
+            const animateParticle = () => {
+              const sourceX = (linkWithPositions as any).source.x || 0;
+              const sourceY = (linkWithPositions as any).source.y || 0;
+              const targetX = (linkWithPositions as any).target.x || 0;
+              const targetY = (linkWithPositions as any).target.y || 0;
+              
+              // Calculate direction based on flow direction
+              const isReverse = link.flow[currentHour] < 0;
+              const startX = isReverse ? targetX : sourceX;
+              const startY = isReverse ? targetY : sourceY;
+              const endX = isReverse ? sourceX : targetX;
+              const endY = isReverse ? sourceY : targetY;
+              
+              // Calculate node radius to start/end particles at edge of nodes
+              const nodeRadius = 35; // Approximate node radius
+              const dx = endX - startX;
+              const dy = endY - startY;
+              const distance = Math.sqrt(dx * dx + dy * dy);
+              
+              if (distance === 0) return;
+              
+              const unitX = dx / distance;
+              const unitY = dy / distance;
+              
+              // Adjust start and end positions to node edges
+              const adjustedStartX = startX + (unitX * nodeRadius);
+              const adjustedStartY = startY + (unitY * nodeRadius);
+              const adjustedEndX = endX - (unitX * nodeRadius);
+              const adjustedEndY = endY - (unitY * nodeRadius);
+              
+              // Set initial position with offset
+              const initialProgress = offset;
+              const initialX = adjustedStartX + (adjustedEndX - adjustedStartX) * initialProgress;
+              const initialY = adjustedStartY + (adjustedEndY - adjustedStartY) * initialProgress;
+              
+              particle
+                .attr('cx', initialX)
+                .attr('cy', initialY);
+              
+              // Animation duration based on flow intensity (faster for higher flow)
+              const duration = Math.max(1000, 3000 - (flowValue * 500));
+              
+              // Animate particle movement
+              particle
+                .transition()
+                .duration(duration)
+                .ease(d3.easeLinear)
+                .attr('cx', adjustedEndX)
+                .attr('cy', adjustedEndY)
+                .on('end', function() {
+                  // Only restart if particle still exists (to avoid memory leaks)
+                  if (particleContainer.select(`.particle-${linkIndex}-${i}`).empty()) return;
+                  
+                  // Reset particle to start position and restart animation
+                  d3.select(this)
+                    .attr('cx', adjustedStartX)
+                    .attr('cy', adjustedStartY);
+                  
+                  // Restart animation after a small delay
+                  const restartTimeoutId = setTimeout(animateParticle, i * 200); // Stagger restart times
+                  particleTimeoutsRef.current.push(restartTimeoutId);
+                });
+            };
+            
+            // Start animation with initial delay
+            const timeoutId = setTimeout(animateParticle, i * 200);
+            particleTimeoutsRef.current.push(timeoutId);
+          }
+        });
+      };
+      
+      // Update particles with a slight delay to ensure links are updated first
+      setTimeout(updateParticles, 350);
+    }
 
   }, [currentHour, data.nodes, data.links]); // Only update visual properties when hour changes
 

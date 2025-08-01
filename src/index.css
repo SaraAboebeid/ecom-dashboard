@@ -152,3 +152,28 @@
 .node:hover .node-metric {
   font-weight: bold;
 }
+
+/* Particle system styles */
+.particles {
+  pointer-events: none;
+}
+
+.particle {
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px currentColor);
+  transition: opacity 0.3s ease;
+}
+
+/* Particle glow animation */
+@keyframes particle-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px currentColor) brightness(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 8px currentColor) brightness(1.5);
+  }
+}
+
+.particle {
+  animation: particle-glow 2s ease-in-out infinite;
+}
