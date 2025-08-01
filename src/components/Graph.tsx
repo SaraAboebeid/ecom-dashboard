@@ -1168,7 +1168,7 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
     <div className="w-full h-full relative">
       <svg
         ref={svgRef}
-        className="w-full h-full bg-gray-900 dark:bg-black transition-colors duration-300"
+        className="w-full h-full bg-white dark:bg-gray-900 transition-colors duration-300"
         viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
         preserveAspectRatio="xMidYMid meet"
       />
