@@ -1020,7 +1020,7 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         return 'url(#flow)';
       });
       
-    // Update nodes - add/remove pulse animation class based on active connections
+    // Update nodes - add/remove pulse animation class and dynamic sizing based on energy flow
     nodeSelection.each(function(d: any) {
       // Check if this node has any active flows in the current hour
       const hasActiveFlow = data.links.some((link: Link) => {
@@ -1028,9 +1028,52 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
                Math.abs(link.flow[currentHour]) >= 0.1;
       });
       
+      // Calculate total energy flow for this node at current hour
+      const totalEnergyFlow = data.links.reduce((sum: number, link: Link) => {
+        if (link.source === d.id || link.target === d.id) {
+          return sum + Math.abs(link.flow[currentHour]);
+        }
+        return sum;
+      }, 0);
+      
+      // Calculate dynamic radius based on energy flow (elastic scaling)
+      const baseRadius = (() => {
+        let base = 32;
+        switch(d.type) {
+          case 'building':
+            return d.total_energy_demand ? base + Math.min(6, Math.sqrt(d.total_energy_demand) / 30) : base;
+          case 'pv':
+            return d.installed_capacity ? base + Math.min(8, d.installed_capacity / 2) : base;
+          case 'battery':
+            return d.capacity ? base + Math.min(10, d.capacity / 10) : base;
+          case 'charge_point':
+            return d.total_connected_evs ? base + Math.min(6, d.total_connected_evs * 2) : base;
+          default:
+            return base;
+        }
+      })();
+      
+      // Add dynamic scaling based on energy flow (max 20% increase)
+      const flowScaling = Math.min(0.2, totalEnergyFlow * 0.05);
+      const dynamicRadius = baseRadius * (1 + flowScaling);
+      const dynamicAuraRadius = dynamicRadius * 1.25;
+      
       // Apply the pulse animation class if the node has active flows
       d3.select(this)
         .classed('pulse', hasActiveFlow);
+        
+      // Apply elastic animations to node circles with energy flow-based sizing
+      d3.select(this).select('.node-main')
+        .transition()
+        .duration(800)
+        .ease(d3.easeElastic.period(0.3))
+        .attr('r', dynamicRadius);
+        
+      d3.select(this).select('.node-aura')
+        .transition()
+        .duration(800)
+        .ease(d3.easeElastic.period(0.3))
+        .attr('r', dynamicAuraRadius);
     });
 
     // Update particles for current hour
