@@ -9,6 +9,9 @@ interface GraphProps {
   filters: {
     nodeTypes: Set<string>;
     minFlow: number;
+    owners: Set<string>;
+    v2gFilter: 'all' | 'v2g-only' | 'no-v2g';
+    capacityRange: { min: number; max: number };
   };
   onKPICalculated?: (kpis: {
     totalPVCapacity: number;
@@ -33,7 +36,8 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
   
   // Create stable keys for filters to prevent unnecessary re-renders
   const nodeTypesKey = Array.from(filters.nodeTypes).sort().join(',');
-  const filtersKey = `${nodeTypesKey}-${filters.minFlow}`;
+  const ownersKey = Array.from(filters.owners).sort().join(',');
+  const filtersKey = `${nodeTypesKey}-${filters.minFlow}-${ownersKey}-${filters.v2gFilter}-${filters.capacityRange.min}-${filters.capacityRange.max}`;
   
   // Helper function to calculate KPIs and summarize data
   const calculateKPIs = () => {

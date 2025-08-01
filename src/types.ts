@@ -14,9 +14,11 @@ export interface Node {
   total_cost?: number;
   total_embodied_co2?: number;
   owner?: string;
+  VALID_OWNERS?: string[];
   // For charge points
   is_v2g?: boolean;
   total_connected_evs?: number;
+  charger_type?: string;
   // For buildings
   building_type?: string;
   area?: number;
@@ -40,6 +42,9 @@ export interface GraphState {
   filters: {
     nodeTypes: Set<string>;
     minFlow: number;
+    owners: Set<string>;
+    buildingTypes: Set<string>;
+    capacityRange: { min: number; max: number };
   };
 }
 

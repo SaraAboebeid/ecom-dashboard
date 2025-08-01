@@ -9,13 +9,49 @@ function App() {
   const [currentHour, setCurrentHour] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeTypes, setActiveTypes] = useState<Set<string>>(new Set(['building', 'pv', 'grid', 'battery', 'charge_point']));
+  const [activeOwners, setActiveOwners] = useState<Set<string>>(new Set());
+  const [v2gFilter, setV2gFilter] = useState<'all' | 'v2g-only' | 'no-v2g'>('all');
+  const [capacityRange, setCapacityRange] = useState<{ min: number; max: number }>({ min: 0, max: 1000 });
   const [minFlow, setMinFlow] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     fetch('/graph.json')
       .then(res => res.json())
-      .then(setData)
+      .then((fetchedData) => {
+        setData(fetchedData);
+        
+        // Initialize available owners and building types
+        if (fetchedData && fetchedData.nodes) {
+          const owners = new Set<string>();
+          
+          fetchedData.nodes.forEach((node: any) => {
+            // Collect from current owner field
+            if (node.owner) {
+              owners.add(node.owner);
+            }
+            // Also collect from VALID_OWNERS array if it exists
+            if (node.VALID_OWNERS && Array.isArray(node.VALID_OWNERS)) {
+              node.VALID_OWNERS.forEach((owner: string) => {
+                owners.add(owner);
+              });
+            }
+          });
+          
+          // Initialize all owners as active
+          setActiveOwners(new Set(owners));
+          
+          // Set capacity range based on actual data
+          const capacities = fetchedData.nodes
+            .filter((node: any) => node.capacity || node.installed_capacity)
+            .map((node: any) => node.capacity || node.installed_capacity || 0);
+          
+          if (capacities.length > 0) {
+            const maxCapacity = Math.max(...capacities);
+            setCapacityRange({ min: 0, max: Math.ceil(maxCapacity / 10) * 10 });
+          }
+        }
+      })
       .catch(console.error);
   }, []);
 
@@ -65,6 +101,24 @@ function App() {
     setActiveTypes(newTypes);
   };
 
+  const toggleOwner = (owner: string) => {
+    const newOwners = new Set(activeOwners);
+    if (newOwners.has(owner)) {
+      newOwners.delete(owner);
+    } else {
+      newOwners.add(owner);
+    }
+    setActiveOwners(newOwners);
+  };
+
+  const handleV2gFilterChange = (filter: 'all' | 'v2g-only' | 'no-v2g') => {
+    setV2gFilter(filter);
+  };
+
+  const handleCapacityRangeChange = (range: { min: number; max: number }) => {
+    setCapacityRange(range);
+  };
+
   const togglePlayPause = () => {
     setIsPlaying(!isPlaying);
   };
@@ -72,7 +126,29 @@ function App() {
   const filteredData = useMemo(() => {
     if (!data) return { nodes: [], links: [] };
     return {
-      nodes: data.nodes.filter(node => activeTypes.has(node.type)),
+      nodes: data.nodes.filter(node => {
+        // Filter by node type
+        if (!activeTypes.has(node.type)) return false;
+        
+        // Filter by owner (if owner filter is applied and node has owner)
+        if (node.owner && activeOwners.size > 0 && !activeOwners.has(node.owner)) {
+          return false;
+        }
+        
+        // Filter by V2G capability (for charge points)
+        if (node.type === 'charge_point' && v2gFilter !== 'all') {
+          if (v2gFilter === 'v2g-only' && !node.is_v2g) return false;
+          if (v2gFilter === 'no-v2g' && node.is_v2g) return false;
+        }
+        
+        // Filter by capacity range
+        const nodeCapacity = node.capacity || node.installed_capacity || 0;
+        if (nodeCapacity > 0 && (nodeCapacity < capacityRange.min || nodeCapacity > capacityRange.max)) {
+          return false;
+        }
+        
+        return true;
+      }),
       links: data.links.filter(link => {
         const sourceNode = data.nodes.find(n => n.id === link.source);
         const targetNode = data.nodes.find(n => n.id === link.target);
@@ -81,16 +157,21 @@ function App() {
           targetNode &&
           activeTypes.has(sourceNode.type) &&
           activeTypes.has(targetNode.type) &&
+          (!sourceNode.owner || activeOwners.size === 0 || activeOwners.has(sourceNode.owner)) &&
+          (!targetNode.owner || activeOwners.size === 0 || activeOwners.has(targetNode.owner)) &&
           Math.abs(link.flow[currentHour]) >= minFlow
         );
       }),
     };
-  }, [data, activeTypes, currentHour, minFlow]);
+  }, [data, activeTypes, activeOwners, v2gFilter, capacityRange, currentHour, minFlow]);
 
   const filters = useMemo(() => ({
     nodeTypes: activeTypes,
-    minFlow
-  }), [activeTypes, minFlow]);
+    minFlow,
+    owners: activeOwners,
+    v2gFilter,
+    capacityRange
+  }), [activeTypes, minFlow, activeOwners, v2gFilter, capacityRange]);
 
   if (!data) {
     return (
@@ -127,6 +208,21 @@ function App() {
           onToggleType={toggleNodeType}
           minFlow={minFlow}
           onMinFlowChange={setMinFlow}
+          activeOwners={activeOwners}
+          onToggleOwner={toggleOwner}
+          availableOwners={data ? [...new Set(data.nodes.flatMap(n => {
+            const owners: string[] = [];
+            if (n.owner) owners.push(n.owner);
+            if (n.VALID_OWNERS && Array.isArray(n.VALID_OWNERS)) {
+              owners.push(...n.VALID_OWNERS);
+            }
+            return owners;
+          }))] : []}
+          v2gFilter={v2gFilter}
+          onV2gFilterChange={handleV2gFilterChange}
+          capacityRange={capacityRange}
+          onCapacityRangeChange={handleCapacityRangeChange}
+          maxCapacity={data ? Math.max(...data.nodes.map(n => n.capacity || n.installed_capacity || 0)) : 100}
         />
 
         <Timeline
