@@ -237,16 +237,145 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
     feMerge.append('feMergeNode')
       .attr('in', 'SourceGraphic');
 
-    // Create node-type specific neon glow filters with pulse animation
+    // Create 3D depth shadow filter for nodes
+    const depthShadowFilter = defs.append('filter')
+      .attr('id', 'depth-shadow')
+      .attr('x', '-60%')
+      .attr('y', '-60%')
+      .attr('width', '220%')
+      .attr('height', '220%');
+    
+    // Create drop shadow
+    depthShadowFilter.append('feDropShadow')
+      .attr('dx', '3')
+      .attr('dy', '5')
+      .attr('stdDeviation', '4')
+      .attr('flood-color', '#000000')
+      .attr('flood-opacity', '0.3')
+      .attr('result', 'dropShadow');
+    
+    // Add inner shadow for depth
+    depthShadowFilter.append('feOffset')
+      .attr('in', 'SourceGraphic')
+      .attr('dx', '-1')
+      .attr('dy', '-2')
+      .attr('result', 'offset');
+    
+    depthShadowFilter.append('feGaussianBlur')
+      .attr('in', 'offset')
+      .attr('stdDeviation', '2')
+      .attr('result', 'blur');
+    
+    depthShadowFilter.append('feFlood')
+      .attr('flood-color', '#ffffff')
+      .attr('flood-opacity', '0.15')
+      .attr('result', 'highlight');
+    
+    depthShadowFilter.append('feComposite')
+      .attr('in', 'highlight')
+      .attr('in2', 'blur')
+      .attr('operator', 'in')
+      .attr('result', 'innerHighlight');
+    
+    const depthMerge = depthShadowFilter.append('feMerge');
+    depthMerge.append('feMergeNode').attr('in', 'dropShadow');
+    depthMerge.append('feMergeNode').attr('in', 'SourceGraphic');
+    depthMerge.append('feMergeNode').attr('in', 'innerHighlight');
+
+    // Create subtle line shadow filter
+    const lineShadowFilter = defs.append('filter')
+      .attr('id', 'line-shadow')
+      .attr('x', '-50%')
+      .attr('y', '-50%')
+      .attr('width', '200%')
+      .attr('height', '200%');
+    
+    lineShadowFilter.append('feDropShadow')
+      .attr('dx', '1')
+      .attr('dy', '2')
+      .attr('stdDeviation', '2')
+      .attr('flood-color', '#000000')
+      .attr('flood-opacity', '0.2');
+
+    // Create node-type specific neon glow filters with pulse animation and 3D depth
     const nodeTypes = ['building', 'pv', 'grid', 'battery', 'charge_point'];
     nodeTypes.forEach(type => {
       const nodeColor = NODE_COLORS[type];
+      
+      // Enhanced neon glow filter with 3D depth
       const filter = defs.append('filter')
         .attr('id', `neon-glow-${type}`)
-        .attr('x', '-60%')
-        .attr('y', '-60%')
-        .attr('width', '220%')
-        .attr('height', '220%');
+        .attr('x', '-80%')
+        .attr('y', '-80%')
+        .attr('width', '260%')
+        .attr('height', '260%');
+      
+      // Create layered shadow for depth
+      filter.append('feDropShadow')
+        .attr('dx', '4')
+        .attr('dy', '6')
+        .attr('stdDeviation', '3')
+        .attr('flood-color', '#000000')
+        .attr('flood-opacity', '0.4')
+        .attr('result', 'shadow1');
+      
+      filter.append('feDropShadow')
+        .attr('dx', '2')
+        .attr('dy', '3')
+        .attr('stdDeviation', '2')
+        .attr('flood-color', nodeColor)
+        .attr('flood-opacity', '0.6')
+        .attr('result', 'shadow2');
+      
+      // Create the main glow effect
+      filter.append('feGaussianBlur')
+        .attr('in', 'SourceGraphic')
+        .attr('stdDeviation', '6')
+        .attr('result', 'glow');
+      
+      filter.append('feFlood')
+        .attr('flood-color', nodeColor)
+        .attr('flood-opacity', '0.8')
+        .attr('result', 'glowColor');
+      
+      filter.append('feComposite')
+        .attr('in', 'glowColor')
+        .attr('in2', 'glow')
+        .attr('operator', 'in')
+        .attr('result', 'coloredGlow');
+      
+      // Add inner highlight for 3D effect
+      filter.append('feOffset')
+        .attr('in', 'SourceGraphic')
+        .attr('dx', '-1')
+        .attr('dy', '-2')
+        .attr('result', 'highlight');
+      
+      filter.append('feGaussianBlur')
+        .attr('in', 'highlight')
+        .attr('stdDeviation', '1')
+        .attr('result', 'softHighlight');
+      
+      filter.append('feFlood')
+        .attr('flood-color', '#ffffff')
+        .attr('flood-opacity', '0.3')
+        .attr('result', 'white');
+      
+      filter.append('feComposite')
+        .attr('in', 'white')
+        .attr('in2', 'softHighlight')
+        .attr('operator', 'in')
+        .attr('result', 'innerLight');
+      
+      // Merge all effects for layered 3D appearance
+      const merge = filter.append('feMerge');
+      merge.append('feMergeNode').attr('in', 'shadow1');
+      merge.append('feMergeNode').attr('in', 'shadow2');
+      merge.append('feMergeNode').attr('in', 'coloredGlow');
+      merge.append('feMergeNode').attr('in', 'SourceGraphic');
+      merge.append('feMergeNode').attr('in', 'innerLight');
+      
+      // Create standard glow filter for smaller elements
       const typeFilter = defs.append('filter')
         .attr('id', `glow-${type}`)
         .attr('x', '-50%')
@@ -265,13 +394,13 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         .attr('in2', 'blur')
         .attr('operator', 'in')
         .attr('result', 'coloredBlur');
-      const merge = typeFilter.append('feMerge');
-      merge.append('feMergeNode').attr('in', 'coloredBlur');
-      merge.append('feMergeNode').attr('in', 'SourceGraphic');
+      const typeFilterMerge = typeFilter.append('feMerge');
+      typeFilterMerge.append('feMergeNode').attr('in', 'coloredBlur');
+      typeFilterMerge.append('feMergeNode').attr('in', 'SourceGraphic');
     });
       
-    // Create linear gradients for each node type's flow
-    // PV gradient (neon yellow)
+    // Create linear gradients for each node type's flow with 3D depth
+    // PV gradient (neon yellow with depth)
     const pvGradient = defs.append('linearGradient')
       .attr('id', 'gradient-pv')
       .attr('gradientUnits', 'userSpaceOnUse')
@@ -282,18 +411,22 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       
     pvGradient.append('stop')
       .attr('offset', '0%')
-      .attr('stop-color', NODE_COLORS.pv)
-      .attr('stop-opacity', 0.7);
+      .attr('stop-color', d3.color(NODE_COLORS.pv)?.darker(0.3)?.toString() || NODE_COLORS.pv)
+      .attr('stop-opacity', 0.8);
     pvGradient.append('stop')
-      .attr('offset', '50%')
+      .attr('offset', '30%')
       .attr('stop-color', NODE_COLORS.pv)
-      .attr('stop-opacity', 0.9);
+      .attr('stop-opacity', 1);
+    pvGradient.append('stop')
+      .attr('offset', '70%')
+      .attr('stop-color', d3.color(NODE_COLORS.pv)?.brighter(0.5)?.toString() || NODE_COLORS.pv)
+      .attr('stop-opacity', 1);
     pvGradient.append('stop')
       .attr('offset', '100%')
-      .attr('stop-color', NODE_COLORS.pv)
-      .attr('stop-opacity', 0.7);
+      .attr('stop-color', d3.color(NODE_COLORS.pv)?.darker(0.2)?.toString() || NODE_COLORS.pv)
+      .attr('stop-opacity', 0.8);
       
-    // Grid gradient (neon green)
+    // Grid gradient (neon green with depth)
     const gridGradient = defs.append('linearGradient')
       .attr('id', 'gradient-grid')
       .attr('gradientUnits', 'userSpaceOnUse')
@@ -304,18 +437,22 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       
     gridGradient.append('stop')
       .attr('offset', '0%')
-      .attr('stop-color', NODE_COLORS.grid)
-      .attr('stop-opacity', 0.7);
+      .attr('stop-color', d3.color(NODE_COLORS.grid)?.darker(0.3)?.toString() || NODE_COLORS.grid)
+      .attr('stop-opacity', 0.8);
     gridGradient.append('stop')
-      .attr('offset', '50%')
+      .attr('offset', '30%')
       .attr('stop-color', NODE_COLORS.grid)
-      .attr('stop-opacity', 0.9);
+      .attr('stop-opacity', 1);
+    gridGradient.append('stop')
+      .attr('offset', '70%')
+      .attr('stop-color', d3.color(NODE_COLORS.grid)?.brighter(0.5)?.toString() || NODE_COLORS.grid)
+      .attr('stop-opacity', 1);
     gridGradient.append('stop')
       .attr('offset', '100%')
-      .attr('stop-color', NODE_COLORS.grid)
-      .attr('stop-opacity', 0.7);
+      .attr('stop-color', d3.color(NODE_COLORS.grid)?.darker(0.2)?.toString() || NODE_COLORS.grid)
+      .attr('stop-opacity', 0.8);
       
-    // Battery gradient (neon cyan)
+    // Battery gradient (neon cyan with depth)
     const batteryGradient = defs.append('linearGradient')
       .attr('id', 'gradient-battery')
       .attr('gradientUnits', 'userSpaceOnUse')
@@ -326,18 +463,22 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       
     batteryGradient.append('stop')
       .attr('offset', '0%')
-      .attr('stop-color', NODE_COLORS.battery)
-      .attr('stop-opacity', 0.7);
+      .attr('stop-color', d3.color(NODE_COLORS.battery)?.darker(0.3)?.toString() || NODE_COLORS.battery)
+      .attr('stop-opacity', 0.8);
     batteryGradient.append('stop')
-      .attr('offset', '50%')
+      .attr('offset', '30%')
       .attr('stop-color', NODE_COLORS.battery)
-      .attr('stop-opacity', 0.9);
+      .attr('stop-opacity', 1);
+    batteryGradient.append('stop')
+      .attr('offset', '70%')
+      .attr('stop-color', d3.color(NODE_COLORS.battery)?.brighter(0.5)?.toString() || NODE_COLORS.battery)
+      .attr('stop-opacity', 1);
     batteryGradient.append('stop')
       .attr('offset', '100%')
-      .attr('stop-color', NODE_COLORS.battery)
-      .attr('stop-opacity', 0.7);
+      .attr('stop-color', d3.color(NODE_COLORS.battery)?.darker(0.2)?.toString() || NODE_COLORS.battery)
+      .attr('stop-opacity', 0.8);
       
-    // Building gradient (neon magenta)
+    // Building gradient (neon magenta with depth)
     const buildingGradient = defs.append('linearGradient')
       .attr('id', 'gradient-building')
       .attr('gradientUnits', 'userSpaceOnUse')
@@ -348,18 +489,22 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       
     buildingGradient.append('stop')
       .attr('offset', '0%')
-      .attr('stop-color', NODE_COLORS.building)
-      .attr('stop-opacity', 0.7);
+      .attr('stop-color', d3.color(NODE_COLORS.building)?.darker(0.3)?.toString() || NODE_COLORS.building)
+      .attr('stop-opacity', 0.8);
     buildingGradient.append('stop')
-      .attr('offset', '50%')
+      .attr('offset', '30%')
       .attr('stop-color', NODE_COLORS.building)
-      .attr('stop-opacity', 0.9);
+      .attr('stop-opacity', 1);
+    buildingGradient.append('stop')
+      .attr('offset', '70%')
+      .attr('stop-color', d3.color(NODE_COLORS.building)?.brighter(0.5)?.toString() || NODE_COLORS.building)
+      .attr('stop-opacity', 1);
     buildingGradient.append('stop')
       .attr('offset', '100%')
-      .attr('stop-color', NODE_COLORS.building)
-      .attr('stop-opacity', 0.7);
+      .attr('stop-color', d3.color(NODE_COLORS.building)?.darker(0.2)?.toString() || NODE_COLORS.building)
+      .attr('stop-opacity', 0.8);
       
-    // Charge point gradient (neon orange)
+    // Charge point gradient (neon orange with depth)
     const chargeGradient = defs.append('linearGradient')
       .attr('id', 'gradient-charge')
       .attr('gradientUnits', 'userSpaceOnUse')
@@ -370,16 +515,20 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       
     chargeGradient.append('stop')
       .attr('offset', '0%')
-      .attr('stop-color', NODE_COLORS.charge_point)
-      .attr('stop-opacity', 0.7);
+      .attr('stop-color', d3.color(NODE_COLORS.charge_point)?.darker(0.3)?.toString() || NODE_COLORS.charge_point)
+      .attr('stop-opacity', 0.8);
     chargeGradient.append('stop')
-      .attr('offset', '50%')
+      .attr('offset', '30%')
       .attr('stop-color', NODE_COLORS.charge_point)
-      .attr('stop-opacity', 0.9);
+      .attr('stop-opacity', 1);
+    chargeGradient.append('stop')
+      .attr('offset', '70%')
+      .attr('stop-color', d3.color(NODE_COLORS.charge_point)?.brighter(0.5)?.toString() || NODE_COLORS.charge_point)
+      .attr('stop-opacity', 1);
     chargeGradient.append('stop')
       .attr('offset', '100%')
-      .attr('stop-color', NODE_COLORS.charge_point)
-      .attr('stop-opacity', 0.7);
+      .attr('stop-color', d3.color(NODE_COLORS.charge_point)?.darker(0.2)?.toString() || NODE_COLORS.charge_point)
+      .attr('stop-opacity', 0.8);
     
     // Create arrow markers for links with different colors based on node type
     const markerTypes = [
@@ -405,7 +554,7 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       .attr('fill', d => d.color)
       .attr('d', 'M0,-5L10,0L0,5');
 
-    // Draw links
+    // Draw links with 3D depth effects
     const linkSelection = container.append('g')
       .selectAll('line')
       .data(linkData)
@@ -433,8 +582,9 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         
         return '#999';
       })
-      .attr('stroke-opacity', 0.8)
-      .attr('stroke-width', (d: Link) => Math.max(1, Math.abs(d.flow[currentHour]) * 2))
+      .attr('stroke-opacity', 0.9)
+      .attr('stroke-width', (d: Link) => Math.max(2, Math.abs(d.flow[currentHour]) * 2.5))
+      .attr('filter', 'url(#line-shadow)') // Add 3D shadow effect to lines
       .attr('marker-end', (d: any) => {
         // Determine the marker to use based on source node type
         const sourceNode = d.source.type ? d.source : data.nodes.find(n => n.id === d.source);
@@ -479,12 +629,19 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         const particleColor = sourceNode ? NODE_COLORS[sourceNode.type] : '#999';
         
         for (let i = 0; i < numParticles; i++) {
+          // Calculate proportional particle size based on node radius and flow
+          const baseNodeRadius = 32; // Base node radius for reference
+          const maxParticleSize = 4; // Maximum particle size to prevent them from being too large
+          const minParticleSize = 1; // Minimum particle size
+          const flowBasedSize = Math.min(maxParticleSize, minParticleSize + (flowValue * 1.5));
+          const proportionalSize = Math.min(maxParticleSize, flowBasedSize * (baseNodeRadius / 50));
+          
           const particle = particleContainer.append('circle')
             .attr('class', `particle particle-${linkIndex}-${i}`)
-            .attr('r', 2 + (flowValue * 2)) // Particle size based on flow
+            .attr('r', proportionalSize) // Proportional particle size with max limit
             .attr('fill', particleColor)
             .attr('stroke', particleColor)
-            .attr('stroke-width', 1)
+            .attr('stroke-width', 0.5)
             .attr('opacity', 0.8)
             .attr('filter', 'url(#glow)')
             .style('pointer-events', 'none');
@@ -593,7 +750,7 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         .on('drag', dragged)
         .on('end', dragended) as any);
 
-    // Add neon outer aura ring with animated glow (smaller, fits icon/text)
+    // Add neon outer aura ring with animated glow and 3D depth (smaller, fits icon/text)
     nodeSelection.append('circle')
       .attr('class', d => `node-aura node-aura-${d.type} neon-glow`)
       .attr('r', (d: Node) => {
@@ -621,10 +778,10 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       .attr('fill', 'none')
       .attr('stroke', d => NODE_COLORS[d.type])
       .attr('stroke-width', 4)
-      .attr('opacity', 1)
+      .attr('opacity', 0.7)
       .attr('filter', d => `url(#neon-glow-${d.type})`);
 
-    // Main node circle (smaller, neon fill, fits icon/text)
+    // Main node circle with 3D depth effects (smaller, neon fill, fits icon/text)
     nodeSelection.append('circle')
       .attr('class', d => `node-main node-main-${d.type}`)
       .attr('r', (d: Node) => {
@@ -644,9 +801,9 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         }
       })
       .attr('fill', d => NODE_COLORS[d.type])
-      .attr('stroke', d => NODE_COLORS[d.type])
-      .attr('stroke-width', 2)
-      .attr('filter', d => `url(#neon-glow-${d.type})`);
+      .attr('stroke', d => d3.color(NODE_COLORS[d.type])?.brighter(0.3)?.toString() || NODE_COLORS[d.type])
+      .attr('stroke-width', 3)
+      .attr('filter', 'url(#depth-shadow)'); // Apply 3D depth shadow
 
     // Add SVG icons inside nodes
     nodeSelection.each(function(d: Node) {
@@ -970,12 +1127,12 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
     const linkSelection = svg.selectAll('.link');
     const nodeSelection = svg.selectAll('.node');
     
-    // Update links
+    // Update links with enhanced 3D effects
     linkSelection
       .transition()
       .duration(300)
-      .attr('stroke-width', (d: any) => Math.max(1, Math.abs(d.flow[currentHour]) * 2))
-      .attr('stroke-opacity', (d: any) => Math.abs(d.flow[currentHour]) > 0 ? 0.8 : 0.3)
+      .attr('stroke-width', (d: any) => Math.max(2, Math.abs(d.flow[currentHour]) * 2.5))
+      .attr('stroke-opacity', (d: any) => Math.abs(d.flow[currentHour]) > 0 ? 0.9 : 0.4)
       .attr('class', (d: any) => {
         // Update animation class based on flow direction
         if (Math.abs(d.flow[currentHour]) > 0) {
@@ -1001,6 +1158,10 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         if (sourceNode.type === 'charge_point') return 'url(#gradient-charge)';
         
         return '#999';
+      })
+      .attr('filter', (d: any) => {
+        // Enhanced shadow for active flows
+        return Math.abs(d.flow[currentHour]) > 0.1 ? 'url(#line-shadow)' : 'none';
       })
       .attr('marker-end', (d: any) => {
         // Determine the marker to use based on source node type
@@ -1106,12 +1267,19 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
           const particleColor = sourceNode ? NODE_COLORS[sourceNode.type] : '#999';
           
           for (let i = 0; i < numParticles; i++) {
+            // Calculate proportional particle size based on node radius and flow
+            const baseNodeRadius = 32; // Base node radius for reference
+            const maxParticleSize = 4; // Maximum particle size to prevent them from being too large
+            const minParticleSize = 1; // Minimum particle size
+            const flowBasedSize = Math.min(maxParticleSize, minParticleSize + (flowValue * 1.5));
+            const proportionalSize = Math.min(maxParticleSize, flowBasedSize * (baseNodeRadius / 50));
+            
             const particle = particleContainer.append('circle')
               .attr('class', `particle particle-${linkIndex}-${i}`)
-              .attr('r', 2 + (flowValue * 2)) // Particle size based on flow
+              .attr('r', proportionalSize) // Proportional particle size with max limit
               .attr('fill', particleColor)
               .attr('stroke', particleColor)
-              .attr('stroke-width', 1)
+              .attr('stroke-width', 0.5)
               .attr('opacity', 0.8)
               .attr('filter', 'url(#glow)')
               .style('pointer-events', 'none');
@@ -1425,7 +1593,7 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
     );
   };
 
-  // Add neon-glow pulse animation style
+  // Add neon-glow pulse animation style with 3D depth enhancements
   // This style is injected only once
   useEffect(() => {
     if (!document.getElementById('neon-glow-style')) {
@@ -1437,9 +1605,58 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
           animation: neon-pulse 2.2s infinite alternate;
         }
         @keyframes neon-pulse {
-          0% { filter: brightness(1.1) drop-shadow(0 0 16px #fff); }
-          50% { filter: brightness(1.6) drop-shadow(0 0 32px #fff); }
-          100% { filter: brightness(1.1) drop-shadow(0 0 16px #fff); }
+          0% { 
+            filter: brightness(1.1) drop-shadow(0 0 16px #fff) drop-shadow(2px 4px 8px rgba(0,0,0,0.3)); 
+            transform: translateZ(0);
+          }
+          50% { 
+            filter: brightness(1.6) drop-shadow(0 0 32px #fff) drop-shadow(3px 6px 12px rgba(0,0,0,0.4)); 
+            transform: translateZ(2px);
+          }
+          100% { 
+            filter: brightness(1.1) drop-shadow(0 0 16px #fff) drop-shadow(2px 4px 8px rgba(0,0,0,0.3)); 
+            transform: translateZ(0);
+          }
+        }
+        
+        /* Enhanced 3D hover effects for nodes */
+        .node:hover .node-main {
+          filter: brightness(1.2) drop-shadow(0 0 20px currentColor) drop-shadow(4px 8px 15px rgba(0,0,0,0.5));
+          transform: translateZ(4px) scale(1.05);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .node:hover .node-aura {
+          filter: brightness(1.3) drop-shadow(0 0 25px currentColor);
+          transform: translateZ(2px) scale(1.1);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Enhanced 3D link hover effects */
+        .link:hover {
+          filter: brightness(1.3) drop-shadow(0 0 8px currentColor) drop-shadow(1px 3px 6px rgba(0,0,0,0.4));
+          stroke-width: calc(100% + 3px);
+          transform: translateZ(1px);
+          transition: all 0.2s ease-out;
+        }
+        
+        /* 3D particle effects */
+        .particle {
+          filter: drop-shadow(0 0 6px currentColor) drop-shadow(1px 2px 4px rgba(0,0,0,0.3));
+          transform-style: preserve-3d;
+        }
+        
+        /* Layered depth for different elements */
+        .particles {
+          transform: translateZ(5px);
+        }
+        
+        .node {
+          transform-style: preserve-3d;
+        }
+        
+        .link {
+          transform: translateZ(-1px);
         }
       `;
       document.head.appendChild(style);
