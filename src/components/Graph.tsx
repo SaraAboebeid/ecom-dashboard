@@ -183,10 +183,13 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
 
     // Create force simulation
     const simulation = d3.forceSimulation(nodeData as d3.SimulationNodeDatum[])
-      .force('link', d3.forceLink(linkData).id((d: any) => d.id).distance(300)) // Increased distance between connected nodes
-      .force('charge', d3.forceManyBody().strength(-600)) // Increased repulsion between nodes
-      .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(55)); // Increased collision radius for larger nodes
+      .force('link', d3.forceLink(linkData).id((d: any) => d.id).distance(600)) // 2x increased distance between connected nodes
+      .force('charge', d3.forceManyBody().strength(-800)) // Reduced repulsion to prevent twitching
+      .force('x', d3.forceX(width / 2).strength(0.02)) // Very weak horizontal centering
+      .force('y', d3.forceY(height / 2).strength(0.02)) // Very weak vertical centering
+      .force('collision', d3.forceCollide().radius(110)) // 2x increased collision radius
+      .alphaDecay(0.0228) // Slower cooling to stabilize better
+      .velocityDecay(0.4); // Increased friction to reduce oscillation
 
     simulationRef.current = simulation;
 
@@ -1082,6 +1085,47 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
 
       nodeSelection.attr('transform', (d: any) => `translate(${d.x},${d.y})`);
     });
+
+    // Apply initial zoom immediately with a reasonable default view
+    const initialScale = 0.6; // Start zoomed out to 60%
+    const initialTransform = d3.zoomIdentity
+      .translate(width * 0.15, height * 0.15) // Center with padding
+      .scale(initialScale);
+    
+    svg.call(zoom.transform as any, initialTransform);
+
+    // Also set a better zoom after a short delay when nodes have settled
+    setTimeout(() => {
+      const nodes = nodeData as any[];
+      if (nodes.length === 0) return;
+      
+      const padding = 120;
+      const minX = Math.min(...nodes.map(d => d.x || 0)) - padding;
+      const maxX = Math.max(...nodes.map(d => d.x || 0)) + padding;
+      const minY = Math.min(...nodes.map(d => d.y || 0)) - padding;
+      const maxY = Math.max(...nodes.map(d => d.y || 0)) + padding;
+      
+      const graphWidth = maxX - minX;
+      const graphHeight = maxY - minY;
+      
+      // Calculate scale to fit the graph with some margin
+      const scaleX = (width * 0.8) / graphWidth;
+      const scaleY = (height * 0.8) / graphHeight;
+      const scale = Math.min(scaleX, scaleY, 0.7); // Max scale of 0.7
+      
+      // Calculate translation to center the graph
+      const translateX = (width - graphWidth * scale) / 2 - minX * scale;
+      const translateY = (height - graphHeight * scale) / 2 - minY * scale;
+      
+      const optimizedTransform = d3.zoomIdentity
+        .translate(translateX, translateY)
+        .scale(scale);
+      
+      svg.transition()
+        .duration(1500)
+        .ease(d3.easeQuadOut)
+        .call(zoom.transform as any, optimizedTransform);
+    }, 1000); // Apply after 1 second
 
     // Drag functions
     function dragstarted(event: any, d: any) {
