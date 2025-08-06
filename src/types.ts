@@ -4,6 +4,8 @@ export interface Node {
   name?: string;
   x?: number;
   y?: number;
+  fx?: number;
+  fy?: number;
   // Additional properties
   total_energy_demand?: number;
   total_installed_capacity?: number;

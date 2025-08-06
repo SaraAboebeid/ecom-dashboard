@@ -181,6 +181,14 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
     const nodeData = data.nodes.map(d => ({ ...d }));
     const linkData = data.links.map(d => ({ ...d }));
 
+    // Find SB1 node and fix its position at 184.397,717.074
+    const sb1Node = nodeData.find(n => n.id === 'SB1');
+    if (sb1Node) {
+        sb1Node.fx = 184.397;
+        sb1Node.fy = 717.074;
+    }
+
+
     // Create force simulation
     const simulation = d3.forceSimulation(nodeData as d3.SimulationNodeDatum[])
       .force('link', d3.forceLink(linkData).id((d: any) => d.id).distance(600)) // 2x increased distance between connected nodes
@@ -195,6 +203,13 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
 
     // Create container for zoom
     const container = svg.append('g');
+
+    container.append('image')
+      .attr('xlink:href', '/3d_topview.png')
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('width', 565.752)
+      .attr('height', 1276.608);
 
     // Add zoom behavior
     const zoom = d3.zoom()

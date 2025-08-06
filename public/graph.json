@@ -42,7 +42,7 @@
       "name": "IT",
       "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Chalmersfastigheter",
+      "owner": "Studentbost\u00e4der",
       "total_energy_demand": 11854.050000000001,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
@@ -61,14 +61,14 @@
       "building_type": "College",
       "electric_demand": "Electric Demand for Elkraftteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 44.8\nvalue | Total: 475,873.85 kWh, Avg: 54.32 kWh, Max: 109.90 kWh, Min: 29.50 kWh",
       "electric_demand_from_program": "Electric Demand (program) for Elkraftteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 1.1088765055888459\nvalue | Total: 17,345.37 kWh, Avg: 1.98 kWh, Max: 3.61 kWh, Min: 1.11 kWh",
-      "footprints": "[<Rhino.Geometry.PolylineCurve object at 0x000002B9CA417EC0>]",
+      "footprints": "[<Rhino.Geometry.PolylineCurve object at 0x00000282B9162400>]",
       "fractional_hourly_electric_demand": "Fractional Electric Demand for Elkraftteknik\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
       "name": "Elkraftteknik",
       "number_of_floors": [
         "1"
       ],
       "occupancy_schedule": null,
-      "owner": "Akademiska Hus",
+      "owner": "Studentbost\u00e4der",
       "total_energy_demand": 475873.85,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
@@ -92,7 +92,7 @@
       "name": "Idel\u00e4ra",
       "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Chalmersfastigheter",
+      "owner": "Studentbost\u00e4der",
       "total_energy_demand": 61345.45,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
@@ -140,7 +140,7 @@
       "name": "HA",
       "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Chalmersfastigheter",
+      "owner": "Studentbost\u00e4der",
       "total_energy_demand": 71119.5,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
@@ -164,7 +164,7 @@
       "name": "SB2",
       "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Akademiska Hus",
+      "owner": "Studentbost\u00e4der",
       "total_energy_demand": 343826.35,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
@@ -244,7 +244,7 @@
       "name": "Edit",
       "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Chalmersfastigheter",
+      "owner": "Studentbost\u00e4der",
       "total_energy_demand": 1293075.9000000001,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
@@ -324,7 +324,7 @@
       "name": "HB",
       "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Akademiska Hus",
+      "owner": "Studentbost\u00e4der",
       "total_energy_demand": 186545.825,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
@@ -348,7 +348,7 @@
       "name": "SB1",
       "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Akademiska Hus",
+      "owner": "Studentbost\u00e4der",
       "total_energy_demand": 707663.6,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
@@ -428,7 +428,7 @@
       "name": "SB3",
       "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Chalmersfastigheter",
+      "owner": "Studentbost\u00e4der",
       "total_energy_demand": 1085973.0,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
@@ -483,7 +483,7 @@
       "type": "building"
     },
     {
-      "id": "Lokalkontor",
+      "id": "07.888 Lokalkontor",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -493,14 +493,14 @@
       "area": 0.0,
       "breps": [],
       "building_type": "LargeOffice",
-      "electric_demand": "Electric Demand for Lokalkontor\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 8.8\nvalue | Total: 77,923.00 kWh, Avg: 8.90 kWh, Max: 28.00 kWh, Min: 0.00 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for Lokalkontor\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for 07.888 Lokalkontor\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 8.8\nvalue | Total: 77,923.00 kWh, Avg: 8.90 kWh, Max: 28.00 kWh, Min: 0.00 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for 07.888 Lokalkontor\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for Lokalkontor\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.3684478000000001\nvalue | Total: 7,275.40 W/m2, Avg: 0.83 W/m2, Max: 1.72 W/m2, Min: 0.36 W/m2",
-      "name": "Lokalkontor",
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.888 Lokalkontor\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.3684478000000001\nvalue | Total: 7,275.40 W/m2, Avg: 0.83 W/m2, Max: 1.72 W/m2, Min: 0.36 W/m2",
+      "name": "07.888 Lokalkontor",
       "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Akademiska Hus",
+      "owner": "Studentbost\u00e4der",
       "total_energy_demand": 77923.0,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
@@ -1343,7 +1343,7 @@
     },
     {
       "source": "Fysik origo",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -2153,7 +2153,7 @@
     },
     {
       "source": "IT",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -2963,7 +2963,7 @@
     },
     {
       "source": "Elkraftteknik",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -3773,7 +3773,7 @@
     },
     {
       "source": "Idel\u00e4ra",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -4583,7 +4583,7 @@
     },
     {
       "source": "HC",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -5393,7 +5393,7 @@
     },
     {
       "source": "HA",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -6203,7 +6203,7 @@
     },
     {
       "source": "SB2",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -7121,7 +7121,7 @@
     },
     {
       "source": "Edit",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -8039,7 +8039,7 @@
     },
     {
       "source": "HB",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -8849,7 +8849,7 @@
     },
     {
       "source": "SB1",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -9767,7 +9767,7 @@
     },
     {
       "source": "SB3",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -10577,7 +10577,7 @@
     },
     {
       "source": "Maskinteknik",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -11387,7 +11387,7 @@
     },
     {
       "source": "Gamla matte",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -11440,7 +11440,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "BAT_Battery-01",
       "flow": [
         0.0,
@@ -11494,7 +11494,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "GRID",
       "flow": [
         0.0,
@@ -11548,7 +11548,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "Fysik origo",
       "flow": [
         0.0,
@@ -11602,7 +11602,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "IT",
       "flow": [
         0.0,
@@ -11656,7 +11656,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "Elkraftteknik",
       "flow": [
         0.0,
@@ -11710,7 +11710,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "Idel\u00e4ra",
       "flow": [
         0.0,
@@ -11764,7 +11764,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "HC",
       "flow": [
         0.0,
@@ -11818,7 +11818,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "HA",
       "flow": [
         0.0,
@@ -11872,7 +11872,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "SB2",
       "flow": [
         0.0,
@@ -11926,7 +11926,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "Edit",
       "flow": [
         0.0,
@@ -11980,7 +11980,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "HB",
       "flow": [
         0.0,
@@ -12034,7 +12034,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "SB1",
       "flow": [
         0.0,
@@ -12088,7 +12088,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "SB3",
       "flow": [
         0.0,
@@ -12142,7 +12142,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "Maskinteknik",
       "flow": [
         0.0,
@@ -12196,7 +12196,7 @@
       ]
     },
     {
-      "source": "Lokalkontor",
+      "source": "07.888 Lokalkontor",
       "target": "Gamla matte",
       "flow": [
         0.0,
@@ -12953,7 +12953,7 @@
     },
     {
       "source": "PV_PV-Plant",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -13763,7 +13763,7 @@
     },
     {
       "source": "BAT_Battery-01",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -14627,7 +14627,7 @@
     },
     {
       "source": "GRID",
-      "target": "Lokalkontor",
+      "target": "07.888 Lokalkontor",
       "flow": [
         8.9,
         8.9,
@@ -14706,7 +14706,7 @@
       "SB3": 0.0,
       "Maskinteknik": 0.0,
       "Gamla matte": 0.0,
-      "Lokalkontor": 0.0
+      "07.888 Lokalkontor": 0.0
     }
   }
 }
