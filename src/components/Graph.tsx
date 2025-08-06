@@ -1635,7 +1635,7 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         /* Enhanced 3D link hover effects */
         .link:hover {
           filter: brightness(1.3) drop-shadow(0 0 8px currentColor) drop-shadow(1px 3px 6px rgba(0,0,0,0.4));
-          stroke-width: calc(100% + 3px);
+          stroke-width: 4;
           transform: translateZ(1px);
           transition: all 0.2s ease-out;
         }

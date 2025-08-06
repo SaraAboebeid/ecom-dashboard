@@ -9,15 +9,15 @@
 }
 
 .link-flow {
-  animation: flow 2s linear infinite, pulse-glow 3s ease-in-out infinite;
+  animation: flow 2s linear infinite;
   filter: url(#glow);
-  transition: all 0.5s ease;
+  transition: none;
 }
 
 .link-flow-reverse {
-  animation: flow-reverse 2s linear infinite, pulse-glow 3s ease-in-out infinite;
+  animation: flow-reverse 2s linear infinite;
   filter: url(#glow);
-  transition: all 0.5s ease;
+  transition: none;
 }
 
 .node {
@@ -92,7 +92,7 @@
 /* Glow effect when hovering over links */
 .link:hover {
   filter: url(#glow);
-  stroke-width: calc(100% + 2px);
+  stroke-width: 4;
 }
 
 /* Node type-specific styles */
@@ -104,37 +104,39 @@
 .node-battery:hover circle { filter: url(#glow-battery); }
 .node-charge_point:hover circle { filter: url(#glow-charge_point); }
 
-/* Pulse animations for each node type */
+/* Pulse animations for each node type - DISABLED for testing */
+/*
 @keyframes pulse-node-building {
-  0%, 100% { transform: scale(1); filter: none; }
-  50% { transform: scale(1.05); filter: url(#glow-building); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 1; }
 }
 
 @keyframes pulse-node-pv {
-  0%, 100% { transform: scale(1); filter: none; }
-  50% { transform: scale(1.05); filter: url(#glow-pv); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 1; }
 }
 
 @keyframes pulse-node-grid {
-  0%, 100% { transform: scale(1); filter: none; }
-  50% { transform: scale(1.05); filter: url(#glow-grid); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 1; }
 }
 
 @keyframes pulse-node-battery {
-  0%, 100% { transform: scale(1); filter: none; }
-  50% { transform: scale(1.05); filter: url(#glow-battery); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 1; }
 }
 
 @keyframes pulse-node-charge_point {
-  0%, 100% { transform: scale(1); filter: none; }
-  50% { transform: scale(1.05); filter: url(#glow-charge_point); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 1; }
 }
 
-.node-building.pulse circle { animation: pulse-node-building 3s ease-in-out infinite; }
-.node-pv.pulse circle { animation: pulse-node-pv 3s ease-in-out infinite; }
-.node-grid.pulse circle { animation: pulse-node-grid 3s ease-in-out infinite; }
-.node-battery.pulse circle { animation: pulse-node-battery 3s ease-in-out infinite; }
-.node-charge_point.pulse circle { animation: pulse-node-charge_point 3s ease-in-out infinite; }
+.node-building.pulse circle { animation: pulse-node-building 4s ease-in-out infinite; }
+.node-pv.pulse circle { animation: pulse-node-pv 4s ease-in-out infinite; }
+.node-grid.pulse circle { animation: pulse-node-grid 4s ease-in-out infinite; }
+.node-battery.pulse circle { animation: pulse-node-battery 4s ease-in-out infinite; }
+.node-charge_point.pulse circle { animation: pulse-node-charge_point 4s ease-in-out infinite; }
+*/
 
 /* Enhanced node labels */
 .node-label {

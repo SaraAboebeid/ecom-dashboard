@@ -1,7 +1,7 @@
 {
   "nodes": [
     {
-      "id": "07.01 Fysik origo",
+      "id": "Fysik origo",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -11,12 +11,12 @@
       "area": 0.0,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for 07.01 Fysik origo\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 2.6\nvalue | Total: 61,345.45 kWh, Avg: 7.00 kWh, Max: 17.80 kWh, Min: 1.70 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.01 Fysik origo\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for Fysik origo\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 2.6\nvalue | Total: 61,345.45 kWh, Avg: 7.00 kWh, Max: 17.80 kWh, Min: 1.70 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for Fysik origo\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.01 Fysik origo\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "07.01 Fysik origo",
-      "number_of_floors": [],
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for Fysik origo\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "Fysik origo",
+      "number_of_floors": null,
       "occupancy_schedule": null,
       "owner": "Akademiska Hus",
       "total_energy_demand": 61345.45,
@@ -25,7 +25,7 @@
       "type": "building"
     },
     {
-      "id": "07.05 IT",
+      "id": "IT",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -35,21 +35,21 @@
       "area": 0.0,
       "breps": [],
       "building_type": "LargeDataCenterHighITE",
-      "electric_demand": "Electric Demand for 07.05 IT\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 2.4\nvalue | Total: 11,854.05 kWh, Avg: 1.35 kWh, Max: 4.60 kWh, Min: 0.20 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.05 IT\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for IT\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 2.4\nvalue | Total: 11,854.05 kWh, Avg: 1.35 kWh, Max: 4.60 kWh, Min: 0.20 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for IT\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.05 IT\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 2.0\nvalue | Total: 17,520.00 W/m2, Avg: 2.00 W/m2, Max: 2.00 W/m2, Min: 2.00 W/m2",
-      "name": "07.05 IT",
-      "number_of_floors": [],
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for IT\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 2.0\nvalue | Total: 17,520.00 W/m2, Avg: 2.00 W/m2, Max: 2.00 W/m2, Min: 2.00 W/m2",
+      "name": "IT",
+      "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Studentbost\u00e4der",
+      "owner": "Chalmersfastigheter",
       "total_energy_demand": 11854.050000000001,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
       "type": "building"
     },
     {
-      "id": "07.12 Elkraftteknik",
+      "id": "Elkraftteknik",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -59,23 +59,23 @@
       "area": 1900.7155641552995,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for 07.12 Elkraftteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 44.8\nvalue | Total: 475,873.85 kWh, Avg: 54.32 kWh, Max: 109.90 kWh, Min: 29.50 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.12 Elkraftteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 1.1088765055888459\nvalue | Total: 17,345.37 kWh, Avg: 1.98 kWh, Max: 3.61 kWh, Min: 1.11 kWh",
-      "footprints": "[<Rhino.Geometry.PolylineCurve object at 0x000002833C3F6400>]",
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.12 Elkraftteknik\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "07.12 Elkraftteknik",
+      "electric_demand": "Electric Demand for Elkraftteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 44.8\nvalue | Total: 475,873.85 kWh, Avg: 54.32 kWh, Max: 109.90 kWh, Min: 29.50 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for Elkraftteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 1.1088765055888459\nvalue | Total: 17,345.37 kWh, Avg: 1.98 kWh, Max: 3.61 kWh, Min: 1.11 kWh",
+      "footprints": "[<Rhino.Geometry.PolylineCurve object at 0x000002B9CA417EC0>]",
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for Elkraftteknik\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "Elkraftteknik",
       "number_of_floors": [
         "1"
       ],
       "occupancy_schedule": null,
-      "owner": "Studentbost\u00e4der",
+      "owner": "Akademiska Hus",
       "total_energy_demand": 475873.85,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
       "type": "building"
     },
     {
-      "id": "07.18 Idel\u00e4ra",
+      "id": "Idel\u00e4ra",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -85,21 +85,21 @@
       "area": 0.0,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for 07.18 Idel\u00e4ra\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 2.6\nvalue | Total: 61,345.45 kWh, Avg: 7.00 kWh, Max: 17.80 kWh, Min: 1.70 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.18 Idel\u00e4ra\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for Idel\u00e4ra\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 2.6\nvalue | Total: 61,345.45 kWh, Avg: 7.00 kWh, Max: 17.80 kWh, Min: 1.70 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for Idel\u00e4ra\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.18 Idel\u00e4ra\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "07.18 Idel\u00e4ra",
-      "number_of_floors": [],
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for Idel\u00e4ra\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "Idel\u00e4ra",
+      "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Studentbost\u00e4der",
+      "owner": "Chalmersfastigheter",
       "total_energy_demand": 61345.45,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
       "type": "building"
     },
     {
-      "id": "07.21 HC",
+      "id": "HC",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -109,12 +109,12 @@
       "area": 0.0,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for 07.21 HC\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 4.4\nvalue | Total: 105,722.30 kWh, Avg: 12.07 kWh, Max: 39.50 kWh, Min: 1.60 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.21 HC\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for HC\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 4.4\nvalue | Total: 105,722.30 kWh, Avg: 12.07 kWh, Max: 39.50 kWh, Min: 1.60 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for HC\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.21 HC\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "07.21 HC",
-      "number_of_floors": [],
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for HC\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "HC",
+      "number_of_floors": null,
       "occupancy_schedule": null,
       "owner": "Studentbost\u00e4der",
       "total_energy_demand": 105722.3,
@@ -123,7 +123,7 @@
       "type": "building"
     },
     {
-      "id": "07.22 HA",
+      "id": "HA",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -133,21 +133,21 @@
       "area": 0.0,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for 07.22 HA\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 3.5\nvalue | Total: 71,119.50 kWh, Avg: 8.12 kWh, Max: 30.10 kWh, Min: 1.60 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.22 HA\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for HA\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 3.5\nvalue | Total: 71,119.50 kWh, Avg: 8.12 kWh, Max: 30.10 kWh, Min: 1.60 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for HA\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.22 HA\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "07.22 HA",
-      "number_of_floors": [],
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for HA\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "HA",
+      "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Studentbost\u00e4der",
+      "owner": "Chalmersfastigheter",
       "total_energy_demand": 71119.5,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
       "type": "building"
     },
     {
-      "id": "07.23 SB2",
+      "id": "SB2",
       "PV_plant": "[PVPlant: SB2-PV_1 | 113.2 kW | 85202 kWh/year, PVPlant: SB2-PV_2 | 112.0 kW | 87562 kWh/year]",
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -157,21 +157,21 @@
       "area": 0.0,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for 07.23 SB2\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 29.8\nvalue | Total: 343,826.35 kWh, Avg: 39.25 kWh, Max: 85.90 kWh, Min: 4.10 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.23 SB2\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for SB2\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 29.8\nvalue | Total: 343,826.35 kWh, Avg: 39.25 kWh, Max: 85.90 kWh, Min: 4.10 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for SB2\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.23 SB2\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "07.23 SB2",
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for SB2\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "SB2",
       "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Studentbost\u00e4der",
+      "owner": "Akademiska Hus",
       "total_energy_demand": 343826.35,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
       "type": "building"
     },
     {
-      "id": "07.23 SB2_PV_SB2-PV_1",
+      "id": "SB2_PV_SB2-PV_1",
       "DEFAULT_LAT": 57.68873,
       "DEFAULT_LON": 11.977887,
       "DEFAULT_NAME": "Default PV Plant",
@@ -199,7 +199,7 @@
       "type": "pv"
     },
     {
-      "id": "07.23 SB2_PV_SB2-PV_2",
+      "id": "SB2_PV_SB2-PV_2",
       "DEFAULT_LAT": 57.68873,
       "DEFAULT_LON": 11.977887,
       "DEFAULT_NAME": "Default PV Plant",
@@ -227,8 +227,8 @@
       "type": "pv"
     },
     {
-      "id": "07.24 Edit",
-      "PV_plant": [],
+      "id": "Edit",
+      "PV_plant": "[PVPlant: Edit-PV_1 | 83.7 kW | 67503 kWh/year, PVPlant: Edit-PV_2 | 78.0 kW | 62983 kWh/year]",
       "VALID_OWNERS": [
         "Akademiska Hus",
         "Studentbost\u00e4der",
@@ -237,21 +237,77 @@
       "area": 0.0,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for 07.24 Edit\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 103.9\nvalue | Total: 1,293,075.90 kWh, Avg: 147.61 kWh, Max: 314.40 kWh, Min: 55.80 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.24 Edit\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for Edit\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 103.9\nvalue | Total: 1,293,075.90 kWh, Avg: 147.61 kWh, Max: 314.40 kWh, Min: 55.80 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for Edit\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.24 Edit\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "07.24 Edit",
-      "number_of_floors": [],
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for Edit\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "Edit",
+      "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Studentbost\u00e4der",
+      "owner": "Chalmersfastigheter",
       "total_energy_demand": 1293075.9000000001,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
       "type": "building"
     },
     {
-      "id": "07.25 HB",
+      "id": "Edit_PV_Edit-PV_1",
+      "DEFAULT_LAT": 57.68873,
+      "DEFAULT_LON": 11.977887,
+      "DEFAULT_NAME": "Default PV Plant",
+      "DEFAULT_PERCENTAGE": 80.0,
+      "DEFAULT_SYSTEM_LOSS": 14.0,
+      "annual_production": 67503.45413,
+      "azimuth": -0.0,
+      "custom_slope": null,
+      "hourly_df": "       hoy  value\n0        1    0.0\n1        2    0.0\n2        3    0.0\n3        4    0.0\n4        5    0.0\n...    ...    ...\n8755  8756    0.0\n8756  8757    0.0\n8757  8758    0.0\n8758  8759    0.0\n8759  8760    0.0\n\n[8760 rows x 2 columns]",
+      "hourly_result": "Hourly PV Production for Edit-PV_1\nCategory: ENERGY\nUnits: KILOWATT_HOUR\nSource: Edit-PV_1\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 67,503.45 kWh, Avg: 7.71 kWh, Max: 59.62 kWh, Min: 0.00 kWh",
+      "installed_capacity": 83.65,
+      "lat": 57.68873,
+      "lon": 11.977887,
+      "module_count": 239,
+      "name": "Edit-PV_1",
+      "percentage": 70.0,
+      "pv_module": "PV Module: MC2 350W Panel\nRated Power: 350.0 W\nArea: 2.00 m\u00b2 | Efficiency: 17.50 %\nTotal Cost: 1085.00 SEK/panel\nTotal Embodied CO\u2082: 215.25 kgCO\u2082e/panel",
+      "slope": 0.0,
+      "surface": "Rhino.Geometry.Brep",
+      "system_loss": 14.0,
+      "total_cost": 259315.0,
+      "total_embodied_co2": 51444.75,
+      "total_surface": 683.1479693661181,
+      "usable_surface": 478.20357855628265,
+      "type": "pv"
+    },
+    {
+      "id": "Edit_PV_Edit-PV_2",
+      "DEFAULT_LAT": 57.68873,
+      "DEFAULT_LON": 11.977887,
+      "DEFAULT_NAME": "Default PV Plant",
+      "DEFAULT_PERCENTAGE": 80.0,
+      "DEFAULT_SYSTEM_LOSS": 14.0,
+      "annual_production": 62982.993709999995,
+      "azimuth": 180.0,
+      "custom_slope": null,
+      "hourly_df": "       hoy  value\n0        1    0.0\n1        2    0.0\n2        3    0.0\n3        4    0.0\n4        5    0.0\n...    ...    ...\n8755  8756    0.0\n8756  8757    0.0\n8757  8758    0.0\n8758  8759    0.0\n8759  8760    0.0\n\n[8760 rows x 2 columns]",
+      "hourly_result": "Hourly PV Production for Edit-PV_2\nCategory: ENERGY\nUnits: KILOWATT_HOUR\nSource: Edit-PV_2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 62,982.99 kWh, Avg: 7.19 kWh, Max: 55.63 kWh, Min: 0.00 kWh",
+      "installed_capacity": 78.05,
+      "lat": 57.68873,
+      "lon": 11.977887,
+      "module_count": 223,
+      "name": "Edit-PV_2",
+      "percentage": 70.0,
+      "pv_module": "PV Module: MC2 350W Panel\nRated Power: 350.0 W\nArea: 2.00 m\u00b2 | Efficiency: 17.50 %\nTotal Cost: 1085.00 SEK/panel\nTotal Embodied CO\u2082: 215.25 kgCO\u2082e/panel",
+      "slope": 0.0,
+      "surface": "Rhino.Geometry.Brep",
+      "system_loss": 14.0,
+      "total_cost": 241955.0,
+      "total_embodied_co2": 48000.75,
+      "total_surface": 637.5587447716172,
+      "usable_surface": 446.291121340132,
+      "type": "pv"
+    },
+    {
+      "id": "HB",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -261,22 +317,22 @@
       "area": 0.0,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for 07.25 HB\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 15.1\nvalue | Total: 186,545.83 kWh, Avg: 21.30 kWh, Max: 73.10 kWh, Min: 3.50 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.25 HB\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for HB\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 15.1\nvalue | Total: 186,545.83 kWh, Avg: 21.30 kWh, Max: 73.10 kWh, Min: 3.50 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for HB\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.25 HB\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "07.25 HB",
-      "number_of_floors": [],
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for HB\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "HB",
+      "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Studentbost\u00e4der",
+      "owner": "Akademiska Hus",
       "total_energy_demand": 186545.825,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
       "type": "building"
     },
     {
-      "id": "07.26 SB1",
-      "PV_plant": [],
+      "id": "SB1",
+      "PV_plant": "[PVPlant: SB1-PV_1 | 52.5 kW | 41045 kWh/year, PVPlant: SB1-PV_2 | 53.2 kW | 40042 kWh/year]",
       "VALID_OWNERS": [
         "Akademiska Hus",
         "Studentbost\u00e4der",
@@ -285,21 +341,77 @@
       "area": 0.0,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for 07.26 SB1\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 58.3\nvalue | Total: 707,663.60 kWh, Avg: 80.78 kWh, Max: 176.20 kWh, Min: 20.50 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.26 SB1\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for SB1\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 58.3\nvalue | Total: 707,663.60 kWh, Avg: 80.78 kWh, Max: 176.20 kWh, Min: 20.50 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for SB1\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.26 SB1\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "07.26 SB1",
-      "number_of_floors": [],
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for SB1\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "SB1",
+      "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Studentbost\u00e4der",
+      "owner": "Akademiska Hus",
       "total_energy_demand": 707663.6,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
       "type": "building"
     },
     {
-      "id": "07.27 SB3",
+      "id": "SB1_PV_SB1-PV_1",
+      "DEFAULT_LAT": 57.68873,
+      "DEFAULT_LON": 11.977887,
+      "DEFAULT_NAME": "Default PV Plant",
+      "DEFAULT_PERCENTAGE": 80.0,
+      "DEFAULT_SYSTEM_LOSS": 14.0,
+      "annual_production": 41044.84969999999,
+      "azimuth": 249.02853206534314,
+      "custom_slope": null,
+      "hourly_df": "       hoy  value\n0        1    0.0\n1        2    0.0\n2        3    0.0\n3        4    0.0\n4        5    0.0\n...    ...    ...\n8755  8756    0.0\n8756  8757    0.0\n8757  8758    0.0\n8758  8759    0.0\n8759  8760    0.0\n\n[8760 rows x 2 columns]",
+      "hourly_result": "Hourly PV Production for SB1-PV_1\nCategory: ENERGY\nUnits: KILOWATT_HOUR\nSource: SB1-PV_1\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 41,044.85 kWh, Avg: 4.69 kWh, Max: 36.28 kWh, Min: 0.00 kWh",
+      "installed_capacity": 52.5,
+      "lat": 57.68873,
+      "lon": 11.977887,
+      "module_count": 150,
+      "name": "SB1-PV_1",
+      "percentage": 50.0,
+      "pv_module": "PV Module: MC2 350W Panel\nRated Power: 350.0 W\nArea: 2.00 m\u00b2 | Efficiency: 17.50 %\nTotal Cost: 1085.00 SEK/panel\nTotal Embodied CO\u2082: 215.25 kgCO\u2082e/panel",
+      "slope": 6.2856151624161845,
+      "surface": "Rhino.Geometry.Brep",
+      "system_loss": 14.0,
+      "total_cost": 162750.0,
+      "total_embodied_co2": 32287.5,
+      "total_surface": 603.77772181174,
+      "usable_surface": 301.88886090587,
+      "type": "pv"
+    },
+    {
+      "id": "SB1_PV_SB1-PV_2",
+      "DEFAULT_LAT": 57.68873,
+      "DEFAULT_LON": 11.977887,
+      "DEFAULT_NAME": "Default PV Plant",
+      "DEFAULT_PERCENTAGE": 80.0,
+      "DEFAULT_SYSTEM_LOSS": 14.0,
+      "annual_production": 40041.9731,
+      "azimuth": 159.02875385400318,
+      "custom_slope": null,
+      "hourly_df": "       hoy  value\n0        1    0.0\n1        2    0.0\n2        3    0.0\n3        4    0.0\n4        5    0.0\n...    ...    ...\n8755  8756    0.0\n8756  8757    0.0\n8757  8758    0.0\n8758  8759    0.0\n8759  8760    0.0\n\n[8760 rows x 2 columns]",
+      "hourly_result": "Hourly PV Production for SB1-PV_2\nCategory: ENERGY\nUnits: KILOWATT_HOUR\nSource: SB1-PV_2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 40,041.97 kWh, Avg: 4.57 kWh, Max: 34.83 kWh, Min: 0.00 kWh",
+      "installed_capacity": 53.2,
+      "lat": 57.68873,
+      "lon": 11.977887,
+      "module_count": 152,
+      "name": "SB1-PV_2",
+      "percentage": 50.0,
+      "pv_module": "PV Module: MC2 350W Panel\nRated Power: 350.0 W\nArea: 2.00 m\u00b2 | Efficiency: 17.50 %\nTotal Cost: 1085.00 SEK/panel\nTotal Embodied CO\u2082: 215.25 kgCO\u2082e/panel",
+      "slope": 6.212005587633813,
+      "surface": "Rhino.Geometry.Brep",
+      "system_loss": 14.0,
+      "total_cost": 164920.0,
+      "total_embodied_co2": 32718.0,
+      "total_surface": 609.1775310022236,
+      "usable_surface": 304.5887655011118,
+      "type": "pv"
+    },
+    {
+      "id": "SB3",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -309,21 +421,21 @@
       "area": 0.0,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for 07.27 SB3\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 104.3\nvalue | Total: 1,085,973.00 kWh, Avg: 123.97 kWh, Max: 274.90 kWh, Min: -200.00 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.27 SB3\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for SB3\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 104.3\nvalue | Total: 1,085,973.00 kWh, Avg: 123.97 kWh, Max: 274.90 kWh, Min: -200.00 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for SB3\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.27 SB3\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "07.27 SB3",
-      "number_of_floors": [],
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for SB3\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "SB3",
+      "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Studentbost\u00e4der",
+      "owner": "Chalmersfastigheter",
       "total_energy_demand": 1085973.0,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
       "type": "building"
     },
     {
-      "id": "07.28 Maskinteknik",
+      "id": "Maskinteknik",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -333,21 +445,21 @@
       "area": 0.0,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for 07.28 Maskinteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 173.7\nvalue | Total: 2,129,120.35 kWh, Avg: 243.05 kWh, Max: 559.00 kWh, Min: 100.00 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.28 Maskinteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for Maskinteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 173.7\nvalue | Total: 2,129,120.35 kWh, Avg: 243.05 kWh, Max: 559.00 kWh, Min: 100.00 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for Maskinteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.28 Maskinteknik\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "07.28 Maskinteknik",
-      "number_of_floors": [],
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for Maskinteknik\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "Maskinteknik",
+      "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Studentbost\u00e4der",
+      "owner": "Akademiska Hus",
       "total_energy_demand": 2129120.3499999996,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
       "type": "building"
     },
     {
-      "id": "07.40 Gamla matte",
+      "id": "Gamla matte",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -357,21 +469,21 @@
       "area": 0.0,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for 07.40 Gamla matte\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 80.7\nvalue | Total: 453,595.85 kWh, Avg: 51.78 kWh, Max: 199.10 kWh, Min: 14.70 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.40 Gamla matte\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for Gamla matte\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 80.7\nvalue | Total: 453,595.85 kWh, Avg: 51.78 kWh, Max: 199.10 kWh, Min: 14.70 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for Gamla matte\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.40 Gamla matte\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "07.40 Gamla matte",
-      "number_of_floors": [],
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for Gamla matte\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "Gamla matte",
+      "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Studentbost\u00e4der",
+      "owner": "Chalmersfastigheter",
       "total_energy_demand": 453595.85000000003,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
       "type": "building"
     },
     {
-      "id": "07.888 Lokalkontor",
+      "id": "Lokalkontor",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -381,21 +493,49 @@
       "area": 0.0,
       "breps": [],
       "building_type": "LargeOffice",
-      "electric_demand": "Electric Demand for 07.888 Lokalkontor\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 8.8\nvalue | Total: 77,923.00 kWh, Avg: 8.90 kWh, Max: 28.00 kWh, Min: 0.00 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.888 Lokalkontor\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for Lokalkontor\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 8.8\nvalue | Total: 77,923.00 kWh, Avg: 8.90 kWh, Max: 28.00 kWh, Min: 0.00 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for Lokalkontor\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.888 Lokalkontor\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.3684478000000001\nvalue | Total: 7,275.40 W/m2, Avg: 0.83 W/m2, Max: 1.72 W/m2, Min: 0.36 W/m2",
-      "name": "07.888 Lokalkontor",
-      "number_of_floors": [],
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for Lokalkontor\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.3684478000000001\nvalue | Total: 7,275.40 W/m2, Avg: 0.83 W/m2, Max: 1.72 W/m2, Min: 0.36 W/m2",
+      "name": "Lokalkontor",
+      "number_of_floors": null,
       "occupancy_schedule": null,
-      "owner": "Studentbost\u00e4der",
+      "owner": "Akademiska Hus",
       "total_energy_demand": 77923.0,
       "total_installed_capacity": 0.0,
       "total_pv_capacity": 0.0,
       "type": "building"
     },
     {
-      "id": "BAT_B01",
+      "id": "PV_PV-Plant",
+      "DEFAULT_LAT": 57.68873,
+      "DEFAULT_LON": 11.977887,
+      "DEFAULT_NAME": "Default PV Plant",
+      "DEFAULT_PERCENTAGE": 80.0,
+      "DEFAULT_SYSTEM_LOSS": 14.0,
+      "annual_production": 53053.68318,
+      "azimuth": 31.999458602157308,
+      "custom_slope": null,
+      "hourly_df": "       hoy  value\n0        1    0.0\n1        2    0.0\n2        3    0.0\n3        4    0.0\n4        5    0.0\n...    ...    ...\n8755  8756    0.0\n8756  8757    0.0\n8757  8758    0.0\n8758  8759    0.0\n8759  8760    0.0\n\n[8760 rows x 2 columns]",
+      "hourly_result": "Hourly PV Production for PV-Plant\nCategory: ENERGY\nUnits: KILOWATT_HOUR\nSource: PV-Plant\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 53,053.68 kWh, Avg: 6.06 kWh, Max: 46.89 kWh, Min: 0.00 kWh",
+      "installed_capacity": 65.45,
+      "lat": 57.68873,
+      "lon": 11.977887,
+      "module_count": 187,
+      "name": "PV-Plant",
+      "percentage": 100.0,
+      "pv_module": "PV Module: MC2 350W Panel\nRated Power: 350.0 W\nArea: 2.00 m\u00b2 | Efficiency: 17.50 %\nTotal Cost: 1085.00 SEK/panel\nTotal Embodied CO\u2082: 215.25 kgCO\u2082e/panel",
+      "slope": 0.4689290943340946,
+      "surface": "Rhino.Geometry.Brep",
+      "system_loss": 14.0,
+      "total_cost": 202895.0,
+      "total_embodied_co2": 40251.75,
+      "total_surface": 375.7002857992678,
+      "usable_surface": 375.7002857992678,
+      "type": "pv"
+    },
+    {
+      "id": "BAT_Battery-01",
       "average_capacity": 48.6,
       "capacity": 54.0,
       "capacity_eol": 43.2,
@@ -403,10 +543,10 @@
       "degradation": 0.02,
       "efficiency": 20.0,
       "embodied_co2_per_kwh": 10.0,
-      "hourly_soc": "Hourly State of Charge for B01\nCategory: ENERGY\nUnits: KILOWATT_HOUR\nSource: B01\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 5.0\nvalue | Total: 43,800.00 kWh, Avg: 5.00 kWh, Max: 5.00 kWh, Min: 5.00 kWh",
+      "hourly_soc": "Hourly State of Charge for Battery-01\nCategory: ENERGY\nUnits: KILOWATT_HOUR\nSource: Battery-01\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 5.0\nvalue | Total: 43,800.00 kWh, Avg: 5.00 kWh, Max: 5.00 kWh, Min: 5.00 kWh",
       "initial_soc": 5.0,
       "lifespan": 10.0,
-      "name": "B01",
+      "name": "Battery-01",
       "point": "319626.64640911424,6398341.68431914,0",
       "total_cost": 540.0,
       "total_embodied_co2": 540.0,
@@ -446,8 +586,8 @@
   ],
   "links": [
     {
-      "source": "07.01 Fysik origo",
-      "target": "BAT_B01",
+      "source": "Fysik origo",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -500,7 +640,7 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
+      "source": "Fysik origo",
       "target": "GRID",
       "flow": [
         0.0,
@@ -554,8 +694,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.05 IT",
+      "source": "Fysik origo",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -608,8 +748,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.12 Elkraftteknik",
+      "source": "Fysik origo",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -662,8 +802,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "Fysik origo",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -716,8 +856,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.21 HC",
+      "source": "Fysik origo",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -770,8 +910,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.22 HA",
+      "source": "Fysik origo",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -824,8 +964,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.23 SB2",
+      "source": "Fysik origo",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -878,8 +1018,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.24 Edit",
+      "source": "Fysik origo",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -932,8 +1072,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.25 HB",
+      "source": "Fysik origo",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -986,8 +1126,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.26 SB1",
+      "source": "Fysik origo",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -1040,8 +1180,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.27 SB3",
+      "source": "Fysik origo",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -1094,8 +1234,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.28 Maskinteknik",
+      "source": "Fysik origo",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -1148,8 +1288,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.40 Gamla matte",
+      "source": "Fysik origo",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -1202,8 +1342,8 @@
       ]
     },
     {
-      "source": "07.01 Fysik origo",
-      "target": "07.888 Lokalkontor",
+      "source": "Fysik origo",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -1256,8 +1396,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "BAT_B01",
+      "source": "IT",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -1310,7 +1450,7 @@
       ]
     },
     {
-      "source": "07.05 IT",
+      "source": "IT",
       "target": "GRID",
       "flow": [
         0.0,
@@ -1364,8 +1504,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.01 Fysik origo",
+      "source": "IT",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -1418,8 +1558,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.12 Elkraftteknik",
+      "source": "IT",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -1472,8 +1612,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "IT",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -1526,8 +1666,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.21 HC",
+      "source": "IT",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -1580,8 +1720,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.22 HA",
+      "source": "IT",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -1634,8 +1774,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.23 SB2",
+      "source": "IT",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -1688,8 +1828,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.24 Edit",
+      "source": "IT",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -1742,8 +1882,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.25 HB",
+      "source": "IT",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -1796,8 +1936,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.26 SB1",
+      "source": "IT",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -1850,8 +1990,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.27 SB3",
+      "source": "IT",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -1904,8 +2044,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.28 Maskinteknik",
+      "source": "IT",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -1958,8 +2098,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.40 Gamla matte",
+      "source": "IT",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -2012,8 +2152,8 @@
       ]
     },
     {
-      "source": "07.05 IT",
-      "target": "07.888 Lokalkontor",
+      "source": "IT",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -2066,8 +2206,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "BAT_B01",
+      "source": "Elkraftteknik",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -2120,7 +2260,7 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
+      "source": "Elkraftteknik",
       "target": "GRID",
       "flow": [
         0.0,
@@ -2174,8 +2314,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.01 Fysik origo",
+      "source": "Elkraftteknik",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -2228,8 +2368,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.05 IT",
+      "source": "Elkraftteknik",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -2282,8 +2422,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "Elkraftteknik",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -2336,8 +2476,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.21 HC",
+      "source": "Elkraftteknik",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -2390,8 +2530,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.22 HA",
+      "source": "Elkraftteknik",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -2444,8 +2584,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.23 SB2",
+      "source": "Elkraftteknik",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -2498,8 +2638,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.24 Edit",
+      "source": "Elkraftteknik",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -2552,8 +2692,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.25 HB",
+      "source": "Elkraftteknik",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -2606,8 +2746,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.26 SB1",
+      "source": "Elkraftteknik",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -2660,8 +2800,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.27 SB3",
+      "source": "Elkraftteknik",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -2714,8 +2854,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.28 Maskinteknik",
+      "source": "Elkraftteknik",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -2768,8 +2908,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.40 Gamla matte",
+      "source": "Elkraftteknik",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -2822,8 +2962,8 @@
       ]
     },
     {
-      "source": "07.12 Elkraftteknik",
-      "target": "07.888 Lokalkontor",
+      "source": "Elkraftteknik",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -2876,8 +3016,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "BAT_B01",
+      "source": "Idel\u00e4ra",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -2930,7 +3070,7 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
+      "source": "Idel\u00e4ra",
       "target": "GRID",
       "flow": [
         0.0,
@@ -2984,8 +3124,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.01 Fysik origo",
+      "source": "Idel\u00e4ra",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -3038,8 +3178,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.05 IT",
+      "source": "Idel\u00e4ra",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -3092,8 +3232,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.12 Elkraftteknik",
+      "source": "Idel\u00e4ra",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -3146,8 +3286,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.21 HC",
+      "source": "Idel\u00e4ra",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -3200,8 +3340,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.22 HA",
+      "source": "Idel\u00e4ra",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -3254,8 +3394,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.23 SB2",
+      "source": "Idel\u00e4ra",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -3308,8 +3448,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.24 Edit",
+      "source": "Idel\u00e4ra",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -3362,8 +3502,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.25 HB",
+      "source": "Idel\u00e4ra",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -3416,8 +3556,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.26 SB1",
+      "source": "Idel\u00e4ra",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -3470,8 +3610,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.27 SB3",
+      "source": "Idel\u00e4ra",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -3524,8 +3664,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.28 Maskinteknik",
+      "source": "Idel\u00e4ra",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -3578,8 +3718,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.40 Gamla matte",
+      "source": "Idel\u00e4ra",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -3632,8 +3772,8 @@
       ]
     },
     {
-      "source": "07.18 Idel\u00e4ra",
-      "target": "07.888 Lokalkontor",
+      "source": "Idel\u00e4ra",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -3686,8 +3826,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "BAT_B01",
+      "source": "HC",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -3740,7 +3880,7 @@
       ]
     },
     {
-      "source": "07.21 HC",
+      "source": "HC",
       "target": "GRID",
       "flow": [
         0.0,
@@ -3794,8 +3934,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.01 Fysik origo",
+      "source": "HC",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -3848,8 +3988,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.05 IT",
+      "source": "HC",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -3902,8 +4042,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.12 Elkraftteknik",
+      "source": "HC",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -3956,8 +4096,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "HC",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -4010,8 +4150,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.22 HA",
+      "source": "HC",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -4064,8 +4204,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.23 SB2",
+      "source": "HC",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -4118,8 +4258,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.24 Edit",
+      "source": "HC",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -4172,8 +4312,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.25 HB",
+      "source": "HC",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -4226,8 +4366,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.26 SB1",
+      "source": "HC",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -4280,8 +4420,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.27 SB3",
+      "source": "HC",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -4334,8 +4474,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.28 Maskinteknik",
+      "source": "HC",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -4388,8 +4528,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.40 Gamla matte",
+      "source": "HC",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -4442,8 +4582,8 @@
       ]
     },
     {
-      "source": "07.21 HC",
-      "target": "07.888 Lokalkontor",
+      "source": "HC",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -4496,8 +4636,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "BAT_B01",
+      "source": "HA",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -4550,7 +4690,7 @@
       ]
     },
     {
-      "source": "07.22 HA",
+      "source": "HA",
       "target": "GRID",
       "flow": [
         0.0,
@@ -4604,8 +4744,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.01 Fysik origo",
+      "source": "HA",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -4658,8 +4798,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.05 IT",
+      "source": "HA",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -4712,8 +4852,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.12 Elkraftteknik",
+      "source": "HA",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -4766,8 +4906,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "HA",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -4820,8 +4960,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.21 HC",
+      "source": "HA",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -4874,8 +5014,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.23 SB2",
+      "source": "HA",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -4928,8 +5068,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.24 Edit",
+      "source": "HA",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -4982,8 +5122,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.25 HB",
+      "source": "HA",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -5036,8 +5176,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.26 SB1",
+      "source": "HA",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -5090,8 +5230,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.27 SB3",
+      "source": "HA",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -5144,8 +5284,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.28 Maskinteknik",
+      "source": "HA",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -5198,8 +5338,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.40 Gamla matte",
+      "source": "HA",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -5252,8 +5392,8 @@
       ]
     },
     {
-      "source": "07.22 HA",
-      "target": "07.888 Lokalkontor",
+      "source": "HA",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -5306,8 +5446,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "BAT_B01",
+      "source": "SB2",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -5360,7 +5500,7 @@
       ]
     },
     {
-      "source": "07.23 SB2",
+      "source": "SB2",
       "target": "GRID",
       "flow": [
         0.0,
@@ -5414,8 +5554,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.01 Fysik origo",
+      "source": "SB2",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -5468,8 +5608,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.05 IT",
+      "source": "SB2",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -5522,8 +5662,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.12 Elkraftteknik",
+      "source": "SB2",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -5576,8 +5716,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "SB2",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -5630,8 +5770,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.21 HC",
+      "source": "SB2",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -5684,8 +5824,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.22 HA",
+      "source": "SB2",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -5738,8 +5878,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.24 Edit",
+      "source": "SB2",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -5792,8 +5932,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.25 HB",
+      "source": "SB2",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -5846,8 +5986,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.26 SB1",
+      "source": "SB2",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -5900,8 +6040,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.27 SB3",
+      "source": "SB2",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -5954,8 +6094,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.28 Maskinteknik",
+      "source": "SB2",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -6008,8 +6148,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.40 Gamla matte",
+      "source": "SB2",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -6062,8 +6202,8 @@
       ]
     },
     {
-      "source": "07.23 SB2",
-      "target": "07.888 Lokalkontor",
+      "source": "SB2",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -6116,8 +6256,8 @@
       ]
     },
     {
-      "source": "07.23 SB2_PV_SB2-PV_1",
-      "target": "07.23 SB2",
+      "source": "SB2_PV_SB2-PV_1",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -6170,8 +6310,8 @@
       ]
     },
     {
-      "source": "07.23 SB2_PV_SB2-PV_2",
-      "target": "07.23 SB2",
+      "source": "SB2_PV_SB2-PV_2",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -6224,8 +6364,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "BAT_B01",
+      "source": "Edit",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -6278,7 +6418,7 @@
       ]
     },
     {
-      "source": "07.24 Edit",
+      "source": "Edit",
       "target": "GRID",
       "flow": [
         0.0,
@@ -6332,8 +6472,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.01 Fysik origo",
+      "source": "Edit",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -6386,8 +6526,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.05 IT",
+      "source": "Edit",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -6440,8 +6580,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.12 Elkraftteknik",
+      "source": "Edit",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -6494,8 +6634,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "Edit",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -6548,8 +6688,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.21 HC",
+      "source": "Edit",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -6602,8 +6742,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.22 HA",
+      "source": "Edit",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -6656,8 +6796,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.23 SB2",
+      "source": "Edit",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -6710,8 +6850,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.25 HB",
+      "source": "Edit",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -6764,8 +6904,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.26 SB1",
+      "source": "Edit",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -6818,8 +6958,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.27 SB3",
+      "source": "Edit",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -6872,8 +7012,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.28 Maskinteknik",
+      "source": "Edit",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -6926,8 +7066,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.40 Gamla matte",
+      "source": "Edit",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -6980,8 +7120,8 @@
       ]
     },
     {
-      "source": "07.24 Edit",
-      "target": "07.888 Lokalkontor",
+      "source": "Edit",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -7034,8 +7174,116 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "BAT_B01",
+      "source": "Edit_PV_Edit-PV_1",
+      "target": "Edit",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.11376,
+        1.31749,
+        3.49573,
+        18.53266,
+        18.03745,
+        20.160490000000003,
+        48.76126,
+        55.56953,
+        52.12232,
+        42.72842,
+        29.00564,
+        27.54845,
+        25.032259999999997,
+        15.40749,
+        5.96759,
+        0.15308000000000002,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.45049,
+        5.6480500000000005,
+        18.866419999999998,
+        30.49963,
+        30.15248,
+        40.394580000000005,
+        46.575480000000006,
+        46.44332,
+        17.8049,
+        19.24619,
+        32.29894,
+        32.040459999999996,
+        26.266099999999998,
+        16.24065,
+        6.6100200000000005,
+        0.5002300000000001,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "Edit_PV_Edit-PV_2",
+      "target": "Edit",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.10615000000000001,
+        1.22929,
+        3.26171,
+        17.29198,
+        16.829919999999998,
+        18.810830000000003,
+        45.49613,
+        51.84783,
+        48.632169999999995,
+        39.867940000000004,
+        27.06384,
+        25.70421,
+        23.35646,
+        14.37603,
+        5.5688699999999995,
+        0.14283,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.35339,
+        5.269939999999999,
+        17.6034,
+        28.45703,
+        28.1339,
+        37.68956,
+        43.45668,
+        43.33336,
+        16.61294,
+        17.95774,
+        30.13589,
+        29.89471,
+        24.5077,
+        15.15341,
+        6.16829,
+        0.46674,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "HB",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -7088,7 +7336,7 @@
       ]
     },
     {
-      "source": "07.25 HB",
+      "source": "HB",
       "target": "GRID",
       "flow": [
         0.0,
@@ -7142,8 +7390,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.01 Fysik origo",
+      "source": "HB",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -7196,8 +7444,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.05 IT",
+      "source": "HB",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -7250,8 +7498,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.12 Elkraftteknik",
+      "source": "HB",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -7304,8 +7552,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "HB",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -7358,8 +7606,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.21 HC",
+      "source": "HB",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -7412,8 +7660,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.22 HA",
+      "source": "HB",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -7466,8 +7714,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.23 SB2",
+      "source": "HB",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -7520,8 +7768,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.24 Edit",
+      "source": "HB",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -7574,8 +7822,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.26 SB1",
+      "source": "HB",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -7628,8 +7876,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.27 SB3",
+      "source": "HB",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -7682,8 +7930,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.28 Maskinteknik",
+      "source": "HB",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -7736,8 +7984,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.40 Gamla matte",
+      "source": "HB",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -7790,8 +8038,8 @@
       ]
     },
     {
-      "source": "07.25 HB",
-      "target": "07.888 Lokalkontor",
+      "source": "HB",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -7844,8 +8092,8 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "BAT_B01",
+      "source": "SB1",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -7898,7 +8146,7 @@
       ]
     },
     {
-      "source": "07.26 SB1",
+      "source": "SB1",
       "target": "GRID",
       "flow": [
         0.0,
@@ -7952,8 +8200,8 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.01 Fysik origo",
+      "source": "SB1",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -8006,8 +8254,8 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.05 IT",
+      "source": "SB1",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -8060,8 +8308,8 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.12 Elkraftteknik",
+      "source": "SB1",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -8114,8 +8362,8 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "SB1",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -8168,8 +8416,8 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.21 HC",
+      "source": "SB1",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -8222,8 +8470,8 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.22 HA",
+      "source": "SB1",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -8276,8 +8524,8 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.23 SB2",
+      "source": "SB1",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -8330,8 +8578,116 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.24 Edit",
+      "source": "SB1",
+      "target": "Edit",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        8.533209999999997,
+        1.6238400000000013,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "SB1",
+      "target": "HB",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.843190000000007,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "SB1",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -8384,8 +8740,8 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.25 HB",
+      "source": "SB1",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -8438,8 +8794,8 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.27 SB3",
+      "source": "SB1",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -8492,8 +8848,8 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.28 Maskinteknik",
+      "source": "SB1",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -8546,8 +8902,116 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.40 Gamla matte",
+      "source": "SB1_PV_SB1-PV_1",
+      "target": "SB1",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.07088,
+        0.82372,
+        2.18715,
+        11.92065,
+        11.35312,
+        12.6441,
+        30.635849999999998,
+        33.89085,
+        30.95768,
+        25.0551,
+        17.31922,
+        15.65812,
+        12.595799999999999,
+        7.008220000000001,
+        2.66962,
+        0.09502,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9072,
+        3.60413,
+        13.430549999999998,
+        21.2562,
+        19.6203,
+        25.9749,
+        29.25825,
+        28.51432,
+        11.13682,
+        12.007280000000002,
+        18.946720000000003,
+        17.42318,
+        12.82208,
+        6.8607,
+        2.19345,
+        0.29662,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "SB1_PV_SB1-PV_2",
+      "target": "SB1",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.07182,
+        0.8347100000000001,
+        2.21631,
+        11.530040000000001,
+        11.36565,
+        12.7281,
+        28.731720000000003,
+        22.309150000000002,
+        29.54232,
+        26.19568,
+        18.241220000000002,
+        17.59271,
+        16.835669999999997,
+        11.318299999999999,
+        4.896529999999999,
+        0.09681999999999999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.9193,
+        3.57025,
+        11.32256,
+        17.800189999999997,
+        18.23856,
+        23.986279999999997,
+        27.57037,
+        27.831580000000002,
+        11.28532,
+        12.18652,
+        20.24526,
+        20.50807,
+        17.770400000000002,
+        12.22217,
+        6.251,
+        0.51551,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "SB3",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -8600,115 +9064,7 @@
       ]
     },
     {
-      "source": "07.26 SB1",
-      "target": "07.888 Lokalkontor",
-      "flow": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ]
-    },
-    {
-      "source": "07.27 SB3",
-      "target": "BAT_B01",
-      "flow": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ]
-    },
-    {
-      "source": "07.27 SB3",
+      "source": "SB3",
       "target": "GRID",
       "flow": [
         0.0,
@@ -8762,8 +9118,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.01 Fysik origo",
+      "source": "SB3",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -8816,8 +9172,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.05 IT",
+      "source": "SB3",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -8870,8 +9226,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.12 Elkraftteknik",
+      "source": "SB3",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -8924,8 +9280,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "SB3",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -8978,8 +9334,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.21 HC",
+      "source": "SB3",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -9032,8 +9388,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.22 HA",
+      "source": "SB3",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -9086,8 +9442,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.23 SB2",
+      "source": "SB3",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -9140,8 +9496,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.24 Edit",
+      "source": "SB3",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -9194,8 +9550,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.25 HB",
+      "source": "SB3",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -9248,8 +9604,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.26 SB1",
+      "source": "SB3",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -9302,8 +9658,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.28 Maskinteknik",
+      "source": "SB3",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -9356,8 +9712,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.40 Gamla matte",
+      "source": "SB3",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -9410,8 +9766,8 @@
       ]
     },
     {
-      "source": "07.27 SB3",
-      "target": "07.888 Lokalkontor",
+      "source": "SB3",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -9464,8 +9820,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "BAT_B01",
+      "source": "Maskinteknik",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -9518,7 +9874,7 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
+      "source": "Maskinteknik",
       "target": "GRID",
       "flow": [
         0.0,
@@ -9572,8 +9928,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.01 Fysik origo",
+      "source": "Maskinteknik",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -9626,8 +9982,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.05 IT",
+      "source": "Maskinteknik",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -9680,8 +10036,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.12 Elkraftteknik",
+      "source": "Maskinteknik",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -9734,8 +10090,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "Maskinteknik",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -9788,8 +10144,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.21 HC",
+      "source": "Maskinteknik",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -9842,8 +10198,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.22 HA",
+      "source": "Maskinteknik",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -9896,8 +10252,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.23 SB2",
+      "source": "Maskinteknik",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -9950,8 +10306,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.24 Edit",
+      "source": "Maskinteknik",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -10004,8 +10360,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.25 HB",
+      "source": "Maskinteknik",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -10058,8 +10414,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.26 SB1",
+      "source": "Maskinteknik",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -10112,8 +10468,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.27 SB3",
+      "source": "Maskinteknik",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -10166,8 +10522,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.40 Gamla matte",
+      "source": "Maskinteknik",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -10220,8 +10576,8 @@
       ]
     },
     {
-      "source": "07.28 Maskinteknik",
-      "target": "07.888 Lokalkontor",
+      "source": "Maskinteknik",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -10274,8 +10630,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "BAT_B01",
+      "source": "Gamla matte",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -10328,7 +10684,7 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
+      "source": "Gamla matte",
       "target": "GRID",
       "flow": [
         0.0,
@@ -10382,8 +10738,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.01 Fysik origo",
+      "source": "Gamla matte",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -10436,8 +10792,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.05 IT",
+      "source": "Gamla matte",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -10490,8 +10846,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.12 Elkraftteknik",
+      "source": "Gamla matte",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -10544,8 +10900,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "Gamla matte",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -10598,8 +10954,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.21 HC",
+      "source": "Gamla matte",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -10652,8 +11008,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.22 HA",
+      "source": "Gamla matte",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -10706,8 +11062,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.23 SB2",
+      "source": "Gamla matte",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -10760,8 +11116,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.24 Edit",
+      "source": "Gamla matte",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -10814,8 +11170,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.25 HB",
+      "source": "Gamla matte",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -10868,8 +11224,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.26 SB1",
+      "source": "Gamla matte",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -10922,8 +11278,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.27 SB3",
+      "source": "Gamla matte",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -10976,8 +11332,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.28 Maskinteknik",
+      "source": "Gamla matte",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -11030,8 +11386,8 @@
       ]
     },
     {
-      "source": "07.40 Gamla matte",
-      "target": "07.888 Lokalkontor",
+      "source": "Gamla matte",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -11084,8 +11440,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "BAT_B01",
+      "source": "Lokalkontor",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -11138,7 +11494,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "GRID",
       "flow": [
         0.0,
@@ -11192,8 +11548,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.01 Fysik origo",
+      "source": "Lokalkontor",
+      "target": "Fysik origo",
       "flow": [
         0.0,
         0.0,
@@ -11246,8 +11602,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.05 IT",
+      "source": "Lokalkontor",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -11300,8 +11656,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.12 Elkraftteknik",
+      "source": "Lokalkontor",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -11354,8 +11710,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "Lokalkontor",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -11408,8 +11764,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.21 HC",
+      "source": "Lokalkontor",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -11462,8 +11818,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.22 HA",
+      "source": "Lokalkontor",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -11516,8 +11872,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.23 SB2",
+      "source": "Lokalkontor",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -11570,8 +11926,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.24 Edit",
+      "source": "Lokalkontor",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -11624,8 +11980,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.25 HB",
+      "source": "Lokalkontor",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -11678,8 +12034,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.26 SB1",
+      "source": "Lokalkontor",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -11732,8 +12088,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.27 SB3",
+      "source": "Lokalkontor",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -11786,8 +12142,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.28 Maskinteknik",
+      "source": "Lokalkontor",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -11840,8 +12196,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "07.40 Gamla matte",
+      "source": "Lokalkontor",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -11894,8 +12250,818 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.01 Fysik origo",
+      "source": "PV_PV-Plant",
+      "target": "Fysik origo",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.08901,
+        1.03084,
+        2.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.6,
+        0.11977,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.1349,
+        2.8,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        4.9,
+        0.39074000000000003,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "IT",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.23516000000000004,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.31897999999999893,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "Elkraftteknik",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        14.488010000000001,
+        14.11233,
+        15.775409999999999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        13.73830000000001,
+        21.661330000000003,
+        19.7515,
+        12.16192,
+        0.7947299999999997,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.3146000000000002,
+        14.67258,
+        20.27785,
+        21.335000000000015,
+        0.0,
+        0.0,
+        0.0,
+        13.93169,
+        15.06266,
+        21.702059999999996,
+        20.493089999999995,
+        20.74569,
+        12.840639999999999,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "Idel\u00e4ra",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.7,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.4,
+        2.247939999999982,
+        10.248399999999986,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        3.673560000000002,
+        4.5,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "HC",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        5.3252099999999905,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.10274999999999901,
+        0.0,
+        13.8,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.2522800000000025,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "HA",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        5.5094399999999855,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        7.592090000000017,
+        0.41762999999999906,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "SB2",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "Edit",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        38.25749,
+        0.0,
+        10.862670000000023,
+        28.091940000000015,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        36.11918,
+        36.46416000000001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "HB",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        10.356809999999992,
+        12.3,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "SB1",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "SB3",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        33.31732000000001,
+        17.837169999999976,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "Maskinteknik",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "Gamla matte",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "Lokalkontor",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "PV_PV-Plant",
+      "target": "GRID",
+      "flow": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "source": "BAT_Battery-01",
+      "target": "Fysik origo",
       "flow": [
         1.0,
         0.0,
@@ -11948,8 +13114,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.05 IT",
+      "source": "BAT_Battery-01",
+      "target": "IT",
       "flow": [
         0.0,
         0.0,
@@ -12002,8 +13168,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.12 Elkraftteknik",
+      "source": "BAT_Battery-01",
+      "target": "Elkraftteknik",
       "flow": [
         0.0,
         0.0,
@@ -12056,8 +13222,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.18 Idel\u00e4ra",
+      "source": "BAT_Battery-01",
+      "target": "Idel\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -12110,8 +13276,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.21 HC",
+      "source": "BAT_Battery-01",
+      "target": "HC",
       "flow": [
         0.0,
         0.0,
@@ -12164,8 +13330,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.22 HA",
+      "source": "BAT_Battery-01",
+      "target": "HA",
       "flow": [
         0.0,
         0.0,
@@ -12218,8 +13384,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.23 SB2",
+      "source": "BAT_Battery-01",
+      "target": "SB2",
       "flow": [
         0.0,
         0.0,
@@ -12272,8 +13438,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.24 Edit",
+      "source": "BAT_Battery-01",
+      "target": "Edit",
       "flow": [
         0.0,
         0.0,
@@ -12326,8 +13492,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.25 HB",
+      "source": "BAT_Battery-01",
+      "target": "HB",
       "flow": [
         0.0,
         0.0,
@@ -12380,8 +13546,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.26 SB1",
+      "source": "BAT_Battery-01",
+      "target": "SB1",
       "flow": [
         0.0,
         0.0,
@@ -12434,8 +13600,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.27 SB3",
+      "source": "BAT_Battery-01",
+      "target": "SB3",
       "flow": [
         0.0,
         0.0,
@@ -12488,8 +13654,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.28 Maskinteknik",
+      "source": "BAT_Battery-01",
+      "target": "Maskinteknik",
       "flow": [
         0.0,
         0.0,
@@ -12542,8 +13708,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.40 Gamla matte",
+      "source": "BAT_Battery-01",
+      "target": "Gamla matte",
       "flow": [
         0.0,
         0.0,
@@ -12596,8 +13762,8 @@
       ]
     },
     {
-      "source": "BAT_B01",
-      "target": "07.888 Lokalkontor",
+      "source": "BAT_Battery-01",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -12650,7 +13816,7 @@
       ]
     },
     {
-      "source": "BAT_B01",
+      "source": "BAT_Battery-01",
       "target": "GRID",
       "flow": [
         0.0,
@@ -12705,7 +13871,7 @@
     },
     {
       "source": "GRID",
-      "target": "BAT_B01",
+      "target": "BAT_Battery-01",
       "flow": [
         0.0,
         0.0,
@@ -12759,15 +13925,14 @@
     },
     {
       "source": "GRID",
-      "target": "07.01 Fysik origo",
+      "target": "Fysik origo",
       "flow": [
         1.6,
         2.5,
         2.6,
         2.5,
-        2.4,
-        2.4,
-        2.5,
+        2.31099,
+        1.36916,
         0.0,
         0.0,
         0.0,
@@ -12779,8 +13944,9 @@
         0.0,
         0.0,
         0.0,
-        3.6,
-        3.6,
+        0.0,
+        0.0,
+        3.48023,
         3.1,
         3.0,
         3.3,
@@ -12789,8 +13955,7 @@
         3.2,
         3.0,
         2.9,
-        2.7,
-        2.8,
+        1.5651000000000002,
         0.0,
         0.0,
         0.0,
@@ -12803,8 +13968,9 @@
         0.0,
         0.0,
         0.0,
-        4.9,
-        4.4,
+        0.0,
+        0.0,
+        4.00926,
         12.1,
         11.1,
         3.1,
@@ -12813,7 +13979,7 @@
     },
     {
       "source": "GRID",
-      "target": "07.05 IT",
+      "target": "IT",
       "flow": [
         0.3,
         0.3,
@@ -12821,6 +13987,28 @@
         0.3,
         0.3,
         0.3,
+        0.06483999999999995,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
         0.3,
         0.0,
         0.0,
@@ -12833,31 +14021,9 @@
         0.0,
         0.0,
         0.0,
-        0.3,
-        0.3,
-        0.3,
-        0.3,
-        0.3,
-        0.3,
-        0.3,
-        0.3,
-        0.3,
-        0.3,
-        0.3,
-        0.3,
         0.0,
         0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.9,
+        0.5810200000000011,
         0.9,
         0.9,
         0.9,
@@ -12867,7 +14033,7 @@
     },
     {
       "source": "GRID",
-      "target": "07.12 Elkraftteknik",
+      "target": "Elkraftteknik",
       "flow": [
         40.8,
         41.2,
@@ -12876,18 +14042,18 @@
         38.0,
         40.2,
         61.0,
-        51.23544,
-        53.99595000000001,
-        40.14281999999999,
+        36.747429999999994,
+        39.88362000000001,
+        24.367409999999992,
         0.0,
         0.0,
         0.0,
         0.0,
-        13.73830000000001,
-        24.661889999999993,
-        31.00569,
-        43.76582,
-        45.9,
+        0.0,
+        3.0005599999999895,
+        11.254190000000001,
+        31.603899999999996,
+        45.10527,
         45.0,
         41.9,
         40.2,
@@ -12898,19 +14064,19 @@
         42.2,
         41.8,
         41.3,
-        41.4,
-        46.3558,
-        20.27785,
-        21.335000000000015,
+        40.0854,
+        31.683220000000002,
         0.0,
         0.0,
         0.0,
-        45.52832,
-        53.153760000000005,
-        21.702059999999996,
-        20.493089999999995,
-        38.934039999999996,
-        46.75727,
+        0.0,
+        0.0,
+        31.59663,
+        38.091100000000004,
+        0.0,
+        0.0,
+        18.188349999999996,
+        33.91663,
         45.0,
         45.3,
         44.9,
@@ -12921,7 +14087,7 @@
     },
     {
       "source": "GRID",
-      "target": "07.18 Idel\u00e4ra",
+      "target": "Idel\u00e4ra",
       "flow": [
         2.6,
         2.5,
@@ -12937,7 +14103,7 @@
         0.0,
         0.0,
         0.0,
-        3.7,
+        0.0,
         3.5,
         3.7,
         3.5,
@@ -12954,15 +14120,15 @@
         2.7,
         2.8,
         3.0,
-        3.4,
-        10.8,
-        10.248399999999986,
+        0.0,
+        8.552060000000019,
+        0.0,
         0.0,
         0.0,
         4.4,
         4.2,
-        4.3,
-        4.5,
+        0.6264399999999979,
+        0.0,
         4.8,
         5.0,
         4.9,
@@ -12975,7 +14141,7 @@
     },
     {
       "source": "GRID",
-      "target": "07.21 HC",
+      "target": "HC",
       "flow": [
         4.0,
         4.3,
@@ -12991,7 +14157,7 @@
         0.0,
         0.0,
         0.0,
-        13.9,
+        8.57479000000001,
         12.9,
         12.4,
         8.1,
@@ -13008,15 +14174,15 @@
         3.1,
         5.8,
         11.2,
-        12.6,
+        12.497250000000001,
         13.6,
-        13.8,
+        0.0,
         0.0,
         0.0,
         14.2,
         15.2,
         16.9,
-        15.3,
+        15.047719999999998,
         14.9,
         10.4,
         6.1,
@@ -13029,7 +14195,7 @@
     },
     {
       "source": "GRID",
-      "target": "07.22 HA",
+      "target": "HA",
       "flow": [
         2.4,
         2.4,
@@ -13044,7 +14210,7 @@
         0.0,
         0.0,
         0.0,
-        5.5094399999999855,
+        0.0,
         8.4,
         7.3,
         8.4,
@@ -13064,8 +14230,8 @@
         8.6,
         7.8,
         8.4,
-        8.6,
-        0.41762999999999906,
+        1.007909999999983,
+        0.0,
         0.0,
         8.4,
         8.6,
@@ -13083,7 +14249,7 @@
     },
     {
       "source": "GRID",
-      "target": "07.23 SB2",
+      "target": "SB2",
       "flow": [
         32.2,
         33.4,
@@ -13137,28 +14303,28 @@
     },
     {
       "source": "GRID",
-      "target": "07.24 Edit",
+      "target": "Edit",
       "flow": [
         104.7,
         92.0,
         104.3,
         95.3,
-        96.9,
-        118.3,
-        134.1,
-        139.2,
-        124.1,
-        137.2,
-        132.80759999999998,
-        115.95057,
-        113.24100000000003,
-        147.8,
-        153.1,
-        158.5,
-        126.4,
-        132.4,
-        126.5,
-        114.2,
+        96.68009,
+        115.75322,
+        127.34255999999999,
+        103.37535999999999,
+        89.23263,
+        98.22867999999998,
+        0.29271999999998144,
+        0.0,
+        0.0,
+        37.11169999999999,
+        97.03052,
+        105.24734000000001,
+        78.01128000000001,
+        102.61648000000001,
+        114.96354,
+        113.90409,
         110.0,
         99.7,
         112.9,
@@ -13167,22 +14333,22 @@
         115.3,
         98.3,
         103.3,
-        96.9,
-        122.8,
-        150.9,
-        135.1,
-        137.8,
-        129.4,
-        146.1,
-        136.94886,
-        143.8,
-        151.7,
-        154.7,
-        145.3,
-        116.1,
-        114.7,
-        128.8,
-        117.9,
+        94.09612,
+        111.88201,
+        114.43018000000001,
+        76.14334,
+        79.51362,
+        51.31586,
+        19.94865999999999,
+        10.708019999999998,
+        109.38216000000001,
+        114.49606999999999,
+        92.26516999999998,
+        83.36483000000001,
+        65.3262,
+        83.30594,
+        116.02169,
+        116.93303,
         109.6,
         112.9,
         114.1,
@@ -13191,7 +14357,7 @@
     },
     {
       "source": "GRID",
-      "target": "07.25 HB",
+      "target": "HB",
       "flow": [
         7.3,
         7.1,
@@ -13204,8 +14370,8 @@
         11.3,
         12.2,
         12.2,
-        12.2,
-        12.3,
+        0.0,
+        0.0,
         12.6,
         12.3,
         12.6,
@@ -13245,28 +14411,28 @@
     },
     {
       "source": "GRID",
-      "target": "07.26 SB1",
+      "target": "SB1",
       "flow": [
         62.8,
         63.7,
         63.4,
         64.3,
-        56.2,
-        53.6,
-        74.0,
-        71.6,
-        67.8,
-        64.4,
-        61.7,
-        56.2,
-        60.5,
-        60.3,
-        60.5,
-        63.0,
-        68.3,
-        72.9,
-        74.7,
-        78.3,
+        56.057300000000005,
+        51.94157,
+        69.59654,
+        48.14930999999999,
+        45.08123,
+        39.027800000000006,
+        2.3324300000000022,
+        0.0,
+        0.0,
+        9.049219999999998,
+        24.93956,
+        29.74917,
+        38.86853,
+        54.57348,
+        67.13385000000001,
+        78.10816,
         68.6,
         49.1,
         48.1,
@@ -13275,22 +14441,22 @@
         47.9,
         48.8,
         49.2,
-        48.8,
-        56.1,
-        78.2,
-        77.7,
-        71.1,
-        69.6,
-        64.7,
-        66.7,
-        62.6,
-        72.0,
-        69.4,
-        72.2,
-        77.6,
-        81.2,
-        76.3,
-        80.3,
+        46.973499999999994,
+        48.92562,
+        53.44689,
+        38.64361000000001,
+        33.241139999999994,
+        19.638819999999996,
+        7.871380000000002,
+        10.354100000000003,
+        40.17786,
+        47.8062,
+        30.208020000000005,
+        34.268750000000004,
+        47.00751999999999,
+        62.11713,
+        67.85555,
+        79.48787,
         66.2,
         54.2,
         61.0,
@@ -13299,7 +14465,7 @@
     },
     {
       "source": "GRID",
-      "target": "07.27 SB3",
+      "target": "SB3",
       "flow": [
         180.1,
         176.5,
@@ -13312,8 +14478,8 @@
         93.6,
         62.2,
         62.6,
-        63.0,
-        57.5,
+        29.68267999999999,
+        39.66283000000003,
         64.4,
         84.6,
         91.1,
@@ -13353,7 +14519,7 @@
     },
     {
       "source": "GRID",
-      "target": "07.28 Maskinteknik",
+      "target": "Maskinteknik",
       "flow": [
         179.3,
         184.0,
@@ -13407,7 +14573,7 @@
     },
     {
       "source": "GRID",
-      "target": "07.40 Gamla matte",
+      "target": "Gamla matte",
       "flow": [
         17.1,
         17.8,
@@ -13461,7 +14627,7 @@
     },
     {
       "source": "GRID",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         8.9,
         8.9,
@@ -13516,31 +14682,31 @@
   ],
   "kpis": {
     "total_demand": 32784.9,
-    "total_grid_import": 30742.004380000002,
+    "total_grid_import": 27813.409590000003,
     "total_grid_export": 0.0,
-    "total_pv_used": 559.0292900000001,
-    "total_pv_gen": 1912.9226899999999,
-    "self_sufficiency": 6.231208940701361,
-    "self_consumption": 29.223830786386884,
+    "total_pv_used": 3475.6238399999997,
+    "total_pv_gen": 4808.51808,
+    "self_sufficiency": 15.163963928515866,
+    "self_consumption": 72.28056091659741,
     "avg_grid_carbon_intensity": 0.0,
     "total_grid_carbon_import": 0.0,
     "avg_grid_price_import": 0.0,
-    "avg_building_self_consumption": 2.08741648474192,
+    "avg_building_self_consumption": 16.277664635579583,
     "building_self_consumption": {
-      "07.01 Fysik origo": 0.0,
-      "07.05 IT": 0.0,
-      "07.12 Elkraftteknik": 0.0,
-      "07.18 Idel\u00e4ra": 0.0,
-      "07.21 HC": 0.0,
-      "07.22 HA": 0.0,
-      "07.23 SB2": 29.223830786386884,
-      "07.24 Edit": 0.0,
-      "07.25 HB": 0.0,
-      "07.26 SB1": 0.0,
-      "07.27 SB3": 0.0,
-      "07.28 Maskinteknik": 0.0,
-      "07.40 Gamla matte": 0.0,
-      "07.888 Lokalkontor": 0.0
+      "Fysik origo": 0.0,
+      "IT": 0.0,
+      "Elkraftteknik": 0.0,
+      "Idel\u00e4ra": 0.0,
+      "HC": 0.0,
+      "HA": 0.0,
+      "SB2": 29.223830786386884,
+      "Edit": 100.0,
+      "HB": 0.0,
+      "SB1": 98.66347411172728,
+      "SB3": 0.0,
+      "Maskinteknik": 0.0,
+      "Gamla matte": 0.0,
+      "Lokalkontor": 0.0
     }
   }
 }
