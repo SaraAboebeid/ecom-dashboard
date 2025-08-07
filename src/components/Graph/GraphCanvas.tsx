@@ -1,12 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { GraphData, Node } from '../../types';
-import { SVGFilters } from '../effects/SVGFilters';
-import { GradientDefinitions } from '../effects/GradientDefinitions';
-import { ArrowMarkers } from '../effects/ArrowMarkers';
 import { GraphNodes } from './GraphNodes';
+import { GraphNodesOptimized } from './GraphNodesOptimized';
 import { GraphLinks } from './GraphLinks';
 import { GraphParticles } from './GraphParticles';
 import { useGraphSimulation } from '../../hooks/useGraphSimulation';
+import { detectPerformanceLevel, PERFORMANCE_PRESETS } from '../../utils/performanceConfig';
 
 interface GraphCanvasProps {
   svgRef: React.RefObject<SVGSVGElement | null>;
@@ -23,6 +22,7 @@ interface GraphCanvasProps {
     hideTooltip: (delay?: number) => void;
     updateTooltipPosition: (event: MouseEvent) => void;
   };
+  performanceMode?: 'auto' | 'high_performance' | 'balanced' | 'high_quality';
 }
 
 /**
@@ -38,9 +38,16 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
   filtersKey,
   selectedNode,
   onNodeClick,
-  tooltip
+  tooltip,
+  performanceMode = 'auto'
 }) => {
   const containerRef = useRef<SVGGElement>(null);
+
+  // Determine performance configuration
+  const performanceConfig = useMemo(() => {
+    const mode = performanceMode === 'auto' ? detectPerformanceLevel() : performanceMode.toUpperCase();
+    return PERFORMANCE_PRESETS[mode as keyof typeof PERFORMANCE_PRESETS] || PERFORMANCE_PRESETS.BALANCED;
+  }, [performanceMode]);
 
   // Use the simulation hook
   const { simulation } = useGraphSimulation({
@@ -53,16 +60,16 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
     selectedNode
   });
 
+  // Choose appropriate nodes component based on performance settings
+  const NodesComponent = performanceConfig.enableNodeIcons ? GraphNodes : GraphNodesOptimized;
+
   return (
     <svg
       ref={svgRef}
       className="w-full h-full"
       style={{ background: 'transparent' }}
     >
-      {/* SVG definitions for filters, gradients, and markers */}
-      <SVGFilters svgRef={svgRef} />
-      <GradientDefinitions svgRef={svgRef} />
-      <ArrowMarkers svgRef={svgRef} />
+      {/* SVG definitions for filters, gradients, and markers removed for simple edges */}
 
       {/* Main container group for zoom/pan transforms */}
       <g ref={containerRef}>
@@ -84,16 +91,10 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           tooltip={tooltip}
         />
 
-        {/* Particles layer */}
-        <GraphParticles
-          containerRef={containerRef}
-          data={data}
-          currentHour={currentHour}
-          isPlaying={isTimelinePlaying}
-        />
+      {/* Particles layer removed for simple edges */}
 
         {/* Nodes layer */}
-        <GraphNodes
+        <NodesComponent
           containerRef={containerRef}
           data={data}
           currentHour={currentHour}

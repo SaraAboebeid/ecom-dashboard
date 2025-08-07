@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { GraphData, Node, Link, NODE_COLORS } from '../../types';
 import { iconToString } from '../NodeIcons';
@@ -30,11 +30,24 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
   tooltip
 }) => {
   
+  // Cache for parsed SVG icons to avoid re-parsing
+  const iconCacheRef = useRef<Map<string, SVGElement>>(new Map());
+  
+  // Cache for node data to prevent unnecessary DOM updates
+  const lastDataRef = useRef<string>('');
+  
   // Create nodes when simulation or data changes
   useEffect(() => {
     if (!containerRef.current || !simulation || !data.nodes.length) return;
 
     const container = d3.select(containerRef.current);
+    
+    // Check if data actually changed to prevent unnecessary updates
+    const currentDataKey = JSON.stringify(data.nodes.map(n => ({ id: n.id, type: n.type })));
+    if (currentDataKey === lastDataRef.current && container.selectAll('.node').size() > 0) {
+      return; // Skip if structure hasn't changed
+    }
+    lastDataRef.current = currentDataKey;
     
     // Remove existing nodes
     container.selectAll('.node').remove();
@@ -150,19 +163,6 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
         .on('drag', dragged)
         .on('end', dragended) as any);
 
-    // Outer aura ring
-    nodeSelection.append('circle')
-      .attr('class', d => `node-aura node-aura-${d.type}`)
-      .attr('r', (d: Node) => {
-        const baseRadius = 30;
-        return baseRadius * 1.2;
-      })
-      .attr('fill', 'none')
-      .attr('stroke', d => NODE_COLORS[d.type])
-      .attr('stroke-width', 2)
-      .attr('opacity', 0.5)
-      .attr('filter', 'none');
-
     // Main node circle
     nodeSelection.append('circle')
       .attr('class', d => `node-main node-main-${d.type}`)
@@ -181,34 +181,39 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
             return baseRadius;
         }
       })
-      .attr('fill', d => NODE_COLORS[d.type])
-      .attr('stroke', d => d3.color(NODE_COLORS[d.type])?.brighter(0.3)?.toString() || NODE_COLORS[d.type])
-      .attr('stroke-width', 2)
-      .attr('filter', 'none');
+      .attr('fill', d => NODE_COLORS[d.type]);
 
-    // Add SVG icons inside nodes
+    // Add SVG icons inside nodes with caching
     nodeSelection.each(function(d: Node) {
       const node = d3.select(this);
       const nodeType = d.type;
       
-      // Insert SVG icon in the center of the node
-      const iconSvgString = iconToString(nodeType);
+      // Check cache first to avoid re-parsing SVG
+      let iconElement = iconCacheRef.current.get(nodeType);
+      if (!iconElement) {
+        const iconSvgString = iconToString(nodeType);
+        if (iconSvgString) {
+          const parser = new DOMParser();
+          const iconDoc = parser.parseFromString(iconSvgString, 'image/svg+xml');
+          iconElement = iconDoc.documentElement.cloneNode(true) as SVGElement;
+          iconCacheRef.current.set(nodeType, iconElement);
+        }
+      }
+      
+      // Insert cached SVG icon in the center of the node
       const iconSize = 24;
       
-      if (iconSvgString) {
-        const parser = new DOMParser();
-        const iconDoc = parser.parseFromString(iconSvgString, 'image/svg+xml');
-        const iconNode = iconDoc.documentElement;
+      if (iconElement) {
+        const clonedIcon = iconElement.cloneNode(true) as SVGElement;
         
         // Append the icon to the node
-        node.node()?.appendChild(iconNode);
+        node.node()?.appendChild(clonedIcon);
         
-        // Position the icon in the center
-        d3.select(iconNode)
+        // Position the icon in the center - use transform instead of x/y for better performance
+        d3.select(clonedIcon)
           .attr('width', iconSize * 2)
           .attr('height', iconSize * 2)
-          .attr('x', -iconSize)
-          .attr('y', -iconSize - 8)
+          .attr('transform', `translate(${-iconSize}, ${-iconSize - 8})`)
           .attr('fill', 'white');
       }
       
@@ -256,10 +261,7 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
           .attr('r', 8)
           .attr('cx', 25)
           .attr('cy', -25)
-          .attr('fill', NODE_COLORS['pv'])
-          .attr('stroke', '#fff')
-          .attr('stroke-width', 1.5)
-          .attr('filter', 'url(#glow)');
+          .attr('fill', NODE_COLORS['pv']);
       }
       
       if (d.type === 'charge_point' && d.is_v2g) {
@@ -267,10 +269,7 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
           .attr('r', 8)
           .attr('cx', 25)
           .attr('cy', -25)
-          .attr('fill', '#10B981')
-          .attr('stroke', '#fff')
-          .attr('stroke-width', 1.5)
-          .attr('filter', 'url(#glow)');
+          .attr('fill', '#10B981');
       }
     });
 
@@ -320,59 +319,31 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
       });
     }
 
-    // Initial update with current hour styling
-    updateNodeStyling(nodeSelection, currentHour);
+    // Initial update with current hour styling - removed for performance
+    // updateNodeStyling(nodeSelection, currentHour);
 
   }, [containerRef, simulation, data.nodes, data.links, selectedNode, onNodeClick, tooltip]);
 
-  // Update node styling when currentHour changes
-  useEffect(() => {
-    if (!containerRef.current) return;
+  // Removed automatic hour-based updates for better performance
+  // useEffect(() => {
+  //   if (!containerRef.current) return;
 
-    const container = d3.select(containerRef.current);
-    const nodeSelection = container.selectAll('.node');
+  //   const container = d3.select(containerRef.current);
+  //   const nodeSelection = container.selectAll('.node');
     
-    updateNodeStyling(nodeSelection, currentHour);
+  //   updateNodeStyling(nodeSelection, currentHour);
 
-  }, [currentHour, containerRef]);
+  // }, [currentHour, containerRef]);
 
   // Helper function to update node styling based on current hour and energy flows
   const updateNodeStyling = (nodeSelection: d3.Selection<any, any, any, any>, hour: number) => {
     nodeSelection.each(function(d: any) {
-      // Check if this node has any active flows in the current hour
-      const hasActiveFlow = data.links.some((link: Link) => {
-        return (link.source === d.id || link.target === d.id) && 
-               Math.abs(link.flow[hour]) >= 0.1;
-      });
-      
-      // Calculate total energy flow for this node at current hour
-      const totalEnergyFlow = data.links
-        .filter((link: Link) => link.source === d.id || link.target === d.id)
-        .reduce((sum, link) => sum + Math.abs(link.flow[hour]), 0);
-
       // Base radius for calculations
       const baseRadius = 30;
       
-      // Add dynamic scaling based on energy flow (max 20% increase)
-      const flowScaling = Math.min(0.2, totalEnergyFlow * 0.05);
-      const dynamicRadius = baseRadius * (1 + flowScaling);
-      const dynamicAuraRadius = dynamicRadius * 1.25;
-      
-      // Apply the pulse animation class if the node has active flows
-      d3.select(this).classed('pulse', hasActiveFlow);
-        
-      // Apply elastic animations to node circles with energy flow-based sizing
+      // Use fixed radius with no transitions for better performance
       d3.select(this).select('.node-main')
-        .transition()
-        .duration(800)
-        .ease(d3.easeElastic.period(0.3))
-        .attr('r', dynamicRadius);
-        
-      d3.select(this).select('.node-aura')
-        .transition()
-        .duration(800)
-        .ease(d3.easeElastic.period(0.3))
-        .attr('r', dynamicAuraRadius);
+        .attr('r', baseRadius);
     });
   };
 

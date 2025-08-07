@@ -18,6 +18,7 @@ interface GraphProps {
     capacityRange: { min: number; max: number };
   };
   isTimelinePlaying?: boolean;
+  performanceMode?: 'auto' | 'high_performance' | 'balanced' | 'high_quality';
   onKPICalculated?: (kpis: {
     totalPVCapacity: number;
     totalEnergyDemand: number;
@@ -36,6 +37,7 @@ export const Graph: React.FC<GraphProps> = ({
   currentHour, 
   filters, 
   isTimelinePlaying, 
+  performanceMode = 'auto',
   onKPICalculated 
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -75,6 +77,7 @@ export const Graph: React.FC<GraphProps> = ({
         selectedNode={selectedNode}
         onNodeClick={handleNodeClick}
         tooltip={tooltip}
+        performanceMode={performanceMode}
       />
 
       {/* Node details panel */}

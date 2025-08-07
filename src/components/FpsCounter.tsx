@@ -1,15 +1,32 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { PerformanceMonitor } from '../utils/performanceConfig';
 
 interface FpsCounterProps {
   className?: string;
+  onPerformanceChange?: (recommendation: 'HIGH_PERFORMANCE' | 'BALANCED' | 'HIGH_QUALITY') => void;
 }
 
-export const FpsCounter: React.FC<FpsCounterProps> = ({ className = '' }) => {
+export const FpsCounter: React.FC<FpsCounterProps> = ({ 
+  className = '', 
+  onPerformanceChange 
+}) => {
   const [fps, setFps] = useState(0);
-  const [isVisible, setIsVisible] = useState(true); // Show by default for easier debugging
+  const [isVisible, setIsVisible] = useState(true);
+  const performanceMonitorRef = useRef(new PerformanceMonitor());
   const frameCountRef = useRef(0);
   const lastTimeRef = useRef(performance.now());
   const animationFrameRef = useRef<number | undefined>(undefined);
+  const lastRecommendationRef = useRef<string>('');
+
+  const checkPerformance = useCallback(() => {
+    const monitor = performanceMonitorRef.current;
+    const recommendation = monitor.getRecommendedConfig();
+    
+    if (recommendation !== lastRecommendationRef.current && onPerformanceChange) {
+      lastRecommendationRef.current = recommendation;
+      onPerformanceChange(recommendation);
+    }
+  }, [onPerformanceChange]);
 
   useEffect(() => {
     const updateFps = () => {
@@ -18,7 +35,15 @@ export const FpsCounter: React.FC<FpsCounterProps> = ({ className = '' }) => {
 
       // Update FPS every second
       if (now - lastTimeRef.current >= 1000) {
-        setFps(Math.round((frameCountRef.current * 1000) / (now - lastTimeRef.current)));
+        const currentFps = Math.round((frameCountRef.current * 1000) / (now - lastTimeRef.current));
+        setFps(currentFps);
+        
+        // Update performance monitor
+        performanceMonitorRef.current.updateFPS();
+        
+        // Check if performance recommendation should change
+        checkPerformance();
+        
         frameCountRef.current = 0;
         lastTimeRef.current = now;
       }
@@ -35,7 +60,7 @@ export const FpsCounter: React.FC<FpsCounterProps> = ({ className = '' }) => {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isVisible]);
+  }, [isVisible, checkPerformance]);
 
   // Toggle visibility with keyboard shortcut (F3)
   useEffect(() => {

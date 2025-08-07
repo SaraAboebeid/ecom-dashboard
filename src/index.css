@@ -18,13 +18,11 @@
 
 .link-flow {
   animation: flow 2s linear infinite;
-  filter: url(#glow);
   transition: none;
 }
 
 .link-flow-reverse {
   animation: flow-reverse 2s linear infinite;
-  filter: url(#glow);
   transition: none;
 }
 
@@ -40,7 +38,6 @@
 }
 
 .node:hover circle {
-  filter: url(#glow);
   transform: scale(1.1);
 }
 
@@ -90,27 +87,26 @@
 
 @keyframes pulse-glow {
   0%, 100% {
-    filter: url(#glow) brightness(1);
+    filter: brightness(1);
   }
   50% {
-    filter: url(#glow) brightness(1.3);
+    filter: brightness(1.3);
   }
 }
 
 /* Glow effect when hovering over links */
 .link:hover {
-  filter: url(#glow);
   stroke-width: 4;
 }
 
 /* Node type-specific styles */
 
 /* Type-specific glow effects */
-.node-building:hover circle { filter: url(#glow-building); }
-.node-pv:hover circle { filter: url(#glow-pv); }
-.node-grid:hover circle { filter: url(#glow-grid); }
-.node-battery:hover circle { filter: url(#glow-battery); }
-.node-charge_point:hover circle { filter: url(#glow-charge_point); }
+.node-building:hover circle { }
+.node-pv:hover circle { }
+.node-grid:hover circle { }
+.node-battery:hover circle { }
+.node-charge_point:hover circle { }
 
 /* Pulse animations for each node type - DISABLED for testing */
 /*
