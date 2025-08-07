@@ -205,6 +205,7 @@ function App() {
           data={filteredData}
           currentHour={currentHour}
           filters={filters}
+          isTimelinePlaying={isPlaying}
         />
 
         <Legend

@@ -1,0 +1,23 @@
+/* Add this to simplify animations */
+.neon-glow {
+  filter: none !important;
+}
+
+.node-main {
+  filter: none !important;
+}
+
+/* Simplified hover effects */
+.node:hover .node-main {
+  filter: brightness(1.2) !important;
+  transform: scale(1.05);
+}
+
+/* Simplified link effects */
+.link:hover {
+  stroke-width: 3 !important;
+}
+
+.node-inner-label, .node-power-value, .node-label, .node-metric {
+  text-shadow: 0 0 3px #000 !important;
+}

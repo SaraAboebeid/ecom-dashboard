@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { GraphData, Node, Link, NODE_COLORS } from '../types';
 import { iconToString } from './NodeIcons';
+import '../simple-animations.css'; // Import simplified animations
 
 interface GraphProps {
   data: GraphData;
@@ -13,6 +14,7 @@ interface GraphProps {
     v2gFilter: 'all' | 'v2g-only' | 'no-v2g';
     capacityRange: { min: number; max: number };
   };
+  isTimelinePlaying?: boolean;
   onKPICalculated?: (kpis: {
     totalPVCapacity: number;
     totalEnergyDemand: number;
@@ -22,7 +24,7 @@ interface GraphProps {
   }) => void;
 }
 
-export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProps) => {
+export const Graph = ({ data, currentHour, filters, isTimelinePlaying, onKPICalculated }: GraphProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const simulationRef = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null);
   const particleTimeoutsRef = useRef<number[]>([]);
@@ -31,6 +33,8 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   // State for selected node to show in slide panel
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+  // Track if timeline is playing to control flow animations
+  const [isPlaying, setIsPlaying] = useState(false);
   
   // Create a stable key for the graph structure
   const graphStructureKey = `${data.nodes.map(n => n.id).sort().join(',')}-${data.links.map(l => `${l.source}-${l.target}`).sort().join(',')}`;
@@ -79,6 +83,38 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       onKPICalculated(kpis);
     }
   }, [kpis, onKPICalculated]);
+  
+  // Update local playing state when the timeline playing status changes
+  useEffect(() => {
+    setIsPlaying(isTimelinePlaying === true);
+    
+    // If we have an SVG reference and the simulation exists, update particles when play state changes
+    if (svgRef.current && simulationRef.current) {
+      const svg = d3.select(svgRef.current);
+      const particleContainer = svg.select('.particles');
+      
+      if (!particleContainer.empty()) {
+        if (isTimelinePlaying) {
+          // Trigger particle animations with slight delay to allow state to update
+          setTimeout(() => {
+            // Clear any existing particles first
+            particleTimeoutsRef.current.forEach(clearTimeout);
+            particleTimeoutsRef.current = [];
+            particleContainer.selectAll('.particle').remove();
+            
+            // This will initiate particle animations based on the new playing state
+            const event = new CustomEvent('updateParticles');
+            window.dispatchEvent(event);
+          }, 100);
+        } else {
+          // If pausing, remove all particles
+          particleTimeoutsRef.current.forEach(clearTimeout);
+          particleTimeoutsRef.current = [];
+          particleContainer.selectAll('.particle').remove();
+        }
+      }
+    }
+  }, [isTimelinePlaying]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -187,7 +223,36 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         sb1Node.fx = 184.397;
         sb1Node.fy = 717.074;
     }
-
+    //find Edit and fix its position at 319.370,759.348
+    const editNode = nodeData.find(n => n.id === 'Edit');
+    if (editNode) {
+        editNode.fx = 319.370;
+        editNode.fy = 759.348;
+    }
+    // find HA node and fix its position at 856,158
+    const haNode = nodeData.find(n => n.id === 'HA');
+    if (haNode) {
+        haNode.fx = 856;
+        haNode.fy = 158;
+    }
+    // find HB and fix its position at 931.232,20.418
+    const hbNode = nodeData.find(n => n.id === 'HB');
+    if (hbNode) {
+        hbNode.fx = 931.232;
+        hbNode.fy = 20.418;
+    }
+    // find HC and fix its position at 1009.722,9.556
+    const hcNode = nodeData.find(n => n.id === 'HC');
+    if (hcNode) {
+        hcNode.fx = 1009.722;
+        hcNode.fy = 9.556;
+    }
+    // find Idelara and fix its position at 1101.542,64.525
+    const idelaraNode = nodeData.find(n => n.id === 'Idelara');
+    if (idelaraNode) {
+        idelaraNode.fx = 1101.542;
+        idelaraNode.fy = 64.525;
+    }
 
     // Create force simulation
     const simulation = d3.forceSimulation(nodeData as d3.SimulationNodeDatum[])
@@ -572,52 +637,25 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       .attr('fill', d => d.color)
       .attr('d', 'M0,-5L10,0L0,5');
 
-    // Draw links with 3D depth effects
+    // Simpler link drawing with fewer effects for better performance
     const linkSelection = container.append('g')
       .selectAll('line')
       .data(linkData)
       .enter().append('line')
       .attr('class', (d: Link) => {
-        // Set appropriate class based on flow direction
-        if (Math.abs(d.flow[currentHour]) > 0) {
-          return d.flow[currentHour] > 0 ? 'link link-flow' : 'link link-flow-reverse';
-        }
+        // Simplified class assignment
         return 'link';
       })
       .attr('stroke', (d: any) => {
-        // Determine the gradient to use based on source node type
+        // Simpler color assignment
         const sourceNode = d.source.type ? d.source : data.nodes.find(n => n.id === d.source);
-        const targetNode = d.target.type ? d.target : data.nodes.find(n => n.id === d.target);
-        
-        if (!sourceNode || !targetNode) return '#999';
-        
-        // Use appropriate gradient based on energy flow type
-        if (sourceNode.type === 'pv') return 'url(#gradient-pv)';
-        if (sourceNode.type === 'grid') return 'url(#gradient-grid)';
-        if (sourceNode.type === 'battery') return 'url(#gradient-battery)';
-        if (sourceNode.type === 'building') return 'url(#gradient-building)';
-        if (sourceNode.type === 'charge_point') return 'url(#gradient-charge)';
-        
-        return '#999';
+        if (!sourceNode) return '#999';
+        return NODE_COLORS[sourceNode.type] || '#999';
       })
-      .attr('stroke-opacity', 0.9)
-      .attr('stroke-width', (d: Link) => Math.max(2, Math.abs(d.flow[currentHour]) * 2.5))
-      .attr('filter', 'url(#line-shadow)') // Add 3D shadow effect to lines
-      .attr('marker-end', (d: any) => {
-        // Determine the marker to use based on source node type
-        const sourceNode = d.source.type ? d.source : data.nodes.find(n => n.id === d.source);
-        if (!sourceNode) return 'url(#flow)';
-        
-        // Use appropriate marker based on energy source type
-        if (sourceNode.type === 'pv') return 'url(#flow-pv)';
-        if (sourceNode.type === 'grid') return 'url(#flow-grid)';
-        if (sourceNode.type === 'battery') return 'url(#flow-battery)';
-        if (sourceNode.type === 'building') return 'url(#flow-building)';
-        if (sourceNode.type === 'charge_point') return 'url(#flow-charge)';
-        
-        return 'url(#flow)';
-      })
-      .attr('stroke-dasharray', '12 12')  // Create dashed line pattern for animation
+      .attr('stroke-opacity', 0.6)
+      .attr('stroke-width', (d: Link) => Math.max(1, Math.abs(d.flow[currentHour]) * 1.5))
+      .attr('filter', 'none') // Remove filter for better performance
+      .attr('marker-end', 'url(#flow)') // Use single marker for better performance
       .attr('x1', 0)
       .attr('y1', 0)
       .attr('x2', 0)
@@ -634,13 +672,22 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       // Remove existing particles
       particleContainer.selectAll('.particle').remove();
       
-      // Create particles for links with active flow
-      linkData.forEach((link: any, linkIndex: number) => {
+      // Only process significant flows and limit total particles
+      // Don't show animated particles if not playing
+      if (!isPlaying) {
+        return; // Exit early if not playing
+      }
+      
+      const significantLinks = linkData
+        .filter((link: any) => Math.abs(link.flow[currentHour]) > 0.05)
+        .sort((a: any, b: any) => Math.abs(b.flow[currentHour]) - Math.abs(a.flow[currentHour]))
+        .slice(0, 15); // Limit to top 15 flows
+      
+      significantLinks.forEach((link: any, linkIndex: number) => {
         const flowValue = Math.abs(link.flow[currentHour]);
-        if (flowValue < 0.01) return; // Skip links with minimal flow
         
-        // Number of particles based on flow intensity (1-5 particles)
-        const numParticles = Math.min(5, Math.max(1, Math.floor(flowValue * 3)));
+        // Reduced number of particles per link (max 3)
+        const numParticles = Math.min(3, Math.max(1, Math.floor(flowValue * 2)));
         
         // Get source node color for particles
         const sourceNode = link.source.type ? link.source : data.nodes.find(n => n.id === link.source);
@@ -768,60 +815,43 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         .on('drag', dragged)
         .on('end', dragended) as any);
 
-    // Add neon outer aura ring with animated glow and 3D depth (smaller, fits icon/text)
+    // Simplified outer aura ring with less intense effects
     nodeSelection.append('circle')
-      .attr('class', d => `node-aura node-aura-${d.type} neon-glow`)
+      .attr('class', d => `node-aura node-aura-${d.type}`)
       .attr('r', (d: Node) => {
-        // Outer ring is 1.25x the main node radius, base radius reduced for compactness
-        let baseRadius = 32;
-        let r = baseRadius;
-        switch(d.type) {
-          case 'building':
-            r = d.total_energy_demand ? baseRadius + Math.min(6, Math.sqrt(d.total_energy_demand) / 30) : baseRadius;
-            break;
-          case 'pv':
-            r = d.installed_capacity ? baseRadius + Math.min(8, d.installed_capacity / 2) : baseRadius;
-            break;
-          case 'battery':
-            r = d.capacity ? baseRadius + Math.min(10, d.capacity / 10) : baseRadius;
-            break;
-          case 'charge_point':
-            r = d.total_connected_evs ? baseRadius + Math.min(6, d.total_connected_evs * 2) : baseRadius;
-            break;
-          default:
-            r = baseRadius;
-        }
-        return r * 1.25;
+        // Fixed radius for better performance
+        const baseRadius = 30;
+        return baseRadius * 1.2; // Consistent size for all nodes
       })
       .attr('fill', 'none')
       .attr('stroke', d => NODE_COLORS[d.type])
-      .attr('stroke-width', 4)
-      .attr('opacity', 0.7)
-      .attr('filter', d => `url(#neon-glow-${d.type})`);
+      .attr('stroke-width', 2)
+      .attr('opacity', 0.5)
+      .attr('filter', 'none'); // Remove filter for better performance
 
-    // Main node circle with 3D depth effects (smaller, neon fill, fits icon/text)
+    // Main node circle with simplified depth effects (smaller, neon fill, fits icon/text)
     nodeSelection.append('circle')
       .attr('class', d => `node-main node-main-${d.type}`)
       .attr('r', (d: Node) => {
         // Base radius reduced for compactness
-        let baseRadius = 32;
+        let baseRadius = 30;
         switch(d.type) {
           case 'building':
-            return d.total_energy_demand ? baseRadius + Math.min(6, Math.sqrt(d.total_energy_demand) / 30) : baseRadius;
+            return baseRadius + 2; // Simplified sizing for better performance
           case 'pv':
-            return d.installed_capacity ? baseRadius + Math.min(8, d.installed_capacity / 2) : baseRadius;
+            return baseRadius + 2;
           case 'battery':
-            return d.capacity ? baseRadius + Math.min(10, d.capacity / 10) : baseRadius;
+            return baseRadius + 2;
           case 'charge_point':
-            return d.total_connected_evs ? baseRadius + Math.min(6, d.total_connected_evs * 2) : baseRadius;
+            return baseRadius + 2;
           default:
             return baseRadius;
         }
       })
       .attr('fill', d => NODE_COLORS[d.type])
       .attr('stroke', d => d3.color(NODE_COLORS[d.type])?.brighter(0.3)?.toString() || NODE_COLORS[d.type])
-      .attr('stroke-width', 3)
-      .attr('filter', 'url(#depth-shadow)'); // Apply 3D depth shadow
+      .attr('stroke-width', 2) // Thinner stroke for better performance
+      .attr('filter', 'none'); // Remove filter for better performance
 
     // Add SVG icons inside nodes
     nodeSelection.each(function(d: Node) {
@@ -1090,15 +1120,18 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         hideTooltip();
       });
 
-    // Update positions on simulation tick
+    // Update positions on simulation tick with requestAnimationFrame for smoother rendering
     simulation.on('tick', () => {
-      linkSelection
-        .attr('x1', (d: any) => d.source.x)
-        .attr('y1', (d: any) => d.source.y)
-        .attr('x2', (d: any) => d.target.x)
-        .attr('y2', (d: any) => d.target.y);
+      // Use requestAnimationFrame for smoother rendering
+      requestAnimationFrame(() => {
+        linkSelection
+          .attr('x1', (d: any) => d.source.x)
+          .attr('y1', (d: any) => d.source.y)
+          .attr('x2', (d: any) => d.target.x)
+          .attr('y2', (d: any) => d.target.y);
 
-      nodeSelection.attr('transform', (d: any) => `translate(${d.x},${d.y})`);
+        nodeSelection.attr('transform', (d: any) => `translate(${d.x},${d.y})`);
+      });
     });
 
     // Apply initial zoom immediately with a reasonable default view
@@ -1307,6 +1340,11 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
         // Remove existing particles
         particleContainer.selectAll('.particle').remove();
         
+        // Only show animated particles if timeline is playing
+        if (!isPlaying) {
+          return; // Exit early if not playing
+        }
+        
         // Create particles for links with active flow
         data.links.forEach((link: any, linkIndex: number) => {
           const flowValue = Math.abs(link.flow[currentHour]);
@@ -1422,7 +1460,7 @@ export const Graph = ({ data, currentHour, filters, onKPICalculated }: GraphProp
       setTimeout(updateParticles, 350);
     }
 
-  }, [currentHour, data.nodes, data.links]); // Only update visual properties when hour changes
+  }, [currentHour, data.nodes, data.links, isPlaying]); // Update when hour changes or play state changes
 
   // Cleanup on unmount
   useEffect(() => {
