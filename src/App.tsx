@@ -3,6 +3,7 @@ import { Graph } from './components/Graph';
 import { Timeline } from './components/Timeline';
 import { Legend } from './components/Legend';
 import { DashboardHeader } from './components/DashboardHeader';
+import { FpsCounter } from './components/FpsCounter';
 import { GraphData } from './types';
 
 function App() {
@@ -184,6 +185,9 @@ function App() {
 
   return (
     <div className="min-h-screen transition-colors duration-300 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      {/* FPS Counter */}
+      <FpsCounter />
+      
       {/* Dashboard Header */}
       <DashboardHeader data={data} currentHour={currentHour} />
       
