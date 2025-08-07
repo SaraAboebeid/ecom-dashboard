@@ -21,7 +21,8 @@
   }
 }
 
-/* Enhanced 3D hover effects for nodes */
+/* Enhanced 3D hover effects for nodes - DISABLED */
+/*
 .node:hover .node-main {
   filter: brightness(1.2) drop-shadow(0 0 20px currentColor) drop-shadow(4px 8px 15px rgba(0,0,0,0.5));
   transform: translateZ(4px) scale(1.05);
@@ -33,6 +34,7 @@
   transform: translateZ(2px) scale(1.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+*/
 
 /* Enhanced 3D link hover effects */
 .link:hover {

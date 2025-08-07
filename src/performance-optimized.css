@@ -1,10 +1,12 @@
 /* Performance-Optimized Styles - Minimal animations */
 
-/* Basic hover effects without expensive filters */
+/* Basic hover effects without expensive filters - DISABLED */
+/*
 .node:hover .node-main {
   transform: scale(1.02);
   transition: transform 0.2s ease;
 }
+*/
 
 /* Simple text shadows for readability */
 .node-inner-label, .node-power-value, .node-label, .node-metric {

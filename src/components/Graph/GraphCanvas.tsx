@@ -133,8 +133,8 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
 
       {/* Particles layer removed for simple edges */}
 
-        {/* Nodes layer - temporarily disabled */}
-        {/* <NodesComponent
+        {/* Nodes layer */}
+        <NodesComponent
           containerRef={containerRef}
           data={data}
           currentHour={currentHour}
@@ -142,7 +142,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           selectedNode={selectedNode}
           onNodeClick={onNodeClick}
           tooltip={tooltip}
-        /> */}
+        />
       </g>
     </svg>
   );

@@ -37,9 +37,12 @@
   stroke-opacity: 0.8;
 }
 
+/* Hover effects disabled */
+/*
 .node:hover circle {
   transform: scale(1.1);
 }
+*/
 
 .node-icon {
   font-size: 14px;
@@ -61,11 +64,14 @@
   pointer-events: none;
 }
 
+/* Hover effects disabled */
+/*
 .node:hover .node-inner-label,
 .node:hover .node-power-value {
   font-weight: bold;
   filter: brightness(1.2);
 }
+*/
 
 @keyframes flow {
   0% {
@@ -101,12 +107,14 @@
 
 /* Node type-specific styles */
 
-/* Type-specific glow effects */
+/* Type-specific styles - hover effects disabled */
+/*
 .node-building:hover circle { }
 .node-pv:hover circle { }
 .node-grid:hover circle { }
 .node-battery:hover circle { }
 .node-charge_point:hover circle { }
+*/
 
 /* Pulse animations for each node type - DISABLED for testing */
 /*
@@ -153,11 +161,13 @@
   opacity: 0.9;
 }
 
-/* Enhance visibility on hover */
+/* Enhance visibility on hover - disabled */
+/*
 .node:hover .node-label,
 .node:hover .node-metric {
   font-weight: bold;
 }
+*/
 
 /* Particle system styles */
 .particles {
