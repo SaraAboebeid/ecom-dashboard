@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import { GraphData, Node } from '../../types';
 import { GraphNodes } from './GraphNodes';
 import { GraphNodesOptimized } from './GraphNodesOptimized';
@@ -43,6 +43,32 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
 }) => {
   const containerRef = useRef<SVGGElement>(null);
 
+  // State to track dark mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Check dark mode on mount and listen for changes
+  useEffect(() => {
+    const checkDarkMode = () => {
+      setIsDarkMode(document.documentElement.classList.contains('dark'));
+    };
+
+    // Initial check
+    checkDarkMode();
+
+    // Listen for dark mode changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          checkDarkMode();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+
+    return () => observer.disconnect();
+  }, []);
+
   // Determine performance configuration
   const performanceConfig = useMemo(() => {
     const mode = performanceMode === 'auto' ? detectPerformanceLevel() : performanceMode.toUpperCase();
@@ -63,6 +89,20 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
   // Choose appropriate nodes component based on performance settings
   const NodesComponent = performanceConfig.enableNodeIcons ? GraphNodes : GraphNodesOptimized;
 
+  // Calculate centered position for background image
+  const imageWidth = 565.752;
+  const imageHeight = 1276.608;
+  const centerX = (dimensions.width - imageWidth) / 2;
+  const centerY = (dimensions.height - imageHeight) / 2;
+
+  // Choose background image based on theme
+  const backgroundImage = isDarkMode ? "/3d_topview_dark.png" : "/3d_topview.png";
+
+  // Debug: Log the current theme and image path
+  if (isDarkMode) {
+    console.log('Dark mode: true, Image:', backgroundImage);
+  }
+
   return (
     <svg
       ref={svgRef}
@@ -73,13 +113,13 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
 
       {/* Main container group for zoom/pan transforms */}
       <g ref={containerRef}>
-        {/* Background image */}
+        {/* Background image - only for dark mode */}
         <image
-          xlinkHref="/3d_topview.png"
-          x={0}
-          y={0}
-          width={565.752}
-          height={1276.608}
+          href={backgroundImage}
+          x={centerX}
+          y={centerY}
+          width={imageWidth}
+          height={imageHeight}
         />
 
         {/* Links layer */}
@@ -93,8 +133,8 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
 
       {/* Particles layer removed for simple edges */}
 
-        {/* Nodes layer */}
-        <NodesComponent
+        {/* Nodes layer - temporarily disabled */}
+        {/* <NodesComponent
           containerRef={containerRef}
           data={data}
           currentHour={currentHour}
@@ -102,7 +142,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           selectedNode={selectedNode}
           onNodeClick={onNodeClick}
           tooltip={tooltip}
-        />
+        /> */}
       </g>
     </svg>
   );
