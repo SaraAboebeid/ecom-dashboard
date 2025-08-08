@@ -87,17 +87,17 @@ export const FpsCounter: React.FC<FpsCounterProps> = ({
 
   return (
     <div 
-      className={`fixed top-4 left-4 z-50 bg-black bg-opacity-90 text-white px-4 py-3 rounded-lg font-mono text-sm backdrop-blur-sm border-2 border-blue-500 shadow-xl ${className}`}
+      className={`fixed top-2 left-2 z-50 bg-black bg-opacity-90 text-white px-2 py-1 rounded-md font-mono text-xs backdrop-blur-sm border border-blue-500 shadow-lg ${className}`}
       style={{ userSelect: 'none', pointerEvents: 'auto' }}
     >
-      <div className="flex items-center space-x-2">
-        <span className="text-gray-300">FPS:</span>
-        <span className={`font-bold text-lg ${getFpsColor(fps)}`}>
+      <div className="flex items-center space-x-1">
+        <span className="text-gray-150">FPS:</span>
+        <span className={`font-bold ${getFpsColor(fps)}`}>
           {fps}
         </span>
       </div>
-      <div className="text-xs text-gray-400 mt-1">
-        Press F3 to toggle
+      <div className="text-xs text-gray-200 opacity-75">
+        F3
       </div>
     </div>
   );
