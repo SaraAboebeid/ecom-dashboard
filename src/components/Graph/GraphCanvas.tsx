@@ -89,11 +89,9 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
   // Force GraphNodes with icons for now (instead of checking performance config)
   const NodesComponent = GraphNodes;
 
-  // Calculate centered position for background image
+  // Background image dimensions
   const imageWidth = 565.752;
   const imageHeight = 1276.608;
-  const centerX = (dimensions.width - imageWidth) / 2;
-  const centerY = (dimensions.height - imageHeight) / 2;
 
   // Choose background image based on theme
   const backgroundImage = isDarkMode ? "/3d_topview_dark.png" : "/3d_topview.png";
@@ -108,11 +106,11 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
 
       {/* Main container group for zoom/pan transforms */}
       <g ref={containerRef}>
-        {/* Background image - only for dark mode */}
+        {/* Background image positioned at origin (0,0) */}
         <image
           href={backgroundImage}
-          x={centerX}
-          y={centerY}
+          x={0}
+          y={0}
           width={imageWidth}
           height={imageHeight}
         />

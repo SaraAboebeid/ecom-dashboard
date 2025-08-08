@@ -4,7 +4,7 @@ import { Node } from '../types';
  * Fixed positions for specific nodes in the graph
  */
 export const FIXED_NODE_POSITIONS: Record<string, { x: number; y: number }> = {
-  'SB1': { x: 184.397, y: 717.074 },
+  'SB1': { x: 0, y: 0 },
   'Edit': { x: 319.370, y: 759.348 },
   'HA': { x: 856, y: 158 },
   'HB': { x: 931.232, y: 20.418 },
