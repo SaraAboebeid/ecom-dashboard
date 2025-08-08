@@ -56,12 +56,12 @@
         "Studentbost\u00e4der",
         "Chalmersfastigheter"
       ],
-      "area": 1900.7155641552995,
+      "area": 1900.7155641553009,
       "breps": [],
       "building_type": "College",
       "electric_demand": "Electric Demand for Elkraftteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 44.8\nvalue | Total: 475,873.85 kWh, Avg: 54.32 kWh, Max: 109.90 kWh, Min: 29.50 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for Elkraftteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 1.1088765055888459\nvalue | Total: 17,345.37 kWh, Avg: 1.98 kWh, Max: 3.61 kWh, Min: 1.11 kWh",
-      "footprints": "[<Rhino.Geometry.PolylineCurve object at 0x000001E2DD8D6B40>]",
+      "electric_demand_from_program": "Electric Demand (program) for Elkraftteknik\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 1.1088765055888465\nvalue | Total: 17,345.37 kWh, Avg: 1.98 kWh, Max: 3.61 kWh, Min: 1.11 kWh",
+      "footprints": "[<Rhino.Geometry.PolylineCurve object at 0x000001D1C264D540>]",
       "fractional_hourly_electric_demand": "Fractional Electric Demand for Elkraftteknik\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
       "name": "Elkraftteknik",
       "number_of_floors": [
@@ -75,7 +75,7 @@
       "type": "building"
     },
     {
-      "id": "Idelara",
+      "id": "Id\u00e9l\u00e4ra",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -85,11 +85,11 @@
       "area": 0.0,
       "breps": [],
       "building_type": "College",
-      "electric_demand": "Electric Demand for Idelara\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 2.6\nvalue | Total: 61,345.45 kWh, Avg: 7.00 kWh, Max: 17.80 kWh, Min: 1.70 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for Idelara\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for Id\u00e9l\u00e4ra\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 2.6\nvalue | Total: 61,345.45 kWh, Avg: 7.00 kWh, Max: 17.80 kWh, Min: 1.70 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for Id\u00e9l\u00e4ra\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for Idelara\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
-      "name": "Idelara",
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for Id\u00e9l\u00e4ra\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.5833994978000002\nvalue | Total: 9,125.70 W/m2, Avg: 1.04 W/m2, Max: 1.90 W/m2, Min: 0.58 W/m2",
+      "name": "Id\u00e9l\u00e4ra",
       "number_of_floors": null,
       "occupancy_schedule": null,
       "owner": "Studentbost\u00e4der",
@@ -483,7 +483,7 @@
       "type": "building"
     },
     {
-      "id": "07.888 Lokalkontor",
+      "id": "Lokalkontor",
       "PV_plant": [],
       "VALID_OWNERS": [
         "Akademiska Hus",
@@ -493,11 +493,11 @@
       "area": 0.0,
       "breps": [],
       "building_type": "LargeOffice",
-      "electric_demand": "Electric Demand for 07.888 Lokalkontor\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 8.8\nvalue | Total: 77,923.00 kWh, Avg: 8.90 kWh, Max: 28.00 kWh, Min: 0.00 kWh",
-      "electric_demand_from_program": "Electric Demand (program) for 07.888 Lokalkontor\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
+      "electric_demand": "Electric Demand for Lokalkontor\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 8.8\nvalue | Total: 77,923.00 kWh, Avg: 8.90 kWh, Max: 28.00 kWh, Min: 0.00 kWh",
+      "electric_demand_from_program": "Electric Demand (program) for Lokalkontor\nUnits: kWh\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 0.00 kWh, Avg: 0.00 kWh, Max: 0.00 kWh, Min: 0.00 kWh",
       "footprints": [],
-      "fractional_hourly_electric_demand": "Fractional Electric Demand for 07.888 Lokalkontor\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.3684478000000001\nvalue | Total: 7,275.40 W/m2, Avg: 0.83 W/m2, Max: 1.72 W/m2, Min: 0.36 W/m2",
-      "name": "07.888 Lokalkontor",
+      "fractional_hourly_electric_demand": "Fractional Electric Demand for Lokalkontor\nUnits: W/m2\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.3684478000000001\nvalue | Total: 7,275.40 W/m2, Avg: 0.83 W/m2, Max: 1.72 W/m2, Min: 0.36 W/m2",
+      "name": "Lokalkontor",
       "number_of_floors": null,
       "occupancy_schedule": null,
       "owner": "Studentbost\u00e4der",
@@ -1331,7 +1331,7 @@
     },
     {
       "source": "Fysik origo",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -1871,7 +1871,7 @@
     },
     {
       "source": "Fysik origo",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -3329,7 +3329,7 @@
     },
     {
       "source": "IT",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -3869,7 +3869,7 @@
     },
     {
       "source": "IT",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -5327,7 +5327,7 @@
     },
     {
       "source": "Elkraftteknik",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -5867,7 +5867,7 @@
     },
     {
       "source": "Elkraftteknik",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -7108,7 +7108,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "BAT_Battery-01",
       "flow": [
         0.0,
@@ -7162,7 +7162,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "GRID",
       "flow": [
         0.0,
@@ -7216,7 +7216,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Fysik origo",
       "flow": [
         0.0,
@@ -7270,7 +7270,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "IT",
       "flow": [
         0.0,
@@ -7324,7 +7324,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Elkraftteknik",
       "flow": [
         0.0,
@@ -7378,7 +7378,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "HC",
       "flow": [
         0.0,
@@ -7432,7 +7432,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "HA",
       "flow": [
         0.0,
@@ -7486,7 +7486,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "SB2",
       "flow": [
         0.0,
@@ -7540,7 +7540,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Edit",
       "flow": [
         0.0,
@@ -7594,7 +7594,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "HB",
       "flow": [
         0.0,
@@ -7648,7 +7648,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "SB1",
       "flow": [
         0.0,
@@ -7702,7 +7702,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "SB3",
       "flow": [
         0.0,
@@ -7756,7 +7756,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Maskinteknik",
       "flow": [
         0.0,
@@ -7810,7 +7810,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Gamla matte",
       "flow": [
         0.0,
@@ -7864,8 +7864,8 @@
       ]
     },
     {
-      "source": "Idelara",
-      "target": "07.888 Lokalkontor",
+      "source": "Id\u00e9l\u00e4ra",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -7918,7 +7918,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "CA-Huset",
       "flow": [
         0.0,
@@ -7972,7 +7972,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "CSB Chabo",
       "flow": [
         0.0,
@@ -8026,7 +8026,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "CSB Gibraltarvallen guesthouse",
       "flow": [
         0.0,
@@ -8080,7 +8080,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "CSB Holtermansgatan",
       "flow": [
         0.0,
@@ -8134,7 +8134,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Emils k\u00e5rhus",
       "flow": [
         0.0,
@@ -8188,7 +8188,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "JSP",
       "flow": [
         0.0,
@@ -8242,7 +8242,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "K\u00e5rhus entr\u00e9",
       "flow": [
         0.0,
@@ -8296,7 +8296,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "K\u00e5rresturangen",
       "flow": [
         0.0,
@@ -8350,7 +8350,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "MC2",
       "flow": [
         0.0,
@@ -8404,7 +8404,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Nya Matte",
       "flow": [
         0.0,
@@ -8458,7 +8458,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Reaktorfysik",
       "flow": [
         0.0,
@@ -8512,7 +8512,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Teknikparken",
       "flow": [
         0.0,
@@ -8566,7 +8566,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Vasa 1",
       "flow": [
         0.0,
@@ -8620,7 +8620,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Vasa 4",
       "flow": [
         0.0,
@@ -8674,7 +8674,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Vasa 7",
       "flow": [
         0.0,
@@ -8728,7 +8728,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Vasa 8",
       "flow": [
         0.0,
@@ -8782,7 +8782,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Vasa 9",
       "flow": [
         0.0,
@@ -8836,7 +8836,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Vasa 10",
       "flow": [
         0.0,
@@ -8890,7 +8890,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Vasa 11",
       "flow": [
         0.0,
@@ -8944,7 +8944,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Vasa 12",
       "flow": [
         0.0,
@@ -8998,7 +8998,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Vasa 13",
       "flow": [
         0.0,
@@ -9052,7 +9052,7 @@
       ]
     },
     {
-      "source": "Idelara",
+      "source": "Id\u00e9l\u00e4ra",
       "target": "Vasa 15",
       "flow": [
         0.0,
@@ -9377,7 +9377,7 @@
     },
     {
       "source": "HC",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -9863,7 +9863,7 @@
     },
     {
       "source": "HC",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -11375,7 +11375,7 @@
     },
     {
       "source": "HA",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -11861,7 +11861,7 @@
     },
     {
       "source": "HA",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -13373,7 +13373,7 @@
     },
     {
       "source": "SB2",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -13859,7 +13859,7 @@
     },
     {
       "source": "SB2",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -15479,7 +15479,7 @@
     },
     {
       "source": "Edit",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -15965,7 +15965,7 @@
     },
     {
       "source": "Edit",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -17585,7 +17585,7 @@
     },
     {
       "source": "HB",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -18071,7 +18071,7 @@
     },
     {
       "source": "HB",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -19583,7 +19583,7 @@
     },
     {
       "source": "SB1",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -20069,7 +20069,7 @@
     },
     {
       "source": "SB1",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -21689,7 +21689,7 @@
     },
     {
       "source": "SB3",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -22175,7 +22175,7 @@
     },
     {
       "source": "SB3",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -23687,7 +23687,7 @@
     },
     {
       "source": "Maskinteknik",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -24173,7 +24173,7 @@
     },
     {
       "source": "Maskinteknik",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -25685,7 +25685,7 @@
     },
     {
       "source": "Gamla matte",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -26171,7 +26171,7 @@
     },
     {
       "source": "Gamla matte",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -27412,7 +27412,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "BAT_Battery-01",
       "flow": [
         0.0,
@@ -27466,7 +27466,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "GRID",
       "flow": [
         0.0,
@@ -27520,7 +27520,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Fysik origo",
       "flow": [
         0.0,
@@ -27574,7 +27574,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "IT",
       "flow": [
         0.0,
@@ -27628,7 +27628,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Elkraftteknik",
       "flow": [
         0.0,
@@ -27682,8 +27682,8 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
-      "target": "Idelara",
+      "source": "Lokalkontor",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -27736,7 +27736,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "HC",
       "flow": [
         0.0,
@@ -27790,7 +27790,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "HA",
       "flow": [
         0.0,
@@ -27844,7 +27844,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "SB2",
       "flow": [
         0.0,
@@ -27898,7 +27898,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Edit",
       "flow": [
         0.0,
@@ -27952,7 +27952,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "HB",
       "flow": [
         0.0,
@@ -28006,7 +28006,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "SB1",
       "flow": [
         0.0,
@@ -28060,7 +28060,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "SB3",
       "flow": [
         0.0,
@@ -28114,7 +28114,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Maskinteknik",
       "flow": [
         0.0,
@@ -28168,7 +28168,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Gamla matte",
       "flow": [
         0.0,
@@ -28222,7 +28222,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "CA-Huset",
       "flow": [
         0.0,
@@ -28276,7 +28276,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "CSB Chabo",
       "flow": [
         0.0,
@@ -28330,7 +28330,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "CSB Gibraltarvallen guesthouse",
       "flow": [
         0.0,
@@ -28384,7 +28384,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "CSB Holtermansgatan",
       "flow": [
         0.0,
@@ -28438,7 +28438,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Emils k\u00e5rhus",
       "flow": [
         0.0,
@@ -28492,7 +28492,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "JSP",
       "flow": [
         0.0,
@@ -28546,7 +28546,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "K\u00e5rhus entr\u00e9",
       "flow": [
         0.0,
@@ -28600,7 +28600,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "K\u00e5rresturangen",
       "flow": [
         0.0,
@@ -28654,7 +28654,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "MC2",
       "flow": [
         0.0,
@@ -28708,7 +28708,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Nya Matte",
       "flow": [
         0.0,
@@ -28762,7 +28762,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Reaktorfysik",
       "flow": [
         0.0,
@@ -28816,7 +28816,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Teknikparken",
       "flow": [
         0.0,
@@ -28870,7 +28870,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Vasa 1",
       "flow": [
         0.0,
@@ -28924,7 +28924,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Vasa 4",
       "flow": [
         0.0,
@@ -28978,7 +28978,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Vasa 7",
       "flow": [
         0.0,
@@ -29032,7 +29032,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Vasa 8",
       "flow": [
         0.0,
@@ -29086,7 +29086,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Vasa 9",
       "flow": [
         0.0,
@@ -29140,7 +29140,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Vasa 10",
       "flow": [
         0.0,
@@ -29194,7 +29194,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Vasa 11",
       "flow": [
         0.0,
@@ -29248,7 +29248,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Vasa 12",
       "flow": [
         0.0,
@@ -29302,7 +29302,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Vasa 13",
       "flow": [
         0.0,
@@ -29356,7 +29356,7 @@
       ]
     },
     {
-      "source": "07.888 Lokalkontor",
+      "source": "Lokalkontor",
       "target": "Vasa 15",
       "flow": [
         0.0,
@@ -29681,7 +29681,7 @@
     },
     {
       "source": "CA-Huset",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -30221,7 +30221,7 @@
     },
     {
       "source": "CA-Huset",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -31679,7 +31679,7 @@
     },
     {
       "source": "CSB Chabo",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -32219,7 +32219,7 @@
     },
     {
       "source": "CSB Chabo",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -33677,7 +33677,7 @@
     },
     {
       "source": "CSB Gibraltarvallen guesthouse",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -34217,7 +34217,7 @@
     },
     {
       "source": "CSB Gibraltarvallen guesthouse",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -35675,7 +35675,7 @@
     },
     {
       "source": "CSB Holtermansgatan",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -36215,7 +36215,7 @@
     },
     {
       "source": "CSB Holtermansgatan",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -36431,60 +36431,6 @@
     },
     {
       "source": "CSB Holtermansgatan",
-      "target": "CSB Holtermansgatan",
-      "flow": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ]
-    },
-    {
-      "source": "CSB Holtermansgatan",
       "target": "Emils k\u00e5rhus",
       "flow": [
         0.0,
@@ -37727,7 +37673,7 @@
     },
     {
       "source": "Emils k\u00e5rhus",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -38267,7 +38213,7 @@
     },
     {
       "source": "Emils k\u00e5rhus",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -39725,7 +39671,7 @@
     },
     {
       "source": "JSP",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -40265,7 +40211,7 @@
     },
     {
       "source": "JSP",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -41723,7 +41669,7 @@
     },
     {
       "source": "K\u00e5rhus entr\u00e9",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -42263,7 +42209,7 @@
     },
     {
       "source": "K\u00e5rhus entr\u00e9",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -43721,7 +43667,7 @@
     },
     {
       "source": "K\u00e5rresturangen",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -44261,7 +44207,7 @@
     },
     {
       "source": "K\u00e5rresturangen",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -45719,7 +45665,7 @@
     },
     {
       "source": "MC2",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -46259,7 +46205,7 @@
     },
     {
       "source": "MC2",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -47717,7 +47663,7 @@
     },
     {
       "source": "Nya Matte",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -48257,7 +48203,7 @@
     },
     {
       "source": "Nya Matte",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -49715,7 +49661,7 @@
     },
     {
       "source": "Reaktorfysik",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -50255,7 +50201,7 @@
     },
     {
       "source": "Reaktorfysik",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -51713,7 +51659,7 @@
     },
     {
       "source": "Teknikparken",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -52253,7 +52199,7 @@
     },
     {
       "source": "Teknikparken",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -53711,7 +53657,7 @@
     },
     {
       "source": "Vasa 1",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -54251,7 +54197,7 @@
     },
     {
       "source": "Vasa 1",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -55709,7 +55655,7 @@
     },
     {
       "source": "Vasa 4",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -56249,7 +56195,7 @@
     },
     {
       "source": "Vasa 4",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -57707,7 +57653,7 @@
     },
     {
       "source": "Vasa 7",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -58247,7 +58193,7 @@
     },
     {
       "source": "Vasa 7",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -59705,7 +59651,7 @@
     },
     {
       "source": "Vasa 8",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -60245,7 +60191,7 @@
     },
     {
       "source": "Vasa 8",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -61703,7 +61649,7 @@
     },
     {
       "source": "Vasa 9",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -62243,7 +62189,7 @@
     },
     {
       "source": "Vasa 9",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -63701,7 +63647,7 @@
     },
     {
       "source": "Vasa 10",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -64241,7 +64187,7 @@
     },
     {
       "source": "Vasa 10",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -65699,7 +65645,7 @@
     },
     {
       "source": "Vasa 11",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -66239,7 +66185,7 @@
     },
     {
       "source": "Vasa 11",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -67697,7 +67643,7 @@
     },
     {
       "source": "Vasa 12",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -68237,7 +68183,7 @@
     },
     {
       "source": "Vasa 12",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -69695,7 +69641,7 @@
     },
     {
       "source": "Vasa 13",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -70235,7 +70181,7 @@
     },
     {
       "source": "Vasa 13",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -71693,7 +71639,7 @@
     },
     {
       "source": "Vasa 15",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -72233,7 +72179,7 @@
     },
     {
       "source": "Vasa 15",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -73583,7 +73529,7 @@
     },
     {
       "source": "PV_PV-Plant",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -74123,7 +74069,7 @@
     },
     {
       "source": "PV_PV-Plant",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -75581,7 +75527,7 @@
     },
     {
       "source": "BAT_Battery-01",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
         0.0,
@@ -76121,7 +76067,7 @@
     },
     {
       "source": "BAT_Battery-01",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         0.0,
         0.0,
@@ -77633,7 +77579,7 @@
     },
     {
       "source": "GRID",
-      "target": "Idelara",
+      "target": "Id\u00e9l\u00e4ra",
       "flow": [
         2.6,
         2.5,
@@ -78173,7 +78119,7 @@
     },
     {
       "source": "GRID",
-      "target": "07.888 Lokalkontor",
+      "target": "Lokalkontor",
       "flow": [
         8.9,
         8.9,
@@ -79415,12 +79361,12 @@
     }
   ],
   "kpis": {
-    "total_demand": 136997.869191,
-    "total_grid_import": 132026.37878099998,
+    "total_demand": 136754.969191,
+    "total_grid_import": 131783.47878099998,
     "total_grid_export": 0.0,
     "total_pv_used": 3475.6238399999997,
     "total_pv_gen": 4808.51808,
-    "self_sufficiency": 3.628881558054642,
+    "self_sufficiency": 3.635327066657845,
     "self_consumption": 72.28056091659741,
     "avg_grid_carbon_intensity": 0.0,
     "total_grid_carbon_import": 0.0,
@@ -79430,7 +79376,7 @@
       "Fysik origo": 0.0,
       "IT": 0.0,
       "Elkraftteknik": 0.0,
-      "Idelara": 0.0,
+      "Id\u00e9l\u00e4ra": 0.0,
       "HC": 0.0,
       "HA": 0.0,
       "SB2": 29.223830786386884,
@@ -79440,7 +79386,7 @@
       "SB3": 0.0,
       "Maskinteknik": 0.0,
       "Gamla matte": 0.0,
-      "07.888 Lokalkontor": 0.0,
+      "Lokalkontor": 0.0,
       "CA-Huset": 0.0,
       "CSB Chabo": 0.0,
       "CSB Gibraltarvallen guesthouse": 0.0,
