@@ -22,9 +22,10 @@ interface GraphProps {
     totalPVProduction: number;
     totalEmbodiedCO2: number;
   }) => void;
+  onFitToView?: (fitToViewFn: () => void) => void;
 }
 
-export const Graph = ({ data, currentHour, filters, isTimelinePlaying, onKPICalculated }: GraphProps) => {
+export const Graph = ({ data, currentHour, filters, isTimelinePlaying, onKPICalculated, onFitToView }: GraphProps) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const simulationRef = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null);
   const particleTimeoutsRef = useRef<number[]>([]);
@@ -44,6 +45,51 @@ export const Graph = ({ data, currentHour, filters, isTimelinePlaying, onKPICalc
   const ownersKey = Array.from(filters.owners).sort().join(',');
   const filtersKey = `${nodeTypesKey}-${filters.minFlow}-${ownersKey}-${filters.v2gFilter}-${filters.capacityRange.min}-${filters.capacityRange.max}`;
   
+  // Function to fit graph to view (can be called manually)
+  const fitGraphToView = () => {
+    if (!svgRef.current || !simulationRef.current) return;
+    
+    const svg = d3.select(svgRef.current);
+    const zoom = d3.zoom().scaleExtent([0.5, 3]);
+    const nodes = simulationRef.current.nodes() as any[];
+    
+    if (nodes.length === 0) return;
+    
+    const padding = 120;
+    const minX = Math.min(...nodes.map(d => d.x || 0)) - padding;
+    const maxX = Math.max(...nodes.map(d => d.x || 0)) + padding;
+    const minY = Math.min(...nodes.map(d => d.y || 0)) - padding;
+    const maxY = Math.max(...nodes.map(d => d.y || 0)) + padding;
+    
+    const graphWidth = maxX - minX;
+    const graphHeight = maxY - minY;
+    
+    // Calculate scale to fit the graph with some margin
+    const scaleX = (dimensions.width * 0.8) / graphWidth;
+    const scaleY = (dimensions.height * 0.8) / graphHeight;
+    const scale = Math.min(scaleX, scaleY, 0.7); // Max scale of 0.7
+    
+    // Calculate translation to center the graph
+    const translateX = (dimensions.width - graphWidth * scale) / 2 - minX * scale;
+    const translateY = (dimensions.height - graphHeight * scale) / 2 - minY * scale;
+    
+    const optimizedTransform = d3.zoomIdentity
+      .translate(translateX, translateY)
+      .scale(scale);
+    
+    svg.transition()
+      .duration(1500)
+      .ease(d3.easeQuadOut)
+      .call(zoom.transform as any, optimizedTransform);
+  };
+
+  // Expose fitGraphToView function to parent component
+  useEffect(() => {
+    if (onFitToView) {
+      onFitToView(fitGraphToView);
+    }
+  }, [onFitToView, fitGraphToView]);
+
   // Helper function to calculate KPIs and summarize data
   const calculateKPIs = () => {
     if (!data.nodes.length) return null;
@@ -247,32 +293,20 @@ export const Graph = ({ data, currentHour, filters, isTimelinePlaying, onKPICalc
         hcNode.fx = 1009.722;
         hcNode.fy = 9.556;
     }
-    // Find Idelara and fix its position at 1101.542,64.525
+    // find Idelara and fix its position at 1101.542,64.525
     const idelaraNode = nodeData.find(n => n.id === 'Idelara');
     if (idelaraNode) {
         idelaraNode.fx = 1101.542;
         idelaraNode.fy = 64.525;
     }
 
-    // Initialize unfixed nodes with random but spread-out positions to prevent clustering at (0,0)
-    nodeData.forEach((node, index) => {
-      if (!node.fx && !node.fy) {
-        // Use a simple layout pattern to spread nodes initially
-        const angle = (index * 2 * Math.PI) / nodeData.length;
-        const radius = Math.min(width, height) * 0.3; // Start in a circle pattern
-        node.x = width / 2 + Math.cos(angle) * radius;
-        node.y = height / 2 + Math.sin(angle) * radius;
-      }
-    });
-
-    // Create force simulation with better initial positioning
+    // Create force simulation
     const simulation = d3.forceSimulation(nodeData as d3.SimulationNodeDatum[])
       .force('link', d3.forceLink(linkData).id((d: any) => d.id).distance(600)) // 2x increased distance between connected nodes
       .force('charge', d3.forceManyBody().strength(-800)) // Reduced repulsion to prevent twitching
-      .force('x', d3.forceX(width / 2).strength(0.05)) // Slightly stronger horizontal centering for better initial layout
-      .force('y', d3.forceY(height / 2).strength(0.05)) // Slightly stronger vertical centering for better initial layout
+      .force('x', d3.forceX(width / 2).strength(0.02)) // Very weak horizontal centering
+      .force('y', d3.forceY(height / 2).strength(0.02)) // Very weak vertical centering
       .force('collision', d3.forceCollide().radius(110)) // 2x increased collision radius
-      .alpha(1) // Start with full energy for better initial positioning
       .alphaDecay(0.0228) // Slower cooling to stabilize better
       .velocityDecay(0.4); // Increased friction to reduce oscillation
 
@@ -1146,61 +1180,16 @@ export const Graph = ({ data, currentHour, filters, isTimelinePlaying, onKPICalc
       });
     });
 
-    // Apply initial zoom to show all nodes properly
-    const initialScale = 0.8; // Start at a good scale to see all nodes
+    // Apply initial zoom immediately with a reasonable default view
+    const initialScale = 0.6; // Start zoomed out to 60%
     const initialTransform = d3.zoomIdentity
-      .translate(width * 0.1, height * 0.1) // Center with less padding to show more content
+      .translate(width * 0.15, height * 0.15) // Center with padding
       .scale(initialScale);
     
     svg.call(zoom.transform as any, initialTransform);
 
-    // Set up a callback to optimize zoom once simulation has stabilized
-    let hasOptimizedZoom = false;
-    const optimizeZoom = () => {
-      if (hasOptimizedZoom) return;
-      
-      const nodes = simulation.nodes() as any[];
-      if (nodes.length === 0) return;
-      
-      // Check if nodes have settled (have actual positions)
-      const nodesWithPositions = nodes.filter(d => d.x !== undefined && d.y !== undefined);
-      if (nodesWithPositions.length < nodes.length * 0.8) return; // Wait until 80% of nodes have positions
-      
-      const padding = 120;
-      const minX = Math.min(...nodesWithPositions.map(d => d.x)) - padding;
-      const maxX = Math.max(...nodesWithPositions.map(d => d.x)) + padding;
-      const minY = Math.min(...nodesWithPositions.map(d => d.y)) - padding;
-      const maxY = Math.max(...nodesWithPositions.map(d => d.y)) + padding;
-      
-      const graphWidth = maxX - minX;
-      const graphHeight = maxY - minY;
-      
-      // Calculate scale to fit the graph with some margin
-      const scaleX = (width * 0.85) / graphWidth;
-      const scaleY = (height * 0.85) / graphHeight;
-      const scale = Math.min(scaleX, scaleY, 1.0); // Allow up to 100% scale
-      
-      // Calculate translation to center the graph
-      const translateX = (width - graphWidth * scale) / 2 - minX * scale;
-      const translateY = (height - graphHeight * scale) / 2 - minY * scale;
-      
-      const optimizedTransform = d3.zoomIdentity
-        .translate(translateX, translateY)
-        .scale(scale);
-      
-      svg.transition()
-        .duration(1000)
-        .ease(d3.easeQuadOut)
-        .call(zoom.transform as any, optimizedTransform);
-        
-      hasOptimizedZoom = true;
-    };
-
-    // Try to optimize zoom after simulation has had time to position nodes
-    setTimeout(optimizeZoom, 2000);
-    
-    // Also listen for simulation end event to optimize zoom
-    simulation.on('end', optimizeZoom);
+    // Note: Removed automatic delayed zoom to prevent unwanted camera movement
+    // If you want to fit the graph to view, you can call this manually with a button
 
     // Drag functions
     function dragstarted(event: any, d: any) {

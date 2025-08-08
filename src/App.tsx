@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Graph } from './components/Graph';
+import { Graph } from './components/Graph/';
 import { Timeline } from './components/Timeline';
 import { Legend } from './components/Legend';
 import { DashboardHeader } from './components/DashboardHeader';
@@ -16,6 +16,7 @@ function App() {
   const [capacityRange, setCapacityRange] = useState<{ min: number; max: number }>({ min: 0, max: 1000 });
   const [minFlow, setMinFlow] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [fitToViewFn, setFitToViewFn] = useState<(() => void) | null>(null);
 
   useEffect(() => {
     fetch('/graph.json')
@@ -125,6 +126,16 @@ function App() {
     setIsPlaying(!isPlaying);
   };
 
+  const handleFitToView = (fitFn: () => void) => {
+    setFitToViewFn(() => fitFn);
+  };
+
+  const onFitToViewClick = () => {
+    if (fitToViewFn) {
+      fitToViewFn();
+    }
+  };
+
   const filteredData = useMemo(() => {
     if (!data) return { nodes: [], links: [] };
     return {
@@ -192,24 +203,37 @@ function App() {
       <DashboardHeader data={data} currentHour={currentHour} />
       
       <div className="relative w-full" style={{ height: 'calc(100vh - 120px)' }}>
-        <button
-          onClick={toggleDarkMode}
-          className="absolute top-4 right-4 p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-md transition-all duration-300 z-50"
-          aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-          title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-        >
-          {isDarkMode ? (
-            <SunIcon className="w-6 h-6 text-yellow-500" />
-          ) : (
-            <MoonIcon className="w-6 h-6 text-gray-700" />
-          )}
-        </button>
+        <div className="absolute top-4 right-4 flex gap-2 z-50">
+          <button
+            onClick={onFitToViewClick}
+            disabled={!fitToViewFn}
+            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-md transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label="Fit graph to view"
+            title="Fit graph to view"
+          >
+            <FitToViewIcon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+          </button>
+          
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-md transition-all duration-300"
+            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {isDarkMode ? (
+              <SunIcon className="w-6 h-6 text-yellow-500" />
+            ) : (
+              <MoonIcon className="w-6 h-6 text-gray-700" />
+            )}
+          </button>
+        </div>
 
         <Graph
           data={filteredData}
           currentHour={currentHour}
           filters={filters}
           isTimelinePlaying={isPlaying}
+          onFitToView={handleFitToView}
         />
 
         <Legend
@@ -275,6 +299,23 @@ const MoonIcon = ({ className = "w-6 h-6" }) => (
       strokeLinejoin="round"
       strokeWidth={2}
       d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+    />
+  </svg>
+);
+
+const FitToViewIcon = ({ className = "w-6 h-6" }) => (
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4"
     />
   </svg>
 );

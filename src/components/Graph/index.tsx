@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { GraphData, Node } from '../../types';
 import { useGraphData } from '../../hooks/useGraphData';
 import { useGraphDimensions } from '../../hooks/useGraphDimensions';
@@ -6,6 +6,7 @@ import { useGraphTooltip } from '../../hooks/useGraphTooltip';
 import { GraphCanvas } from './GraphCanvas';
 import { NodeDetailsPanel } from './NodeDetailsPanel';
 import '../../simple-animations.css';
+import * as d3 from 'd3';
 
 interface GraphProps {
   data: GraphData;
@@ -26,6 +27,7 @@ interface GraphProps {
     totalPVProduction: number;
     totalEmbodiedCO2: number;
   }) => void;
+  onFitToView?: (fitFn: () => void) => void;
 }
 
 /**
@@ -38,7 +40,8 @@ export const Graph: React.FC<GraphProps> = ({
   filters, 
   isTimelinePlaying, 
   performanceMode = 'auto',
-  onKPICalculated 
+  onKPICalculated,
+  onFitToView
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
@@ -52,6 +55,54 @@ export const Graph: React.FC<GraphProps> = ({
 
   const dimensions = useGraphDimensions(svgRef);
   const tooltip = useGraphTooltip();
+
+  // Function to fit graph to view (can be called manually)
+  const fitGraphToView = () => {
+    if (!svgRef.current) return;
+    
+    const svg = d3.select(svgRef.current);
+    const zoom = d3.zoom().scaleExtent([0.5, 3]);
+    
+    // Get all nodes from the processed data
+    const nodes = processedData.nodes;
+    
+    if (nodes.length === 0) return;
+    
+    const padding = 120;
+    // Use initial positions or simulate positions if needed
+    const minX = Math.min(...nodes.map(d => d.x || 0)) - padding;
+    const maxX = Math.max(...nodes.map(d => d.x || 0)) + padding;
+    const minY = Math.min(...nodes.map(d => d.y || 0)) - padding;
+    const maxY = Math.max(...nodes.map(d => d.y || 0)) + padding;
+    
+    const graphWidth = maxX - minX;
+    const graphHeight = maxY - minY;
+    
+    // Calculate scale to fit the graph with some margin
+    const scaleX = (dimensions.width * 0.8) / graphWidth;
+    const scaleY = (dimensions.height * 0.8) / graphHeight;
+    const scale = Math.min(scaleX, scaleY, 0.7); // Max scale of 0.7
+    
+    // Calculate translation to center the graph
+    const translateX = (dimensions.width - graphWidth * scale) / 2 - minX * scale;
+    const translateY = (dimensions.height - graphHeight * scale) / 2 - minY * scale;
+    
+    const optimizedTransform = d3.zoomIdentity
+      .translate(translateX, translateY)
+      .scale(scale);
+    
+    svg.transition()
+      .duration(1500)
+      .ease(d3.easeQuadOut)
+      .call(zoom.transform as any, optimizedTransform);
+  };
+
+  // Expose fitGraphToView function to parent component
+  useEffect(() => {
+    if (onFitToView) {
+      onFitToView(fitGraphToView);
+    }
+  }, [onFitToView, fitGraphToView]);
 
   // Handle node selection
   const handleNodeClick = (node: Node) => {
