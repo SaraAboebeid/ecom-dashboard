@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
-import { GraphData } from '../../types';
+import { GraphData, NODE_COLORS } from '../../types';
 
 // Flow visualization control constants
 const FLOW_CONFIG = {
@@ -95,14 +95,8 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
           const sourceNode = nodeData.find(n => n.id === (d.source.id || d.source));
           if (!sourceNode) return '#999';
           
-          switch (sourceNode.type) {
-            case 'grid': return '#10B981'; // Green
-            case 'pv': return '#F59E0B';   // Yellow/Amber
-            case 'battery': return '#3B82F6'; // Blue
-            case 'building': return '#8B5CF6'; // Purple
-            case 'charge_point': return '#EC4899'; // Pink
-            default: return '#6B7280'; // Gray
-          }
+          // Use the global NODE_COLORS for consistency
+          return NODE_COLORS[sourceNode.type] || '#6B7280';
         })
         .attr('class', (d: any) => {
           const flowValue = d.flow && d.flow[currentHour] ? d.flow[currentHour] : 0;
@@ -191,14 +185,8 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
         const sourceNode = nodeData.find(n => n.id === (d.source.id || d.source));
         if (!sourceNode) return '#999';
         
-        switch (sourceNode.type) {
-          case 'grid': return '#10B981'; // Green
-          case 'pv': return '#F59E0B';   // Yellow/Amber  
-          case 'battery': return '#3B82F6'; // Blue
-          case 'building': return '#8B5CF6'; // Purple
-          case 'charge_point': return '#EC4899'; // Pink
-          default: return '#6B7280'; // Gray
-        }
+        // Use the global NODE_COLORS for consistency
+        return NODE_COLORS[sourceNode.type] || '#6B7280';
       })
       .attr('class', d => {
         const flowValue = d.flow && d.flow[currentHour] ? d.flow[currentHour] : 0;

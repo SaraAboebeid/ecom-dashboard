@@ -66,11 +66,38 @@ export interface GraphState {
   };
 }
 
-// Color scheme for different node types - Neon colors
+// Color scheme for different node types - Tailwind colors
 export const NODE_COLORS = {
-  building: '#FF00FF',    // Neon Magenta/Pink
-  pv: '#FFFF00',          // Neon Yellow
-  grid: '#00FF00',        // Neon Green
-  battery: '#00FFFF',     // Neon Cyan
-  charge_point: '#FF6600' // Neon Orange
+  building: '#ff00a6ff',    // pink-500
+  pv: '#eaff00ff',          // amber-500
+  grid: '#00ffe5ff',        // green-500
+  battery: '#fa3600ff',     // blue-500
+  charge_point: '#00ff5eff' // purple-500
 };
+
+// Alternate neon color scheme
+// export const NODE_COLORS = {
+//   building: '#EC4899',    // pink-500
+//   pv: '#F59E0B',          // amber-500
+//   grid: '#10B981',       // green-500
+//   battery: '#3B82F6',    // blue-500
+//   charge_point: '#8B5CF6' // purple-500
+// };
+
+// Alternate pastel color scheme
+// export const NODE_COLORS = {
+//   building: '#FFB6C1',    // Light Pink
+//   pv: '#FFFACD',          // Light Yellow
+//   grid: '#B0E0E6',       // Light Blue
+//   battery: '#DDA0DD',    // Plum
+//   charge_point: '#E6E6FA' // Lavender
+// };
+
+// Alternate cyberpunk color scheme
+// export const NODE_COLORS = {
+//   building: '#FF00FF',    // Magenta
+//   pv: '#00FFFF',          // Cyan
+//   grid: '#00FF00',       // Green
+//   battery: '#0000FF',    // Blue
+//   charge_point: '#FF00FF' // Purple
+// };

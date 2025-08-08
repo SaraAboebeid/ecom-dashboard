@@ -514,16 +514,9 @@ export const SankeyDrawer: React.FC<SankeyDrawerProps> = ({ isOpen, onClose, dat
         .attr('cx', nodeWidth / 2)
         .attr('cy', 4)
         .attr('r', 3)
-        .attr('fill', () => {
-          // Use different colors for each type
-          switch(d.type) {
-            case 'pv': return '#ffcc00'; // yellow/gold for solar
-            case 'battery': return '#00cc44'; // green for battery
-            case 'building': return '#3366ff'; // blue for building
-            case 'charge_point': return '#cc33ff'; // purple for EV charging
-            case 'grid': return '#ff3300'; // red for grid
-            default: return '#aaaaaa';
-          }
+        .attr('fill', (d: any) => {
+          // Use the global NODE_COLORS for consistency
+          return NODE_COLORS[d.type] || '#aaaaaa';
         });
     });
 

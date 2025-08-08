@@ -341,7 +341,7 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
           .attr('r', 8)
           .attr('cx', 25)
           .attr('cy', -25)
-          .attr('fill', '#10B981');
+          .attr('fill', NODE_COLORS['grid']); // Use global color for grid indicator
       }
     });
 
