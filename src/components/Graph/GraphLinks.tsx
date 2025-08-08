@@ -43,9 +43,10 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
     if (currentDataKey === lastDataRef.current && container.selectAll('.link').size() > 0) {
       // Even if structure hasn't changed, we still need to update the visual properties
       // for the current hour and update the tick function
+      const existingBackgroundLinks = container.selectAll('.background-link');
       const existingLinks = container.selectAll('.link');
       
-      // Update visual properties based on current hour flow values
+      // Update visual properties for the animated flow lines
       existingLinks
         .attr('stroke-opacity', (d: any) => {
           const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
@@ -57,9 +58,9 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
         .attr('stroke-width', (d: any) => {
           const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
           if (flowValue === 0) return 0;
-          // Subtle width variation (2-4px range)
+          // Thicker particle lines (3-6px range)
           const normalizedFlow = Math.min(flowValue / 10, 1);
-          return 2 + (normalizedFlow * 2);
+          return 3 + (normalizedFlow * 3);
         })
         .attr('stroke', (d: any) => {
           const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
@@ -97,7 +98,15 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
         });
       
       const updateLinkPositions = () => {
+        // Update animated particle lines
         existingLinks
+          .attr('x1', (d: any) => d.source.x)
+          .attr('y1', (d: any) => d.source.y)
+          .attr('x2', (d: any) => d.target.x)
+          .attr('y2', (d: any) => d.target.y);
+        
+        // Update solid background lines
+        existingBackgroundLinks
           .attr('x1', (d: any) => d.source.x)
           .attr('y1', (d: any) => d.source.y)
           .attr('x2', (d: any) => d.target.x)
@@ -118,12 +127,22 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
     const linksContainer = container.append('g')
       .attr('class', 'links-container');
 
-    // Create link lines using simulation's link data
-    const linkSelection = linksContainer
-      .selectAll('line')
+    // Create background solid lines (always visible)
+    const backgroundLinks = linksContainer
+      .selectAll('.background-link')
       .data(linkData)
       .enter().append('line')
-      .attr('stroke-dasharray', '12 12')
+      .attr('class', 'background-link')
+      .attr('stroke', '#777')
+      .attr('stroke-opacity', 0.1)
+      .attr('stroke-width', 1);
+      
+    // Create animated particle lines on top for showing energy flow
+    const linkSelection = linksContainer
+      .selectAll('.link')
+      .data(linkData)
+      .enter().append('line')
+      .attr('stroke-dasharray', '5 50') // Larger particle-like dashed line for all links
       .attr('stroke-opacity', d => {
         const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
         if (flowValue === 0) return 0;
@@ -134,9 +153,9 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
       .attr('stroke-width', d => {
         const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
         if (flowValue === 0) return 0;
-        // Subtle width variation (2-4px range)
+        // Thicker particle lines (3-6px range)
         const normalizedFlow = Math.min(flowValue / 10, 1);
-        return 2 + (normalizedFlow * 2);
+        return 3 + (normalizedFlow * 3);
       })
       .attr('stroke', d => {
         const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
@@ -180,7 +199,7 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
         
         // Enhanced hover effect
         d3.select(this)
-          .attr('stroke-width', Math.max(4, parseInt(d3.select(this).attr('stroke-width')) * 1.5))
+          .attr('stroke-width', Math.max(6, parseInt(d3.select(this).attr('stroke-width')) * 1.5))
           .style('filter', 'brightness(1.3) drop-shadow(0 0 8px currentColor)');
         
         // Show link tooltip - use nodeData from simulation for consistent references
@@ -218,7 +237,7 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
         let originalWidth = 0;
         if (Math.abs(flowValue) > 0) {
           const normalizedFlow = Math.min(Math.abs(flowValue) / 10, 1);
-          originalWidth = 2 + (normalizedFlow * 2);
+          originalWidth = 3 + (normalizedFlow * 3);
         }
         
         d3.select(this)
@@ -230,7 +249,15 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
 
     // Update link positions on simulation tick
     const updateLinkPositions = () => {
+      // Update animated particle lines
       linkSelection
+        .attr('x1', (d: any) => d.source.x)
+        .attr('y1', (d: any) => d.source.y)
+        .attr('x2', (d: any) => d.target.x)
+        .attr('y2', (d: any) => d.target.y);
+      
+      // Update solid background lines  
+      backgroundLinks
         .attr('x1', (d: any) => d.source.x)
         .attr('y1', (d: any) => d.source.y)
         .attr('x2', (d: any) => d.target.x)
