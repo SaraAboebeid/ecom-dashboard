@@ -338,48 +338,61 @@ export const SankeyDrawer: React.FC<SankeyDrawerProps> = ({ isOpen, onClose, dat
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
-    // Define node layout parameters
-    const nodeWidth = 20; // Make nodes narrower to fit more
-    const nodeMargin = 10;
-    const nodeTypes = ['pv', 'battery', 'building', 'charge_point', 'grid'];
-    
+    // Define node layout parameters (more compact)
+    const nodeWidth = isFullscreen ? 72 : 54;
+    const nodeMargin = 8;
+    // Decide column order dynamically: keep PV and GRID on same (left) side unless building exports to grid this hour
+    const hasBuildingToGridExport = data.links?.some(link => {
+      if (!link.flow || !Array.isArray(link.flow) || link.flow.length <= currentHour) return false;
+      const v = link.flow[currentHour];
+      if (v <= 0) return false;
+      const src = data.nodes.find(n => n.id === link.source);
+      const tgt = data.nodes.find(n => n.id === link.target);
+      return src?.type === 'building' && tgt?.type === 'grid';
+    }) || false;
+
+    const nodeTypesOrdered = hasBuildingToGridExport
+      ? ['pv', 'battery', 'building', 'charge_point', 'grid'] // grid on right if exporting
+      : ['grid', 'pv', 'building', 'charge_point', 'battery']; // grid left with PV when importing only
+
     // Group nodes by type
     const nodesByType: Record<string, SankeyNode[]> = {};
     for (const node of sankeyData.nodes) {
-      if (!nodesByType[node.type]) {
-        nodesByType[node.type] = [];
-      }
+      if (!nodesByType[node.type]) nodesByType[node.type] = [];
       nodesByType[node.type].push(node);
     }
-    
+
     // Sort nodes within each type by value
-    Object.values(nodesByType).forEach(nodes => {
-      nodes.sort((a, b) => b.value - a.value);
+    Object.values(nodesByType).forEach(arr => {
+      (arr as SankeyNode[]).sort((a, b) => b.value - a.value);
     });
     
     // Calculate column positions for each type
-    const totalWidth = width - 80;
-    const typeCount = Object.keys(nodesByType).length;
-    
+    const totalWidth = width - (isFullscreen ? 160 : 120); // More margin in fullscreen
+    const presentTypes = nodeTypesOrdered.filter(type => nodesByType[type] && nodesByType[type].length > 0);
+    const count = presentTypes.length;
+
     // Column positions for each type (sorted by preferred order)
     const typePositions: Record<string, number> = {};
-    nodeTypes.filter(type => nodesByType[type] && nodesByType[type].length > 0)
-      .forEach((type, i) => {
-        typePositions[type] = (i * totalWidth / (typeCount - 1)) + 40;
-      });
+    presentTypes.forEach((type, i) => {
+      typePositions[type] = (i * totalWidth / Math.max(1, count - 1)) + (isFullscreen ? 80 : 60);
+    });
     
     // Position nodes within their type columns
-    Object.entries(nodesByType).forEach(([type, nodes]) => {
+    Object.entries(nodesByType).forEach(([type, list]) => {
+      if (typePositions[type] === undefined) return; // Type not displayed this hour
       const xPos = typePositions[type];
-      const totalNodesInColumn = nodes.length;
+      const nodesArr = list as SankeyNode[];
+      const totalNodesInColumn = nodesArr.length;
       
-      // Calculate vertical spacing - adjust based on fullscreen state
-      const totalHeight = height - 40;
-      const maxSpacing = isFullscreen ? 50 : 30; // More space in fullscreen mode
-      const verticalSpacing = Math.min(maxSpacing, totalHeight / Math.max(1, totalNodesInColumn + 1));
-      const startY = (height - ((totalNodesInColumn - 1) * verticalSpacing)) / 2;
+      // Calculate vertical spacing - compact to keep everything visible
+      const totalHeight = height - (isFullscreen ? 120 : 100);
+      const maxSpacing = isFullscreen ? 160 : 100; // tighter spacing
+      const available = totalHeight / Math.max(1, totalNodesInColumn + 1);
+      const verticalSpacing = Math.min(maxSpacing, available);
+      const startY = (isFullscreen ? 60 : 50) + (totalHeight - ((totalNodesInColumn - 1) * verticalSpacing)) / 2;
       
-      nodes.forEach((node, i) => {
+      nodesArr.forEach((node, i) => {
         node.x = xPos;
         node.y = startY + (i * verticalSpacing);
       });
@@ -388,10 +401,10 @@ export const SankeyDrawer: React.FC<SankeyDrawerProps> = ({ isOpen, onClose, dat
     // Calculate the maximum link value for scaling
     const maxLinkValue = d3.max(sankeyData.links, d => d.value) || 1;
     
-    // Scale for link thickness - use thinner links for individual entities view
+    // Scale for link thickness - more compact
     const linkWidthScale = d3.scaleLinear()
       .domain([0, maxLinkValue])
-      .range([1, 15]); // Min and max link widths
+      .range([1, 12]); // Min and max link widths
 
     // Calculate link positions
     sankeyData.links.forEach(link => {
@@ -448,10 +461,9 @@ export const SankeyDrawer: React.FC<SankeyDrawerProps> = ({ isOpen, onClose, dat
         return `${sourceNode?.name || d.source} → ${targetNode?.name || d.target}: ${d.value.toFixed(2)} kWh`;
       });
 
-    // Calculate node height based on value but with reasonable constraints
+    // Calculate node height based on value but with compact constraints
     const getNodeHeight = (value: number) => {
-      // Make nodes smaller to fit more in the container
-      return Math.max(20, Math.min(40, value / maxLinkValue * 60));
+      return Math.max(14, Math.min(28, value / maxLinkValue * 42));
     };
 
     // Draw nodes as rectangles with icons
@@ -509,49 +521,53 @@ export const SankeyDrawer: React.FC<SankeyDrawerProps> = ({ isOpen, onClose, dat
     // Add node type indicators (small dots with different colors)
     nodeGroups.each(function(this: SVGGElement, d: SankeyNode) {
       const g = d3.select(this);
-      // Simple colored dot indicator at the top of each node
+      // Move the dot to the top-left to avoid overlapping centered labels
       g.append('circle')
-        .attr('cx', nodeWidth / 2)
-        .attr('cy', 4)
+        .attr('cx', 8)
+        .attr('cy', 8)
         .attr('r', 3)
         .attr('fill', (d: any) => {
-          // Use the global NODE_COLORS for consistency
           return NODE_COLORS[d.type] || '#aaaaaa';
         });
     });
 
-    // Add abbreviated node labels
+    // Add abbreviated node labels (inside rectangle, top)
     nodeGroups.append('text')
       .attr('x', nodeWidth / 2)
-      .attr('y', d => getNodeHeight(d.value) + 10)
+      .attr('y', 3)
       .attr('text-anchor', 'middle')
-      .attr('fill', isDarkMode ? '#e5e7eb' : '#374151')
-      .attr('font-size', '8px')
+      .attr('dominant-baseline', 'hanging')
+      .attr('fill', '#ffffff')
+      .attr('font-size', isFullscreen ? '10px' : '8px')
       .attr('font-weight', 'bold')
+      .style('pointer-events', 'none')
+      .style('display', d => getNodeHeight(d.value) >= 16 ? 'block' : 'none')
       .text(d => {
-        // Truncate and abbreviate node names
-        if (d.name.length <= 6) return d.name;
+        const maxLength = isFullscreen ? 12 : 9;
+        if (d.name.length <= maxLength) return d.name;
         const words = d.name.split(/\s+/);
         if (words.length > 1) {
-          // Use first letters of multiple words
-          return words.map(w => w[0]).join('');
+          const firstWord = words[0];
+          if (firstWord.length <= maxLength - 2) {
+            return firstWord + ' ' + words[1][0];
+          }
+          return firstWord.substring(0, maxLength - 2) + '..';
         }
-        // Otherwise truncate
-        return d.name.substring(0, 6) + '...';
+        return d.name.substring(0, maxLength) + '..';
       })
-      .append('title') // Full name on hover
+      .append('title')
       .text(d => d.name);
 
-    // Add compact node values
+    // Add compact node values (inside rectangle, bottom)
     nodeGroups.append('text')
       .attr('x', nodeWidth / 2)
-      .attr('y', d => getNodeHeight(d.value) / 2 + 3)
+      .attr('y', d => Math.max(10, getNodeHeight(d.value) - 3))
       .attr('text-anchor', 'middle')
+      .attr('dominant-baseline', 'ideographic')
       .attr('fill', 'white')
       .attr('font-size', '8px')
       .attr('font-weight', 'bold')
       .text(d => {
-        // Format the number for display
         if (d.value < 1) return d.value.toFixed(1);
         if (d.value < 10) return Math.round(d.value).toString();
         if (d.value < 1000) return Math.round(d.value).toString();
@@ -586,7 +602,7 @@ export const SankeyDrawer: React.FC<SankeyDrawerProps> = ({ isOpen, onClose, dat
     // Add hour label
     svg.append('text')
       .attr('x', width)
-      .attr('y', height - 10)
+      .attr('y', height - (isFullscreen ? 30 : 20)) // More space from bottom in fullscreen
       .attr('text-anchor', 'end')
       .attr('fill', isDarkMode ? '#e5e7eb' : '#374151')
       .attr('font-size', '14px')
