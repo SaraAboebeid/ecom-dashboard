@@ -41,9 +41,11 @@ export const FIXED_NODE_POSITIONS: Record<string, { x: number; y: number }> = {
   'IT': { x: 140.424, y: 1157.231 },
   'CA-Huset': { x: 136.279, y: 463.660 },
   'Reaktorfysik': { x: 244.771, y: 411.121 },
-  'CSB Gibraltarvallen': { x: 427.087, y: 559.410 },
+  'CSB Gibraltarvallen guesthouse': { x: 427.087, y: 559.410 },
   'Vasa 4': { x: 247.271, y: 258.770 },
   'Vasa 7': { x: 245.196, y: 236.308 },
+  'Vasa 15': { x: 381.065, y: 334.557 },
+  'PV-Plant': { x: 195.531, y: 1079.886 },
 };
 
 /**
