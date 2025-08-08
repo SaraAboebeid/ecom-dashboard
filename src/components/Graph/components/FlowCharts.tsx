@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { Link, Node } from '../../../types';
 
@@ -13,6 +13,24 @@ interface FlowChartsProps {
 export const FlowCharts: React.FC<FlowChartsProps> = ({ node, links }) => {
   const incomingSvgRef = useRef<SVGSVGElement>(null);
   const outgoingSvgRef = useRef<SVGSVGElement>(null);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => 
+    document.documentElement.classList.contains('dark')
+  );
+
+  // Update charts when theme changes
+  useEffect(() => {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          const isDark = document.documentElement.classList.contains('dark');
+          setIsDarkMode(isDark);
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!node || !links || links.length === 0) return;
@@ -54,7 +72,7 @@ export const FlowCharts: React.FC<FlowChartsProps> = ({ node, links }) => {
     if (outgoingLinks.length > 0) {
       drawLineChart(outgoingSvgRef.current, outgoingFlowsByHour, '#FF4500', 'Outgoing');
     }
-  }, [node, links]);
+  }, [node, links, isDarkMode]);
 
   // D3 chart drawing function
   const drawLineChart = (svgElement: SVGSVGElement | null, data: number[], color: string, label: string) => {
@@ -62,6 +80,9 @@ export const FlowCharts: React.FC<FlowChartsProps> = ({ node, links }) => {
 
     // Clear previous chart
     d3.select(svgElement).selectAll('*').remove();
+
+    // Use isDarkMode state
+    const textColor = isDarkMode ? '#e5e7eb' : '#374151'; // gray-200 for dark, gray-700 for light
 
     const width = svgElement.clientWidth || 250;
     const height = svgElement.clientHeight || 150;
@@ -96,12 +117,14 @@ export const FlowCharts: React.FC<FlowChartsProps> = ({ node, links }) => {
     g.append('g')
       .attr('transform', `translate(0,${innerHeight})`)
       .call(d3.axisBottom(x).ticks(6).tickFormat((d: any) => `${d}h`))
-      .attr('class', 'text-xs');
+      .attr('class', 'text-xs')
+      .attr('color', textColor);
 
     // Add the Y axis
     g.append('g')
       .call(d3.axisLeft(y).ticks(5))
-      .attr('class', 'text-xs');
+      .attr('class', 'text-xs')
+      .attr('color', textColor);
 
     // Add the line path
     g.append('path')
@@ -129,6 +152,7 @@ export const FlowCharts: React.FC<FlowChartsProps> = ({ node, links }) => {
       .attr('y', 0)
       .attr('text-anchor', 'middle')
       .attr('class', 'text-sm font-semibold')
+      .attr('fill', textColor)
       .text(`${label} Flow`);
 
     // Add units
@@ -136,13 +160,14 @@ export const FlowCharts: React.FC<FlowChartsProps> = ({ node, links }) => {
       .attr('x', -margin.left + 10)
       .attr('y', -5)
       .attr('text-anchor', 'start')
-      .attr('class', 'text-xs text-gray-500')
+      .attr('fill', isDarkMode ? '#9ca3af' : '#6b7280') // gray-400 for dark, gray-500 for light
+      .attr('class', 'text-xs')
       .text('kWh');
   };
 
   return (
     <div className="flow-charts space-y-6 mt-6">
-      <h3 className="text-sm font-semibold">Energy Flows (24h)</h3>
+      <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Energy Flows (24h)</h3>
       
       <div>
         <svg ref={incomingSvgRef} className="w-full h-[150px]"></svg>
