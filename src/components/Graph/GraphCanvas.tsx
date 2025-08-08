@@ -114,6 +114,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           y={0}
           width={imageWidth}
           height={imageHeight}
+          opacity="0.5"
           transform={`rotate(${COMPASS_ORIENTATION} ${imageCenter.x} ${imageCenter.y})`}
         />
 
