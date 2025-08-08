@@ -56,15 +56,7 @@ export const DashboardHeader = ({ data, currentHour }: DashboardHeaderProps) => 
         .filter(n => n.type === 'charge_point' && n.is_v2g).length,
       totalEnergyDemand: data.nodes
         .filter(n => n.type === 'building')
-        .reduce((sum, n) => sum + (n.total_energy_demand || 0), 0),
-      owners: [...new Set(data.nodes.flatMap(n => {
-        const owners: string[] = [];
-        if (n.owner) owners.push(n.owner);
-        if (n.VALID_OWNERS && Array.isArray(n.VALID_OWNERS)) {
-          owners.push(...n.VALID_OWNERS);
-        }
-        return owners;
-      }))].length
+        .reduce((sum, n) => sum + (n.total_energy_demand || 0), 0)
     };
 
     return kpis;
@@ -146,11 +138,6 @@ export const DashboardHeader = ({ data, currentHour }: DashboardHeaderProps) => 
                     {data.kpis ? formatPercentage(data.kpis.self_sufficiency) : 'N/A'}
                   </p>
                 </div>
-
-                <div className="bg-green-50 dark:bg-green-900/20 rounded px-6 py-1">
-                  <p className="text-xs text-green-600 dark:text-green-400">Owners</p>
-                  <p className="text-xl font-bold text-green-700 dark:text-green-300 text-center">{kpis.owners}</p>
-                </div>
               </div>
             )}
 
@@ -174,7 +161,7 @@ export const DashboardHeader = ({ data, currentHour }: DashboardHeaderProps) => 
 
           {/* Mobile Stats (hidden on large screens) */}
           {kpis && (
-            <div className="mt-2 grid grid-cols-3 sm:grid-cols-6 gap-2 lg:hidden">
+            <div className="mt-2 grid grid-cols-3 sm:grid-cols-5 gap-2 lg:hidden">
               <div className="bg-gray-50 dark:bg-gray-700 rounded p-2">
                 <p className="text-xs text-gray-500 dark:text-gray-400">Assets</p>
                 <p className="text-sm font-bold text-gray-900 dark:text-white">{kpis.totalNodes}</p>
@@ -202,13 +189,8 @@ export const DashboardHeader = ({ data, currentHour }: DashboardHeaderProps) => 
               <div className="bg-blue-50 dark:bg-blue-900/20 rounded p-2">
                 <p className="text-xs text-blue-600 dark:text-blue-400">Self-Sufficiency</p>
                 <p className="text-sm font-bold text-blue-700 dark:text-blue-300">
-                  {data.kpis ? formatPercentage(data.kpis.self_sufficiency) : 'N/A'}
+                  {data?.kpis ? formatPercentage(data.kpis.self_sufficiency) : 'N/A'}
                 </p>
-              </div>
-              
-              <div className="bg-green-50 dark:bg-green-900/20 rounded p-2">
-                <p className="text-xs text-green-600 dark:text-green-400">Owners</p>
-                <p className="text-sm font-bold text-green-700 dark:text-green-300">{kpis.owners}</p>
               </div>
             </div>
           )}
