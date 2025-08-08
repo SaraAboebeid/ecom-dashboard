@@ -16,7 +16,7 @@ const FLOW_CONFIG = {
   MAX_FLOW_VALUE: 20,     // Maximum flow value for normalization (kW)
   
   // Particle pattern (dash = gap for square particles)
-  PARTICLE_SIZE: 8,       // Size of each particle (px)
+  PARTICLE_SIZE: 5,       // Size of each particle (px)
   
   // Speed thresholds
   FAST_THRESHOLD: 3,      // Flow value for fast animation (kW)

@@ -5,6 +5,7 @@ import { useGraphDimensions } from '../../hooks/useGraphDimensions';
 import { useGraphTooltip } from '../../hooks/useGraphTooltip';
 import { GraphCanvas } from './GraphCanvas';
 import { NodeDetailsPanel } from './NodeDetailsPanel';
+import { getScaledImageDimensions } from '../../utils/backgroundConfig';
 import '../../simple-animations.css';
 import * as d3 from 'd3';
 
@@ -69,20 +70,29 @@ export const Graph: React.FC<GraphProps> = ({
     
     if (nodes.length === 0) return;
     
-    const padding = 120;
-    // Use initial positions or simulate positions if needed
-    const minX = Math.min(...nodes.map(d => d.x || 0)) - padding;
-    const maxX = Math.max(...nodes.map(d => d.x || 0)) + padding;
-    const minY = Math.min(...nodes.map(d => d.y || 0)) - padding;
-    const maxY = Math.max(...nodes.map(d => d.y || 0)) + padding;
+    // Try to get node positions from the simulation if available
+    let nodePositions = nodes;
+    
+    // If we have access to the simulation, get the current node positions
+    if ((window as any).graphSimulation) {
+      const simNodes = (window as any).graphSimulation.nodes();
+      nodePositions = simNodes.length > 0 ? simNodes : nodes;
+    }
+    
+    const padding = 150;
+    // Get the bounds of all nodes
+    const minX = Math.min(...nodePositions.map(d => d.x || 0)) - padding;
+    const maxX = Math.max(...nodePositions.map(d => d.x || 0)) + padding;
+    const minY = Math.min(...nodePositions.map(d => d.y || 0)) - padding;
+    const maxY = Math.max(...nodePositions.map(d => d.y || 0)) + padding;
     
     const graphWidth = maxX - minX;
     const graphHeight = maxY - minY;
     
     // Calculate scale to fit the graph with some margin
-    const scaleX = (dimensions.width * 0.8) / graphWidth;
-    const scaleY = (dimensions.height * 0.8) / graphHeight;
-    const scale = Math.min(scaleX, scaleY, 0.7); // Max scale of 0.7
+    const scaleX = (dimensions.width * 0.9) / graphWidth;
+    const scaleY = (dimensions.height * 0.9) / graphHeight;
+    const scale = Math.min(scaleX, scaleY, 3); // Use the new max scale limit
     
     // Calculate translation to center the graph
     const translateX = (dimensions.width - graphWidth * scale) / 2 - minX * scale;
@@ -92,38 +102,60 @@ export const Graph: React.FC<GraphProps> = ({
       .translate(translateX, translateY)
       .scale(scale);
     
-    // Create a temporary zoom behavior just for this transform if needed
-    // We're not storing this zoom instance as it's just for the transform
-    const tempZoom = d3.zoom<SVGSVGElement, unknown>()
-      .scaleExtent([0.5, 3])
+    // Get the existing zoom behavior from the simulation
+    const zoom = d3.zoom<SVGSVGElement, unknown>()
+      .scaleExtent([0.1, 5])
       .on('zoom', (event) => {
         const g = d3.select(svgRef.current!.querySelector('g'));
         g.attr('transform', event.transform);
       });
     
-    svg.call(tempZoom as any)
-       .transition()
+    // Apply the zoom behavior and transform
+    svg.call(zoom as any);
+    svg.transition()
        .duration(1500)
        .ease(d3.easeQuadOut)
-       .call(tempZoom.transform as any, optimizedTransform);
-       
-    // This fix makes sure our zoom events keep working after fitting
-    tempZoom.on('end', () => {
-      // Re-enable the original zoom behavior after transition completes
-      svg.on('.zoom', null); // Clear any zoom handlers
-      
-      // Re-initialize the original zoom behavior
-      const newZoom = d3.zoom<SVGSVGElement, unknown>()
-        .scaleExtent([0.5, 3])
-        .on('zoom', (event) => {
-          const g = d3.select(svgRef.current!.querySelector('g'));
-          g.attr('transform', event.transform);
-        });
-      
-      svg.call(newZoom as any)
-         .call(newZoom.transform as any, optimizedTransform);
-    });
+       .call(zoom.transform as any, optimizedTransform);
   }, [processedData.nodes, dimensions]);
+
+  // Function to fit to background image bounds
+  const fitToImageBounds = useCallback(() => {
+    if (!svgRef.current) return;
+    
+    const svg = d3.select(svgRef.current);
+    const imageSize = getScaledImageDimensions();
+    
+    // Calculate scale to fit the background image with some padding - more zoomed in
+    const padding = 50; // Reduced padding for closer view
+    const scaleX = (dimensions.width - padding * 2) / imageSize.width;
+    const scaleY = (dimensions.height - padding * 2) / imageSize.height;
+    const scale = Math.min(scaleX, scaleY, 1.2); // Allow slightly more zoom in
+    
+    // Better centering calculation
+    const translateX = (dimensions.width - imageSize.width * scale) / 2;
+    const translateY = (dimensions.height - imageSize.height * scale) / 2;
+    
+    // Adjust for better centering - move slightly right and down for better composition
+    const centeringAdjustX = dimensions.width * 0.05; // Move 5% right
+    const centeringAdjustY = dimensions.height * 0.02; // Move 2% down
+    
+    const transform = d3.zoomIdentity
+      .translate(translateX + centeringAdjustX, translateY + centeringAdjustY)
+      .scale(scale);
+    
+    const zoom = d3.zoom<SVGSVGElement, unknown>()
+      .scaleExtent([0.1, 5])
+      .on('zoom', (event) => {
+        const g = d3.select(svgRef.current!.querySelector('g'));
+        g.attr('transform', event.transform);
+      });
+    
+    svg.call(zoom as any);
+    svg.transition()
+       .duration(1500)
+       .ease(d3.easeQuadOut)
+       .call(zoom.transform as any, transform);
+  }, [dimensions]);
 
   // Expose fitGraphToView function to parent component
   useEffect(() => {

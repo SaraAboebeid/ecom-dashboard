@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { GraphData, Node } from '../types';
 import { applyFixedPositions } from '../utils/nodePositioning';
+import { getScaledImageDimensions } from '../utils/backgroundConfig';
 
 interface UseGraphSimulationProps {
   svgRef: React.RefObject<SVGSVGElement | null>;
@@ -69,6 +70,9 @@ export const useGraphSimulation = ({
 
     simulationRef.current = simulation;
     
+    // Store simulation globally for fit-to-view access
+    (window as any).graphSimulation = simulation;
+    
     // Store link data on simulation for component access
     // Node data can be accessed directly via simulation.nodes()
     (simulation as any).linkData = linkData;
@@ -76,7 +80,7 @@ export const useGraphSimulation = ({
     // Add zoom behavior only once
     if (!zoomInitializedRef.current) {
       const zoom = d3.zoom()
-        .scaleExtent([0.5, 3])
+        .scaleExtent([0.1, 5]) // Increased zoom range for better flexibility
         .on('zoom', (event) => {
           container.attr('transform', event.transform);
         });
@@ -87,46 +91,26 @@ export const useGraphSimulation = ({
       svg.call(zoom as any);
       zoomInitializedRef.current = true;
 
-      // Only apply initial zoom on first setup
-      const initialScale = 0.6;
+      // Set initial view to fit the background image bounds
+      const imageSize = getScaledImageDimensions();
+      
+      // Calculate scale to fit the background image with some padding - more zoomed in
+
+      const fitScale = 0.5; // Allow slightly more zoom in
+      
+      // Better centering calculation - account for image rotation and positioning
+      const translateX = (width - imageSize.width * fitScale) / 2;
+      const translateY = (height - imageSize.height * fitScale) / 2;
+      
+      // Adjust for better centering - move slightly right and down for better composition
+      const centeringAdjustX = width * 0.63; // left right
+      const centeringAdjustY = height * -0.01; // Move 2% down
+      
       const initialTransform = d3.zoomIdentity
-        .translate(width * 0.15, height * 0.15)
-        .scale(initialScale);
+        .translate(translateX + centeringAdjustX, translateY + centeringAdjustY)
+        .scale(fitScale);
       
       svg.call(zoom.transform as any, initialTransform);
-
-      // Set a better zoom after nodes have settled - only on first load
-      setTimeout(() => {
-        const nodes = nodeData as any[];
-        if (nodes.length === 0) return;
-        
-        const padding = 120;
-        const minX = Math.min(...nodes.map(d => d.x || 0)) - padding;
-        const maxX = Math.max(...nodes.map(d => d.x || 0)) + padding;
-        const minY = Math.min(...nodes.map(d => d.y || 0)) - padding;
-        const maxY = Math.max(...nodes.map(d => d.y || 0)) + padding;
-        
-        const graphWidth = maxX - minX;
-        const graphHeight = maxY - minY;
-        
-        // Calculate scale to fit the graph with some margin
-        const scaleX = (width * 0.8) / graphWidth;
-        const scaleY = (height * 0.8) / graphHeight;
-        const scale = Math.min(scaleX, scaleY, 0.7);
-        
-        // Calculate translation to center the graph
-        const translateX = (width - graphWidth * scale) / 2 - minX * scale;
-        const translateY = (height - graphHeight * scale) / 2 - minY * scale;
-        
-        const optimizedTransform = d3.zoomIdentity
-          .translate(translateX, translateY)
-          .scale(scale);
-        
-        svg.transition()
-          .duration(1500)
-          .ease(d3.easeQuadOut)
-          .call(zoom.transform as any, optimizedTransform);
-      }, 1000);
     }
 
     // Cleanup function
