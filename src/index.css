@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Prevent page scrolling and ensure full viewport usage */
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
 /* Energy flow animations */
 @keyframes flow {
   0% {
