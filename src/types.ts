@@ -33,9 +33,25 @@ export interface Link {
   flow: number[];  // Array of 48 hourly values
 }
 
+export interface GraphKPIs {
+  total_demand: number;
+  total_grid_import: number;
+  total_grid_export: number;
+  total_pv_used: number;
+  total_pv_gen: number;
+  self_sufficiency: number;
+  self_consumption: number;
+  avg_grid_carbon_intensity: number;
+  total_grid_carbon_import: number;
+  avg_grid_price_import: number;
+  avg_building_self_consumption: number;
+  building_self_consumption: Record<string, number>;
+}
+
 export interface GraphData {
   nodes: Node[];
   links: Link[];
+  kpis?: GraphKPIs;
 }
 
 export interface GraphState {

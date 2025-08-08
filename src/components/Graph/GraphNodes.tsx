@@ -95,9 +95,6 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
         onNodeClick(d);
       })
       .on('mouseover', function(this: SVGGElement, event: MouseEvent, d: Node) {
-        // Temporarily disabled
-        return;
-
         // Don't show tooltip if panel is open
         if (selectedNode) return;
         

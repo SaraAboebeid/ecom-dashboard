@@ -4,6 +4,20 @@ interface DashboardHeaderProps {
   data?: {
     nodes: any[];
     links: any[];
+    kpis?: {
+      total_demand: number;
+      total_grid_import: number;
+      total_grid_export: number;
+      total_pv_used: number;
+      total_pv_gen: number;
+      self_sufficiency: number;
+      self_consumption: number;
+      avg_grid_carbon_intensity: number;
+      total_grid_carbon_import: number;
+      avg_grid_price_import: number;
+      avg_building_self_consumption: number;
+      building_self_consumption: Record<string, number>;
+    };
   };
   currentHour: number;
   onKPICalculated?: (kpis: {
@@ -68,11 +82,20 @@ export const DashboardHeader = ({ data, currentHour }: DashboardHeaderProps) => 
 
   const formatNumber = (num: number, unit = '') => {
     if (num >= 1000000) {
-      return `${(num / 1000000).toFixed(1)}M${unit}`;
+      return `${(num / 1000000).toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}M${unit}`;
     } else if (num >= 1000) {
-      return `${(num / 1000).toFixed(1)}k${unit}`;
+      return `${(num / 1000).toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}k${unit}`;
     }
-    return `${num.toFixed(1)}${unit}`;
+    return `${num.toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}${unit}`;
+  };
+  
+  const formatEnergyToMWh = (kWh: number) => {
+    const mWh = kWh / 1000;
+    return `${mWh.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} MWh`;
+  };
+  
+  const formatPercentage = (value: number) => {
+    return `${value.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}%`;
   };
 
   return (
@@ -111,15 +134,17 @@ export const DashboardHeader = ({ data, currentHour }: DashboardHeaderProps) => 
                     {formatNumber(kpis.totalBatteryCapacity, 'Wh')}
                   </p>
                 </div>
-                
-                <div className="bg-orange-50 dark:bg-orange-900/20 rounded px-6 py-1">
-                  <p className="text-xs text-orange-600 dark:text-orange-400">EV</p>
-                  <p className="text-xl font-bold text-orange-700 dark:text-orange-300 text-center">{kpis.totalChargePoints}</p>
-                </div>
 
                 <div className="bg-purple-50 dark:bg-purple-900/20 rounded px-6 py-1">
                   <p className="text-xs text-purple-600 dark:text-purple-400">Buildings</p>
                   <p className="text-xl font-bold text-purple-700 dark:text-purple-300 text-center">{kpis.buildingNodes}</p>
+                </div>
+
+                <div className="bg-blue-50 dark:bg-blue-900/20 rounded px-6 py-1">
+                  <p className="text-xs text-blue-600 dark:text-blue-400">Self-Sufficiency</p>
+                  <p className="text-xl font-bold text-blue-700 dark:text-blue-300 text-center">
+                    {data.kpis ? formatPercentage(data.kpis.self_sufficiency) : 'N/A'}
+                  </p>
                 </div>
 
                 <div className="bg-green-50 dark:bg-green-900/20 rounded px-6 py-1">
@@ -169,14 +194,16 @@ export const DashboardHeader = ({ data, currentHour }: DashboardHeaderProps) => 
                 </p>
               </div>
               
-              <div className="bg-orange-50 dark:bg-orange-900/20 rounded p-2">
-                <p className="text-xs text-orange-600 dark:text-orange-400">EV</p>
-                <p className="text-sm font-bold text-orange-700 dark:text-orange-300">{kpis.totalChargePoints}</p>
-              </div>
-              
               <div className="bg-purple-50 dark:bg-purple-900/20 rounded p-2">
                 <p className="text-xs text-purple-600 dark:text-purple-400">Buildings</p>
                 <p className="text-sm font-bold text-purple-700 dark:text-purple-300">{kpis.buildingNodes}</p>
+              </div>
+              
+              <div className="bg-blue-50 dark:bg-blue-900/20 rounded p-2">
+                <p className="text-xs text-blue-600 dark:text-blue-400">Self-Sufficiency</p>
+                <p className="text-sm font-bold text-blue-700 dark:text-blue-300">
+                  {data.kpis ? formatPercentage(data.kpis.self_sufficiency) : 'N/A'}
+                </p>
               </div>
               
               <div className="bg-green-50 dark:bg-green-900/20 rounded p-2">
@@ -217,7 +244,63 @@ export const DashboardHeader = ({ data, currentHour }: DashboardHeaderProps) => 
                   </div>
                 </div>
 
-                {/* Capacity Summary */}
+                {/* Energy Summary */}
+                <div className="space-y-2">
+                  <h4 className="text-sm font-medium text-gray-900 dark:text-white">Energy</h4>
+                  <div className="space-y-1 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-300">Total Demand:</span>
+                      <span className="font-medium">{data.kpis ? formatEnergyToMWh(data.kpis.total_demand) : 'N/A'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-300">Grid Import:</span>
+                      <span className="font-medium">{data.kpis ? formatEnergyToMWh(data.kpis.total_grid_import) : 'N/A'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-300">Grid Export:</span>
+                      <span className="font-medium">{data.kpis ? formatEnergyToMWh(data.kpis.total_grid_export) : 'N/A'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-300">PV Generated:</span>
+                      <span className="font-medium">{data.kpis ? formatEnergyToMWh(data.kpis.total_pv_gen) : 'N/A'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-300">PV Used:</span>
+                      <span className="font-medium">{data.kpis ? formatEnergyToMWh(data.kpis.total_pv_used) : 'N/A'}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Efficiency Summary */}
+                <div className="space-y-2">
+                  <h4 className="text-sm font-medium text-gray-900 dark:text-white">Efficiency</h4>
+                  <div className="space-y-1 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-300">Self-Sufficiency:</span>
+                      <span className="font-medium">{data.kpis ? formatPercentage(data.kpis.self_sufficiency) : 'N/A'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-300">Self-Consumption:</span>
+                      <span className="font-medium">{data.kpis ? formatPercentage(data.kpis.self_consumption) : 'N/A'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-300">Avg. Building Self-Consumption:</span>
+                      <span className="font-medium">{data.kpis ? formatPercentage(data.kpis.avg_building_self_consumption) : 'N/A'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-300">Grid Carbon Intensity:</span>
+                      <span className="font-medium">{data.kpis ? formatNumber(data.kpis.avg_grid_carbon_intensity) : 'N/A'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-300">Grid Carbon Import:</span>
+                      <span className="font-medium">{data.kpis ? formatNumber(data.kpis.total_grid_carbon_import) : 'N/A'}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Additional Capacity Section */}
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="space-y-2">
                   <h4 className="text-sm font-medium text-gray-900 dark:text-white">Capacity</h4>
                   <div className="space-y-1 text-xs">
@@ -251,6 +334,17 @@ export const DashboardHeader = ({ data, currentHour }: DashboardHeaderProps) => 
                     <div className="flex justify-between">
                       <span className="text-gray-600 dark:text-gray-300">V2G Capable:</span>
                       <span className="font-medium">{kpis.v2gCapableChargers}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Pricing Summary */}
+                <div className="space-y-2">
+                  <h4 className="text-sm font-medium text-gray-900 dark:text-white">Pricing</h4>
+                  <div className="space-y-1 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600 dark:text-gray-300">Avg. Grid Price Import:</span>
+                      <span className="font-medium">{data.kpis ? formatNumber(data.kpis.avg_grid_price_import) : 'N/A'}</span>
                     </div>
                   </div>
                 </div>
