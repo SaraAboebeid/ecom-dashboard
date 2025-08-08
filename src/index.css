@@ -35,7 +35,7 @@ html, body, #root {
 /* Energy flow animations */
 @keyframes flow {
   0% {
-    stroke-dashoffset: 60; /* Sum of dash array values (10+50) */
+    stroke-dashoffset: 32; /* 2 * (8 + 8) = 2 * particle cycle for smooth animation */
   }
   100% {
     stroke-dashoffset: 0;
@@ -47,32 +47,32 @@ html, body, #root {
     stroke-dashoffset: 0;
   }
   100% {
-    stroke-dashoffset: 60; /* Sum of dash array values (10+50) */
+    stroke-dashoffset: 32; /* 2 * (8 + 8) = 2 * particle cycle for smooth animation */
   }
 }
 
 .link-flow {
-  animation: flow 4s linear infinite;
+  animation: flow 2s linear infinite; /* Faster: 4s -> 2s */
 }
 
 .link-flow-reverse {
-  animation: flow-reverse 4s linear infinite;
+  animation: flow-reverse 2s linear infinite; /* Faster: 4s -> 2s */
 }
 
 /* Fast flow animations for high energy */
 .link-flow-fast {
-  animation: flow 2.5s linear infinite;
+  animation: flow 1s linear infinite; /* Much faster: 2.5s -> 1s */
 }
 
 .link-flow-reverse-fast {
-  animation: flow-reverse 2.5s linear infinite;
+  animation: flow-reverse 1s linear infinite; /* Much faster: 2.5s -> 1s */
 }
 
 /* Slow flow animations for low energy */
 .link-flow-slow {
-  animation: flow 6s linear infinite;
+  animation: flow 3s linear infinite; /* Faster: 6s -> 3s */
 }
 
 .link-flow-reverse-slow {
-  animation: flow-reverse 6s linear infinite;
+  animation: flow-reverse 3s linear infinite; /* Faster: 6s -> 3s */
 }

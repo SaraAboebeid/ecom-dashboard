@@ -2,6 +2,31 @@ import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { GraphData } from '../../types';
 
+// Flow visualization control constants
+const FLOW_CONFIG = {
+  // Width control
+  MIN_WIDTH: 3,           // Minimum stroke width (px)
+  MAX_WIDTH: 12,          // Maximum stroke width (px)
+  
+  // Opacity control
+  MIN_OPACITY: 0.4,       // Minimum opacity
+  MAX_OPACITY: 1.0,       // Maximum opacity
+  
+  // Flow normalization
+  MAX_FLOW_VALUE: 20,     // Maximum flow value for normalization (kW)
+  
+  // Particle pattern (dash = gap for square particles)
+  PARTICLE_SIZE: 8,       // Size of each particle (px)
+  
+  // Speed thresholds
+  FAST_THRESHOLD: 3,      // Flow value for fast animation (kW)
+  SLOW_THRESHOLD: 1,      // Flow value for slow animation (kW)
+  
+  // Hover effects
+  HOVER_SCALE: 1.8,       // Scaling factor on hover
+  HOVER_MIN_WIDTH: 8,     // Minimum width on hover (px)
+} as const;
+
 interface GraphLinksProps {
   containerRef: React.RefObject<SVGGElement | null>;
   data: GraphData;
@@ -51,16 +76,16 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
         .attr('stroke-opacity', (d: any) => {
           const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
           if (flowValue === 0) return 0;
-          // Use opacity to show flow intensity (0.3 to 1.0 range)
-          const normalizedFlow = Math.min(flowValue / 10, 1); // Normalize to max 10kW
-          return 0.3 + (normalizedFlow * 0.7);
+          // Use opacity to show flow intensity
+          const normalizedFlow = Math.min(flowValue / FLOW_CONFIG.MAX_FLOW_VALUE, 1);
+          return FLOW_CONFIG.MIN_OPACITY + (normalizedFlow * (FLOW_CONFIG.MAX_OPACITY - FLOW_CONFIG.MIN_OPACITY));
         })
         .attr('stroke-width', (d: any) => {
           const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
           if (flowValue === 0) return 0;
-          // Thicker particle lines (3-6px range)
-          const normalizedFlow = Math.min(flowValue / 10, 1);
-          return 3 + (normalizedFlow * 3);
+          // Dynamic width based on flow intensity
+          const normalizedFlow = Math.min(flowValue / FLOW_CONFIG.MAX_FLOW_VALUE, 1);
+          return FLOW_CONFIG.MIN_WIDTH + (normalizedFlow * (FLOW_CONFIG.MAX_WIDTH - FLOW_CONFIG.MIN_WIDTH));
         })
         .attr('stroke', (d: any) => {
           const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
@@ -83,11 +108,12 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
           const flowValue = d.flow && d.flow[currentHour] ? d.flow[currentHour] : 0;
           if (Math.abs(flowValue) === 0) return 'link';
           
-          // Determine animation speed based on flow intensity
+          // Determine animation speed based on flow intensity using config constants
           const absFlow = Math.abs(flowValue);
           let speedClass = '';
-          if (absFlow > 5) speedClass = '-fast';
-          else if (absFlow < 1) speedClass = '-slow';
+          if (absFlow > FLOW_CONFIG.FAST_THRESHOLD) speedClass = '-fast';
+          else if (absFlow > FLOW_CONFIG.SLOW_THRESHOLD) speedClass = '';
+          else speedClass = '-slow';
           
           // Add animation class based on flow direction and speed
           return flowValue > 0 ? `link link-flow${speedClass}` : `link link-flow-reverse${speedClass}`;
@@ -142,20 +168,20 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
       .selectAll('.link')
       .data(linkData)
       .enter().append('line')
-      .attr('stroke-dasharray', '5 50') // Larger particle-like dashed line for all links
+      .attr('stroke-dasharray', `${FLOW_CONFIG.PARTICLE_SIZE} ${FLOW_CONFIG.PARTICLE_SIZE}`) // Equal dash and gap for square particles
       .attr('stroke-opacity', d => {
         const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
         if (flowValue === 0) return 0;
-        // Use opacity to show flow intensity (0.3 to 1.0 range)
-        const normalizedFlow = Math.min(flowValue / 10, 1); // Normalize to max 10kW
-        return 0.3 + (normalizedFlow * 0.7);
+        // Use opacity to show flow intensity
+        const normalizedFlow = Math.min(flowValue / FLOW_CONFIG.MAX_FLOW_VALUE, 1);
+        return FLOW_CONFIG.MIN_OPACITY + (normalizedFlow * (FLOW_CONFIG.MAX_OPACITY - FLOW_CONFIG.MIN_OPACITY));
       })
       .attr('stroke-width', d => {
         const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
         if (flowValue === 0) return 0;
-        // Thicker particle lines (3-6px range)
-        const normalizedFlow = Math.min(flowValue / 10, 1);
-        return 3 + (normalizedFlow * 3);
+        // Dynamic width based on flow intensity
+        const normalizedFlow = Math.min(flowValue / FLOW_CONFIG.MAX_FLOW_VALUE, 1);
+        return FLOW_CONFIG.MIN_WIDTH + (normalizedFlow * (FLOW_CONFIG.MAX_WIDTH - FLOW_CONFIG.MIN_WIDTH));
       })
       .attr('stroke', d => {
         const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
@@ -178,11 +204,12 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
         const flowValue = d.flow && d.flow[currentHour] ? d.flow[currentHour] : 0;
         if (Math.abs(flowValue) === 0) return 'link';
         
-        // Determine animation speed based on flow intensity
+        // Determine animation speed based on flow intensity using config constants
         const absFlow = Math.abs(flowValue);
         let speedClass = '';
-        if (absFlow > 5) speedClass = '-fast';
-        else if (absFlow < 1) speedClass = '-slow';
+        if (absFlow > FLOW_CONFIG.FAST_THRESHOLD) speedClass = '-fast';
+        else if (absFlow > FLOW_CONFIG.SLOW_THRESHOLD) speedClass = '';
+        else speedClass = '-slow';
         
         // Add animation class based on flow direction and speed
         return flowValue > 0 ? `link link-flow${speedClass}` : `link link-flow-reverse${speedClass}`;
@@ -197,10 +224,10 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
         const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
         if (flowValue === 0) return;
         
-        // Enhanced hover effect
+        // Enhanced hover effect with configurable scaling
         d3.select(this)
-          .attr('stroke-width', Math.max(6, parseInt(d3.select(this).attr('stroke-width')) * 1.5))
-          .style('filter', 'brightness(1.3) drop-shadow(0 0 8px currentColor)');
+          .attr('stroke-width', Math.max(FLOW_CONFIG.HOVER_MIN_WIDTH, parseInt(d3.select(this).attr('stroke-width')) * FLOW_CONFIG.HOVER_SCALE))
+          .style('filter', 'brightness(1.4) drop-shadow(0 0 12px currentColor)');
         
         // Show link tooltip - use nodeData from simulation for consistent references
         const sourceNode = nodeData.find(n => n.id === (d.source.id || d.source));
@@ -236,8 +263,8 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
         const flowValue = linkDatum?.flow?.[currentHour] || 0;
         let originalWidth = 0;
         if (Math.abs(flowValue) > 0) {
-          const normalizedFlow = Math.min(Math.abs(flowValue) / 10, 1);
-          originalWidth = 3 + (normalizedFlow * 3);
+          const normalizedFlow = Math.min(Math.abs(flowValue) / FLOW_CONFIG.MAX_FLOW_VALUE, 1);
+          originalWidth = FLOW_CONFIG.MIN_WIDTH + (normalizedFlow * (FLOW_CONFIG.MAX_WIDTH - FLOW_CONFIG.MIN_WIDTH));
         }
         
         d3.select(this)

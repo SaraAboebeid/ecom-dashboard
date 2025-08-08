@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { GraphData, Node, Link, NODE_COLORS } from '../../types';
 import { iconToString } from '../NodeIcons';
+import { hasFixedPosition, getFixedPosition } from '../../utils/nodePositioning';
 
 interface GraphNodesProps {
   containerRef: React.RefObject<SVGGElement | null>;
@@ -64,22 +65,49 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
     // Use the same node data from simulation to ensure consistency
     const nodeData = simulation.nodes() as Node[]; // Use simulation.nodes() directly for better sync
 
-    // Drag functions
+    // Drag functions that respect fixed positions
     const dragstarted = (event: any, d: any) => {
+      // Don't allow dragging of nodes with fixed positions
+      if (hasFixedPosition(d.id)) {
+        // Change cursor to indicate non-draggable
+        d3.select(event.sourceEvent.target.parentNode).style('cursor', 'not-allowed');
+        return;
+      }
       if (!event.active) simulation.alphaTarget(0.3).restart();
       d.fx = d.x;
       d.fy = d.y;
+      // Change cursor to indicate dragging
+      d3.select(event.sourceEvent.target.parentNode).style('cursor', 'grabbing');
     };
 
     const dragged = (event: any, d: any) => {
+      // Don't allow dragging of nodes with fixed positions
+      if (hasFixedPosition(d.id)) {
+        return;
+      }
       d.fx = event.x;
       d.fy = event.y;
     };
 
     const dragended = (event: any, d: any) => {
       if (!event.active) simulation.alphaTarget(0);
-      d.fx = null;
-      d.fy = null;
+      
+      // Reset cursor based on node type
+      const cursor = hasFixedPosition(d.id) ? 'pointer' : 'grab';
+      d3.select(event.sourceEvent.target.parentNode).style('cursor', cursor);
+      
+      // Preserve fixed positions, only release non-fixed nodes
+      if (!hasFixedPosition(d.id)) {
+        d.fx = null;
+        d.fy = null;
+      } else {
+        // Restore original fixed position if it was somehow changed
+        const fixedPos = getFixedPosition(d.id);
+        if (fixedPos) {
+          d.fx = fixedPos.x;
+          d.fy = fixedPos.y;
+        }
+      }
     };
 
     // Create node groups
@@ -89,7 +117,7 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
       .data(nodeData as Node[])
       .enter().append('g')
       .attr('class', (d: Node) => `node node-${d.type}`)
-      .style('cursor', 'pointer')
+      .style('cursor', d => hasFixedPosition(d.id) ? 'pointer' : 'grab')
       .on('click', (event: MouseEvent, d: Node) => {
         event.stopPropagation();
         onNodeClick(d);

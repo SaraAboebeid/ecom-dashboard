@@ -1,6 +1,7 @@
 import { useEffect, useRef, useMemo } from 'react';
 import * as d3 from 'd3';
 import { GraphData, Node, NODE_COLORS } from '../../types';
+import { hasFixedPosition, getFixedPosition } from '../../utils/nodePositioning';
 
 interface GraphNodesOptimizedProps {
   containerRef: React.RefObject<SVGGElement | null>;
@@ -61,22 +62,49 @@ export const GraphNodesOptimized: React.FC<GraphNodesOptimizedProps> = ({
     // Get node data from simulation to ensure positions are synchronized
     const nodeData = simulation.nodes() as any[];
 
-    // Simplified drag functions
+    // Simplified drag functions that respect fixed positions
     const dragstarted = (event: any, d: any) => {
+      // Don't allow dragging of nodes with fixed positions
+      if (hasFixedPosition(d.id)) {
+        // Change cursor to indicate non-draggable
+        d3.select(event.sourceEvent.target.parentNode).style('cursor', 'not-allowed');
+        return;
+      }
       if (!event.active) simulation.alphaTarget(0.3).restart();
       d.fx = d.x;
       d.fy = d.y;
+      // Change cursor to indicate dragging
+      d3.select(event.sourceEvent.target.parentNode).style('cursor', 'grabbing');
     };
 
     const dragged = (event: any, d: any) => {
+      // Don't allow dragging of nodes with fixed positions
+      if (hasFixedPosition(d.id)) {
+        return;
+      }
       d.fx = event.x;
       d.fy = event.y;
     };
 
     const dragended = (event: any, d: any) => {
       if (!event.active) simulation.alphaTarget(0);
-      d.fx = null;
-      d.fy = null;
+      
+      // Reset cursor based on node type
+      const cursor = hasFixedPosition(d.id) ? 'pointer' : 'grab';
+      d3.select(event.sourceEvent.target.parentNode).style('cursor', cursor);
+      
+      // Preserve fixed positions, only release non-fixed nodes
+      if (!hasFixedPosition(d.id)) {
+        d.fx = null;
+        d.fy = null;
+      } else {
+        // Restore original fixed position if it was somehow changed
+        const fixedPos = getFixedPosition(d.id);
+        if (fixedPos) {
+          d.fx = fixedPos.x;
+          d.fy = fixedPos.y;
+        }
+      }
     };
 
     // Create simplified node groups
@@ -85,7 +113,7 @@ export const GraphNodesOptimized: React.FC<GraphNodesOptimizedProps> = ({
       .data(nodeData)
       .enter().append('g')
       .attr('class', d => `node node-${d.type}`)
-      .style('cursor', 'pointer')
+      .style('cursor', d => hasFixedPosition(d.id) ? 'pointer' : 'grab')
       .on('click', (event: MouseEvent, d: Node) => {
         event.stopPropagation();
         onNodeClick(d);
@@ -118,7 +146,11 @@ export const GraphNodesOptimized: React.FC<GraphNodesOptimizedProps> = ({
       .call(d3.drag()
         .on('start', dragstarted)
         .on('drag', dragged)
-        .on('end', dragended) as any);
+        .on('end', dragended)
+        .filter((event: any, d: any) => {
+          // Allow drag events for all nodes, but handle them differently in the functions
+          return true;
+        }) as any);
 
     // Main node circle with consistent sizing
     nodeSelection.append('circle')

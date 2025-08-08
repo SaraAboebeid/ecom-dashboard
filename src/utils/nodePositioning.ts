@@ -47,6 +47,7 @@ const ORIGINAL_NODE_POSITIONS: Record<string, { x: number; y: number }> = {
   'Vasa 7': { x: 245.196, y: 236.308 },
   'Vasa 15': { x: 381.065, y: 334.557 },
   'PV-Plant': { x: 195.531, y: 1079.886 },
+  'GRID': { x: 197.562, y: 495.081 }, // Placeholder for grid node
 };
 
 /**
