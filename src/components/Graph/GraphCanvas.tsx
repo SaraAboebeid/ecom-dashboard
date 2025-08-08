@@ -86,8 +86,8 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
     selectedNode
   });
 
-  // Choose appropriate nodes component based on performance settings
-  const NodesComponent = performanceConfig.enableNodeIcons ? GraphNodes : GraphNodesOptimized;
+  // Force GraphNodes with icons for now (instead of checking performance config)
+  const NodesComponent = GraphNodes;
 
   // Calculate centered position for background image
   const imageWidth = 565.752;

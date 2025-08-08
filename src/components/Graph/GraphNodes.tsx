@@ -218,38 +218,35 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
           : 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))';
       });
 
-    // Add SVG icons inside nodes with caching
+    // Add text icon labels inside nodes (direct text approach instead of SVG)
     nodeSelection.each(function(d: Node) {
       const node = d3.select(this);
       const nodeType = d.type;
       
-      // Check cache first to avoid re-parsing SVG
-      let iconElement = iconCacheRef.current.get(nodeType);
-      if (!iconElement) {
-        const iconSvgString = iconToString(nodeType);
-        if (iconSvgString) {
-          const parser = new DOMParser();
-          const iconDoc = parser.parseFromString(iconSvgString, 'image/svg+xml');
-          iconElement = iconDoc.documentElement.cloneNode(true) as SVGElement;
-          iconCacheRef.current.set(nodeType, iconElement);
+      // Get icon name for this node type
+      const iconName = (() => {
+        switch(nodeType) {
+          case 'building': return 'apartment';
+          case 'pv': return 'wb_sunny';
+          case 'grid': return 'grid_on';
+          case 'battery': return 'battery_charging_full';
+          case 'charge_point': return 'ev_station';
+          default: return '';
         }
-      }
+      })();
       
-      // Insert cached SVG icon in the center of the node
-      const iconSize = 24;
-      
-      if (iconElement) {
-        const clonedIcon = iconElement.cloneNode(true) as SVGElement;
-        
-        // Append the icon to the node
-        node.node()?.appendChild(clonedIcon);
-        
-        // Position the icon in the center - use transform instead of x/y for better performance
-        d3.select(clonedIcon)
-          .attr('width', iconSize * 2)
-          .attr('height', iconSize * 2)
-          .attr('transform', `translate(${-iconSize}, ${-iconSize - 8})`)
+      if (iconName) {
+        // Add a text element with Material Symbols icon
+        node.append('text')
+          .attr('class', 'material-symbols-outlined node-icon')
+          .attr('text-anchor', 'middle')
+          .attr('dominant-baseline', 'central')
+          .attr('dy', '-8px') // Position slightly above center
           .attr('fill', 'white')
+          .style('font-size', '30px')
+          .style('pointer-events', 'none')
+          .style('user-select', 'none')
+          .text(iconName)
           .attr('opacity', () => {
             // Check if this node has any active energy flow
             const hasFlow = data.links.some(link => {

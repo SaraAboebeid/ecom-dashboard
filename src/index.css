@@ -14,6 +14,24 @@ html, body, #root {
   animation: none !important;
 }
 
+/* Material Symbols icon styles */
+.material-symbols-outlined.node-icon {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  color: white;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
 /* Energy flow animations */
 @keyframes flow {
   0% {

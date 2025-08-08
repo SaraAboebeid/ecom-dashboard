@@ -14,7 +14,7 @@ export const PERFORMANCE_PRESETS = {
   HIGH_PERFORMANCE: {
     enableParticles: false,
     enableComplexTooltips: false,
-    enableNodeIcons: false,
+    enableNodeIcons: true,
     enableSmoothAnimations: false,
     maxParticles: 0,
     maxVisibleLinks: 20,
@@ -25,7 +25,7 @@ export const PERFORMANCE_PRESETS = {
   BALANCED: {
     enableParticles: true,
     enableComplexTooltips: true,
-    enableNodeIcons: false,
+    enableNodeIcons: true,
     enableSmoothAnimations: true,
     maxParticles: 8,
     maxVisibleLinks: 50,
