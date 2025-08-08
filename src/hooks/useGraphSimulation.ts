@@ -26,7 +26,9 @@ export const useGraphSimulation = ({
   selectedNode
 }: UseGraphSimulationProps) => {
   const simulationRef = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null);
+  const zoomInitializedRef = useRef(false);
 
+  // Effect for creating/recreating simulation only when structure changes
   useEffect(() => {
     if (!svgRef.current || !containerRef.current || !data.nodes.length) return;
 
@@ -70,61 +72,89 @@ export const useGraphSimulation = ({
     // Node data can be accessed directly via simulation.nodes()
     (simulation as any).linkData = linkData;
 
-    // Add zoom behavior
-    const zoom = d3.zoom()
-      .scaleExtent([0.5, 3])
-      .on('zoom', (event) => {
-        container.attr('transform', event.transform);
-      });
+    // Add zoom behavior only once
+    if (!zoomInitializedRef.current) {
+      const zoom = d3.zoom()
+        .scaleExtent([0.5, 3])
+        .on('zoom', (event) => {
+          container.attr('transform', event.transform);
+        });
 
-    svg.call(zoom as any);
+      svg.call(zoom as any);
+      zoomInitializedRef.current = true;
 
-    // Apply initial zoom immediately with a reasonable default view
-    const initialScale = 0.6;
-    const initialTransform = d3.zoomIdentity
-      .translate(width * 0.15, height * 0.15)
-      .scale(initialScale);
-    
-    svg.call(zoom.transform as any, initialTransform);
+      // Only apply initial zoom on first setup
+      const initialScale = 0.6;
+      const initialTransform = d3.zoomIdentity
+        .translate(width * 0.15, height * 0.15)
+        .scale(initialScale);
+      
+      svg.call(zoom.transform as any, initialTransform);
 
-    // Set a better zoom after nodes have settled
-    setTimeout(() => {
-      const nodes = nodeData as any[];
-      if (nodes.length === 0) return;
-      
-      const padding = 120;
-      const minX = Math.min(...nodes.map(d => d.x || 0)) - padding;
-      const maxX = Math.max(...nodes.map(d => d.x || 0)) + padding;
-      const minY = Math.min(...nodes.map(d => d.y || 0)) - padding;
-      const maxY = Math.max(...nodes.map(d => d.y || 0)) + padding;
-      
-      const graphWidth = maxX - minX;
-      const graphHeight = maxY - minY;
-      
-      // Calculate scale to fit the graph with some margin
-      const scaleX = (width * 0.8) / graphWidth;
-      const scaleY = (height * 0.8) / graphHeight;
-      const scale = Math.min(scaleX, scaleY, 0.7);
-      
-      // Calculate translation to center the graph
-      const translateX = (width - graphWidth * scale) / 2 - minX * scale;
-      const translateY = (height - graphHeight * scale) / 2 - minY * scale;
-      
-      const optimizedTransform = d3.zoomIdentity
-        .translate(translateX, translateY)
-        .scale(scale);
-      
-      svg.transition()
-        .duration(1500)
-        .ease(d3.easeQuadOut)
-        .call(zoom.transform as any, optimizedTransform);
-    }, 1000);
+      // Set a better zoom after nodes have settled - only on first load
+      setTimeout(() => {
+        const nodes = nodeData as any[];
+        if (nodes.length === 0) return;
+        
+        const padding = 120;
+        const minX = Math.min(...nodes.map(d => d.x || 0)) - padding;
+        const maxX = Math.max(...nodes.map(d => d.x || 0)) + padding;
+        const minY = Math.min(...nodes.map(d => d.y || 0)) - padding;
+        const maxY = Math.max(...nodes.map(d => d.y || 0)) + padding;
+        
+        const graphWidth = maxX - minX;
+        const graphHeight = maxY - minY;
+        
+        // Calculate scale to fit the graph with some margin
+        const scaleX = (width * 0.8) / graphWidth;
+        const scaleY = (height * 0.8) / graphHeight;
+        const scale = Math.min(scaleX, scaleY, 0.7);
+        
+        // Calculate translation to center the graph
+        const translateX = (width - graphWidth * scale) / 2 - minX * scale;
+        const translateY = (height - graphHeight * scale) / 2 - minY * scale;
+        
+        const optimizedTransform = d3.zoomIdentity
+          .translate(translateX, translateY)
+          .scale(scale);
+        
+        svg.transition()
+          .duration(1500)
+          .ease(d3.easeQuadOut)
+          .call(zoom.transform as any, optimizedTransform);
+      }, 1000);
+    }
 
     // Cleanup function
     return () => {
       simulation.stop();
     };
-  }, [svgRef, containerRef, data, dimensions, graphStructureKey, filtersKey, selectedNode]);
+  }, [svgRef, containerRef, dimensions, graphStructureKey]); // Only recreate simulation when graph structure actually changes
+
+  // Separate effect for updating data without recreating simulation
+  useEffect(() => {
+    if (!simulationRef.current) return;
+
+    const simulation = simulationRef.current;
+    
+    // Update nodes and links data without recreating the simulation
+    const nodeData = applyFixedPositions(data.nodes.map(d => ({ ...d })));
+    const linkData = data.links.map(d => ({ ...d }));
+    
+    // Update simulation nodes and links
+    simulation.nodes(nodeData as d3.SimulationNodeDatum[]);
+    
+    const linkForce = simulation.force('link') as d3.ForceLink<d3.SimulationNodeDatum, d3.SimulationLinkDatum<d3.SimulationNodeDatum>>;
+    if (linkForce) {
+      linkForce.links(linkData);
+    }
+    
+    // Store updated link data
+    (simulation as any).linkData = linkData;
+    
+    // Gently restart simulation with low alpha to avoid jarring movements
+    simulation.alpha(0.1).restart();
+  }, [data]);
 
   return {
     simulation: simulationRef.current

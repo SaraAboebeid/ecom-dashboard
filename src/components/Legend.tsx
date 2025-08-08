@@ -169,6 +169,38 @@ export const Legend = ({
             {minFlow.toFixed(1)} kWh
           </div>
         </div>
+
+        {/* Energy Flow Colors */}
+        <div className="space-y-2">
+          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            Energy Flow Colors
+          </h4>
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-1 bg-green-500 rounded"></div>
+              <span className="text-xs text-gray-600 dark:text-gray-400">Grid Energy</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-1 bg-amber-500 rounded"></div>
+              <span className="text-xs text-gray-600 dark:text-gray-400">Solar Energy</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-1 bg-blue-500 rounded"></div>
+              <span className="text-xs text-gray-600 dark:text-gray-400">Battery Energy</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-1 bg-purple-500 rounded"></div>
+              <span className="text-xs text-gray-600 dark:text-gray-400">Building Energy</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-1 bg-pink-500 rounded"></div>
+              <span className="text-xs text-gray-600 dark:text-gray-400">Charging Energy</span>
+            </div>
+            <div className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+              * Opacity indicates flow intensity
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

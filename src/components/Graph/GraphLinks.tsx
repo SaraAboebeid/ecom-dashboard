@@ -41,9 +41,61 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
     // Check if data actually changed to prevent unnecessary updates
     const currentDataKey = JSON.stringify(data.links.map(l => ({ source: l.source, target: l.target })));
     if (currentDataKey === lastDataRef.current && container.selectAll('.link').size() > 0) {
-      // Even if structure hasn't changed, we still need to update the tick function
-      // to ensure synchronization with current simulation state
+      // Even if structure hasn't changed, we still need to update the visual properties
+      // for the current hour and update the tick function
       const existingLinks = container.selectAll('.link');
+      
+      // Update visual properties based on current hour flow values
+      existingLinks
+        .attr('stroke-opacity', (d: any) => {
+          const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
+          if (flowValue === 0) return 0;
+          // Use opacity to show flow intensity (0.3 to 1.0 range)
+          const normalizedFlow = Math.min(flowValue / 10, 1); // Normalize to max 10kW
+          return 0.3 + (normalizedFlow * 0.7);
+        })
+        .attr('stroke-width', (d: any) => {
+          const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
+          if (flowValue === 0) return 0;
+          // Subtle width variation (2-4px range)
+          const normalizedFlow = Math.min(flowValue / 10, 1);
+          return 2 + (normalizedFlow * 2);
+        })
+        .attr('stroke', (d: any) => {
+          const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
+          if (flowValue === 0) return '#999';
+          
+          // Color based on source node type
+          const sourceNode = nodeData.find(n => n.id === (d.source.id || d.source));
+          if (!sourceNode) return '#999';
+          
+          switch (sourceNode.type) {
+            case 'grid': return '#10B981'; // Green
+            case 'pv': return '#F59E0B';   // Yellow/Amber
+            case 'battery': return '#3B82F6'; // Blue
+            case 'building': return '#8B5CF6'; // Purple
+            case 'charge_point': return '#EC4899'; // Pink
+            default: return '#6B7280'; // Gray
+          }
+        })
+        .attr('class', (d: any) => {
+          const flowValue = d.flow && d.flow[currentHour] ? d.flow[currentHour] : 0;
+          if (Math.abs(flowValue) === 0) return 'link';
+          
+          // Determine animation speed based on flow intensity
+          const absFlow = Math.abs(flowValue);
+          let speedClass = '';
+          if (absFlow > 5) speedClass = '-fast';
+          else if (absFlow < 1) speedClass = '-slow';
+          
+          // Add animation class based on flow direction and speed
+          return flowValue > 0 ? `link link-flow${speedClass}` : `link link-flow-reverse${speedClass}`;
+        })
+        .style('cursor', (d: any) => {
+          const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
+          return flowValue > 0 ? 'pointer' : 'default';
+        });
+      
       const updateLinkPositions = () => {
         existingLinks
           .attr('x1', (d: any) => d.source.x)
@@ -71,18 +123,50 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
       .selectAll('line')
       .data(linkData)
       .enter().append('line')
-      .attr('class', 'link')
-      .attr('stroke', '#999')
       .attr('stroke-dasharray', '12 12')
       .attr('stroke-opacity', d => {
-        // Hide links with no energy flow
         const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
-        return flowValue > 0 ? 0.6 : 0;
+        if (flowValue === 0) return 0;
+        // Use opacity to show flow intensity (0.3 to 1.0 range)
+        const normalizedFlow = Math.min(flowValue / 10, 1); // Normalize to max 10kW
+        return 0.3 + (normalizedFlow * 0.7);
       })
       .attr('stroke-width', d => {
-        // Use current hour's flow value for stroke width
         const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
-        return flowValue > 0 ? Math.sqrt(flowValue) * 2 + 1 : 0;
+        if (flowValue === 0) return 0;
+        // Subtle width variation (2-4px range)
+        const normalizedFlow = Math.min(flowValue / 10, 1);
+        return 2 + (normalizedFlow * 2);
+      })
+      .attr('stroke', d => {
+        const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
+        if (flowValue === 0) return '#999';
+        
+        // Color based on source node type
+        const sourceNode = nodeData.find(n => n.id === (d.source.id || d.source));
+        if (!sourceNode) return '#999';
+        
+        switch (sourceNode.type) {
+          case 'grid': return '#10B981'; // Green
+          case 'pv': return '#F59E0B';   // Yellow/Amber  
+          case 'battery': return '#3B82F6'; // Blue
+          case 'building': return '#8B5CF6'; // Purple
+          case 'charge_point': return '#EC4899'; // Pink
+          default: return '#6B7280'; // Gray
+        }
+      })
+      .attr('class', d => {
+        const flowValue = d.flow && d.flow[currentHour] ? d.flow[currentHour] : 0;
+        if (Math.abs(flowValue) === 0) return 'link';
+        
+        // Determine animation speed based on flow intensity
+        const absFlow = Math.abs(flowValue);
+        let speedClass = '';
+        if (absFlow > 5) speedClass = '-fast';
+        else if (absFlow < 1) speedClass = '-slow';
+        
+        // Add animation class based on flow direction and speed
+        return flowValue > 0 ? `link link-flow${speedClass}` : `link link-flow-reverse${speedClass}`;
       })
       .style('cursor', d => {
         // Only show pointer cursor for links with energy flow
@@ -112,6 +196,16 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
             tooltipContent += `<div>Flow: ${d.flow[currentHour].toFixed(2)} kW</div>`;
           }
           
+          // Add energy source type
+          const sourceTypeLabel = {
+            'grid': 'Grid Energy',
+            'pv': 'Solar Energy',
+            'battery': 'Battery Energy',
+            'building': 'Building Energy',
+            'charge_point': 'Charging Energy'
+          }[sourceNode.type] || 'Energy';
+          tooltipContent += `<div class="text-sm text-gray-500">Source: ${sourceTypeLabel}</div>`;
+          
           tooltip.showTooltip(tooltipContent, event);
         }
       })
@@ -119,9 +213,14 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
         tooltip.updateTooltipPosition(event);
       })
       .on('mouseout', function(this: SVGLineElement) {
-        // Reset hover styling
-        const flowValue = linkData.find(l => l === d3.select(this).datum())?.flow?.[currentHour] || 0;
-        const originalWidth = flowValue > 0 ? Math.sqrt(Math.abs(flowValue)) * 2 + 1 : 0;
+        // Reset hover styling using current hour's flow value
+        const linkDatum = d3.select(this).datum() as any;
+        const flowValue = linkDatum?.flow?.[currentHour] || 0;
+        let originalWidth = 0;
+        if (Math.abs(flowValue) > 0) {
+          const normalizedFlow = Math.min(Math.abs(flowValue) / 10, 1);
+          originalWidth = 2 + (normalizedFlow * 2);
+        }
         
         d3.select(this)
           .attr('stroke-width', originalWidth)

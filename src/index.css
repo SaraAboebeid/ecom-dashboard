@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Energy flow animations */
+@keyframes flow {
+  0% {
+    stroke-dashoffset: 24; /* Same as dash array length */
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes flow-reverse {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 24; /* Same as dash array length */
+  }
+}
+
+.link-flow {
+  animation: flow 2s linear infinite;
+}
+
+.link-flow-reverse {
+  animation: flow-reverse 2s linear infinite;
+}
+
+/* Fast flow animations for high energy */
+.link-flow-fast {
+  animation: flow 1s linear infinite;
+}
+
+.link-flow-reverse-fast {
+  animation: flow-reverse 1s linear infinite;
+}
+
+/* Slow flow animations for low energy */
+.link-flow-slow {
+  animation: flow 3s linear infinite;
+}
+
+.link-flow-reverse-slow {
+  animation: flow-reverse 3s linear infinite;
+}

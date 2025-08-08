@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { GraphData, Node } from '../../types';
 import { useGraphData } from '../../hooks/useGraphData';
 import { useGraphDimensions } from '../../hooks/useGraphDimensions';
@@ -57,7 +57,7 @@ export const Graph: React.FC<GraphProps> = ({
   const tooltip = useGraphTooltip();
 
   // Function to fit graph to view (can be called manually)
-  const fitGraphToView = () => {
+  const fitGraphToView = useCallback(() => {
     if (!svgRef.current) return;
     
     const svg = d3.select(svgRef.current);
@@ -95,7 +95,7 @@ export const Graph: React.FC<GraphProps> = ({
       .duration(1500)
       .ease(d3.easeQuadOut)
       .call(zoom.transform as any, optimizedTransform);
-  };
+  }, [processedData.nodes, dimensions]);
 
   // Expose fitGraphToView function to parent component
   useEffect(() => {
