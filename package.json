@@ -16,8 +16,10 @@
     "@heroicons/react": "^2.2.0",
     "@mui/icons-material": "^7.3.1",
     "@types/d3": "^7.4.3",
+    "@types/d3-sankey": "^0.12.4",
     "chartjs": "^0.3.24",
     "d3": "^7.9.0",
+    "d3-sankey": "^0.12.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

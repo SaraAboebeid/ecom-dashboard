@@ -4,6 +4,7 @@ import { Timeline } from './components/Timeline';
 import { Legend } from './components/Legend';
 import { DashboardHeader } from './components/DashboardHeader';
 import { FpsCounter } from './components/FpsCounter';
+import { SankeyDrawer } from './components/SankeyDrawer';
 import { GraphData } from './types';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   const [minFlow, setMinFlow] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [fitToViewFn, setFitToViewFn] = useState<(() => void) | null>(null);
+  const [isSankeyOpen, setIsSankeyOpen] = useState(false);
 
   useEffect(() => {
     fetch('/graph.json')
@@ -234,12 +236,33 @@ function App() {
           maxCapacity={data ? Math.max(...data.nodes.map(n => n.capacity || n.installed_capacity || 0)) : 100}
         />
 
-        <Timeline
-          currentHour={currentHour}
-          isPlaying={isPlaying}
-          onHourChange={setCurrentHour}
-          onPlayPause={togglePlayPause}
-        />
+        <div className="relative">
+          <button
+            onClick={() => setIsSankeyOpen(!isSankeyOpen)}
+            className="fixed left-1/2 transform -translate-x-1/2 bg-blue-500 dark:bg-blue-600 text-white rounded-t-md px-4 py-2 text-sm font-medium shadow-md z-50 hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors"
+            style={{ bottom: 'calc(var(--timeline-height, 96px) + 8px)' }}
+          >
+            {isSankeyOpen ? 'Hide' : 'Show'} Energy Flow Diagram
+          </button>
+          <Timeline
+            currentHour={currentHour}
+            isPlaying={isPlaying}
+            onHourChange={setCurrentHour}
+            onPlayPause={togglePlayPause}
+            isSankeyOpen={isSankeyOpen}
+          />
+        </div>
+        
+        {/* Sankey Diagram Drawer */}
+        {data && (
+          <SankeyDrawer
+            isOpen={isSankeyOpen}
+            onClose={() => setIsSankeyOpen(false)}
+            data={data}
+            currentHour={currentHour}
+            isDarkMode={isDarkMode}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface TimelineProps {
   currentHour: number;
   isPlaying: boolean;
   onHourChange: (hour: number) => void;
   onPlayPause: () => void;
+  isSankeyOpen?: boolean;
 }
 
 export const Timeline = ({
@@ -12,8 +13,10 @@ export const Timeline = ({
   isPlaying,
   onHourChange,
   onPlayPause,
+  isSankeyOpen = false,
 }: TimelineProps) => {
   const [localHour, setLocalHour] = useState(currentHour);
+  const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setLocalHour(currentHour);
@@ -42,8 +45,24 @@ export const Timeline = ({
     return `${displayHour}:00 ${ampm}`;
   };
 
+  // Expose the current timeline height via a CSS variable for other components
+  useEffect(() => {
+    const updateVar = () => {
+      const h = rootRef.current?.offsetHeight || 96; // default ~6rem
+      document.documentElement.style.setProperty('--timeline-height', `${h}px`);
+    };
+    updateVar();
+    window.addEventListener('resize', updateVar);
+    return () => window.removeEventListener('resize', updateVar);
+  }, [isSankeyOpen, isPlaying, localHour]);
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg p-4">
+    <div
+      ref={rootRef}
+      className={`fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-lg p-4 z-40 ${
+        isSankeyOpen ? 'border-t-4 border-blue-500' : ''
+      }`}
+    >
       <div className="max-w-7xl mx-auto flex items-center gap-4">
         <button
           onClick={onPlayPause}
