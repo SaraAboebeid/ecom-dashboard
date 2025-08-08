@@ -136,48 +136,6 @@ function App() {
     }
   };
 
-  const filteredData = useMemo(() => {
-    if (!data) return { nodes: [], links: [] };
-    return {
-      nodes: data.nodes.filter(node => {
-        // Filter by node type
-        if (!activeTypes.has(node.type)) return false;
-        
-        // Filter by owner (if owner filter is applied and node has owner)
-        if (node.owner && activeOwners.size > 0 && !activeOwners.has(node.owner)) {
-          return false;
-        }
-        
-        // Filter by V2G capability (for charge points)
-        if (node.type === 'charge_point' && v2gFilter !== 'all') {
-          if (v2gFilter === 'v2g-only' && !node.is_v2g) return false;
-          if (v2gFilter === 'no-v2g' && node.is_v2g) return false;
-        }
-        
-        // Filter by capacity range
-        const nodeCapacity = node.capacity || node.installed_capacity || 0;
-        if (nodeCapacity > 0 && (nodeCapacity < capacityRange.min || nodeCapacity > capacityRange.max)) {
-          return false;
-        }
-        
-        return true;
-      }),
-      links: data.links.filter(link => {
-        const sourceNode = data.nodes.find(n => n.id === link.source);
-        const targetNode = data.nodes.find(n => n.id === link.target);
-        return (
-          sourceNode &&
-          targetNode &&
-          activeTypes.has(sourceNode.type) &&
-          activeTypes.has(targetNode.type) &&
-          (!sourceNode.owner || activeOwners.size === 0 || activeOwners.has(sourceNode.owner)) &&
-          (!targetNode.owner || activeOwners.size === 0 || activeOwners.has(targetNode.owner)) &&
-          Math.abs(link.flow[currentHour]) >= minFlow
-        );
-      }),
-    };
-  }, [data, activeTypes, activeOwners, v2gFilter, capacityRange, currentHour, minFlow]);
-
   const filters = useMemo(() => ({
     nodeTypes: activeTypes,
     minFlow,
@@ -229,7 +187,7 @@ function App() {
         </div>
 
         <Graph
-          data={filteredData}
+          data={data}
           currentHour={currentHour}
           filters={filters}
           isTimelinePlaying={isPlaying}

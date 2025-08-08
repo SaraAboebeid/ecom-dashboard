@@ -50,6 +50,7 @@ export const Graph: React.FC<GraphProps> = ({
   const { processedData, kpis, graphStructureKey, filtersKey } = useGraphData({
     data,
     filters,
+    currentHour,
     onKPICalculated
   });
 

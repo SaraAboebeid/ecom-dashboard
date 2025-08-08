@@ -7,6 +7,13 @@ interface LegendProps {
   activeOwners: Set<string>;
   onToggleOwner: (owner: string) => void;
   availableOwners: string[];
+  minFlow?: number;
+  onMinFlowChange?: (value: number) => void;
+  v2gFilter?: 'all' | 'v2g-only' | 'no-v2g';
+  onV2gFilterChange?: (filter: 'all' | 'v2g-only' | 'no-v2g') => void;
+  capacityRange?: { min: number; max: number };
+  onCapacityRangeChange?: (range: { min: number; max: number }) => void;
+  maxCapacity?: number;
 }
 
 export const Legend = ({
@@ -15,10 +22,20 @@ export const Legend = ({
   activeOwners,
   onToggleOwner,
   availableOwners,
+  minFlow = 0,
+  onMinFlowChange,
+  v2gFilter = 'all',
+  onV2gFilterChange,
+  capacityRange = { min: 0, max: 100 },
+  onCapacityRangeChange,
+  maxCapacity = 100
 }: LegendProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isTypeFilterCollapsed, setIsTypeFilterCollapsed] = useState(false);
   const [isOwnerFilterCollapsed, setIsOwnerFilterCollapsed] = useState(false);
+  const [isV2GFilterCollapsed, setIsV2GFilterCollapsed] = useState(false);
+  const [isFlowFilterCollapsed, setIsFlowFilterCollapsed] = useState(false);
+  const [isCapacityFilterCollapsed, setIsCapacityFilterCollapsed] = useState(false);
   const nodeTypes = Object.entries(NODE_COLORS);
 
   return (
@@ -156,6 +173,159 @@ export const Legend = ({
                       </span>
                     </label>
                   ))}
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {/* V2G Filter */}
+          {onV2gFilterChange && (
+            <div className="space-y-1">
+              <button
+                onClick={() => setIsV2GFilterCollapsed(!isV2GFilterCollapsed)}
+                className="w-full flex items-center justify-between text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-700/50"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-1 h-1 bg-purple-500 rounded-full"></div>
+                  <span>V2G Filter</span>
+                </div>
+                <ChevronIcon className={`w-3 h-3 transform transition-transform duration-200 ${
+                  isV2GFilterCollapsed ? 'rotate-180' : 'rotate-0'
+                }`} />
+              </button>
+              <div className={`overflow-hidden transition-all duration-200 ease-in-out ${
+                isV2GFilterCollapsed ? 'max-h-0 opacity-0' : 'max-h-96 opacity-100'
+              }`}>
+                <div className="space-y-0.5 bg-gray-50 dark:bg-gray-700/50 rounded p-1.5">
+                  <label className="flex items-center gap-1.5 cursor-pointer hover:bg-white dark:hover:bg-gray-600/50 rounded p-1 transition-colors">
+                    <input
+                      type="radio"
+                      checked={v2gFilter === 'all'}
+                      onChange={() => onV2gFilterChange('all')}
+                      className="rounded-full text-blue-500 focus:ring-blue-500 focus:ring-1 w-3 h-3"
+                    />
+                    <span className="text-xs text-gray-700 dark:text-gray-300 font-medium leading-tight">All Charging Points</span>
+                  </label>
+                  <label className="flex items-center gap-1.5 cursor-pointer hover:bg-white dark:hover:bg-gray-600/50 rounded p-1 transition-colors">
+                    <input
+                      type="radio"
+                      checked={v2gFilter === 'v2g-only'}
+                      onChange={() => onV2gFilterChange('v2g-only')}
+                      className="rounded-full text-blue-500 focus:ring-blue-500 focus:ring-1 w-3 h-3"
+                    />
+                    <span className="text-xs text-gray-700 dark:text-gray-300 font-medium leading-tight">V2G Only</span>
+                  </label>
+                  <label className="flex items-center gap-1.5 cursor-pointer hover:bg-white dark:hover:bg-gray-600/50 rounded p-1 transition-colors">
+                    <input
+                      type="radio"
+                      checked={v2gFilter === 'no-v2g'}
+                      onChange={() => onV2gFilterChange('no-v2g')}
+                      className="rounded-full text-blue-500 focus:ring-blue-500 focus:ring-1 w-3 h-3"
+                    />
+                    <span className="text-xs text-gray-700 dark:text-gray-300 font-medium leading-tight">Non-V2G Only</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {/* Minimum Flow Filter */}
+          {onMinFlowChange && (
+            <div className="space-y-1">
+              <button
+                onClick={() => setIsFlowFilterCollapsed(!isFlowFilterCollapsed)}
+                className="w-full flex items-center justify-between text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-700/50"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-1 h-1 bg-blue-500 rounded-full"></div>
+                  <span>Min Energy Flow Filter</span>
+                </div>
+                <ChevronIcon className={`w-3 h-3 transform transition-transform duration-200 ${
+                  isFlowFilterCollapsed ? 'rotate-180' : 'rotate-0'
+                }`} />
+              </button>
+              <div className={`overflow-hidden transition-all duration-200 ease-in-out ${
+                isFlowFilterCollapsed ? 'max-h-0 opacity-0' : 'max-h-96 opacity-100'
+              }`}>
+                <div className="space-y-0.5 bg-gray-50 dark:bg-gray-700/50 rounded p-1.5 px-2.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-700 dark:text-gray-300 font-medium">Min Flow: {minFlow}kW</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="50"
+                    step="1"
+                    value={minFlow}
+                    onChange={(e) => onMinFlowChange(Number(e.target.value))}
+                    className="w-full h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full appearance-none cursor-pointer"
+                    style={{
+                      accentColor: '#3b82f6'
+                    }}
+                  />
+                  <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                    <span>0kW</span>
+                    <span>50kW</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {/* Capacity Range Filter */}
+          {onCapacityRangeChange && maxCapacity > 0 && (
+            <div className="space-y-1">
+              <button
+                onClick={() => setIsCapacityFilterCollapsed(!isCapacityFilterCollapsed)}
+                className="w-full flex items-center justify-between text-xs font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors p-1.5 rounded hover:bg-gray-100 dark:hover:bg-gray-700/50"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-1 h-1 bg-amber-500 rounded-full"></div>
+                  <span>Capacity Range Filter</span>
+                </div>
+                <ChevronIcon className={`w-3 h-3 transform transition-transform duration-200 ${
+                  isCapacityFilterCollapsed ? 'rotate-180' : 'rotate-0'
+                }`} />
+              </button>
+              <div className={`overflow-hidden transition-all duration-200 ease-in-out ${
+                isCapacityFilterCollapsed ? 'max-h-0 opacity-0' : 'max-h-96 opacity-100'
+              }`}>
+                <div className="space-y-2 bg-gray-50 dark:bg-gray-700/50 rounded p-1.5 px-2.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-700 dark:text-gray-300 font-medium">
+                      Range: {capacityRange.min}kW - {capacityRange.max}kW
+                    </span>
+                  </div>
+                  <div className="px-1">
+                    <input
+                      type="range"
+                      min="0"
+                      max={maxCapacity}
+                      step="1"
+                      value={capacityRange.min}
+                      onChange={(e) => onCapacityRangeChange({...capacityRange, min: Number(e.target.value)})}
+                      className="w-full h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full appearance-none cursor-pointer"
+                      style={{
+                        accentColor: '#3b82f6'
+                      }}
+                    />
+                    <input
+                      type="range"
+                      min="0"
+                      max={maxCapacity}
+                      step="1"
+                      value={capacityRange.max}
+                      onChange={(e) => onCapacityRangeChange({...capacityRange, max: Number(e.target.value)})}
+                      className="w-full h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full appearance-none cursor-pointer"
+                      style={{
+                        accentColor: '#3b82f6'
+                      }}
+                    />
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                    <span>0kW</span>
+                    <span>{maxCapacity}kW</span>
+                  </div>
                 </div>
               </div>
             </div>
