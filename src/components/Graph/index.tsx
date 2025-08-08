@@ -163,6 +163,7 @@ export const Graph: React.FC<GraphProps> = ({
       <NodeDetailsPanel
         selectedNode={selectedNode}
         onClose={handleCloseNodeDetails}
+        links={data.links}
       />
     </div>
   );

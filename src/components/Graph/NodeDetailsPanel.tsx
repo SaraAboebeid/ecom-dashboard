@@ -1,14 +1,17 @@
-import { Node } from '../../types';
+import { Node, Link } from '../../types';
+import FlowCharts from './components/FlowCharts';
+import { useGraphData } from '../../hooks/useGraphData';
 
 interface NodeDetailsPanelProps {
   selectedNode: Node | null;
   onClose: () => void;
+  links?: Link[];
 }
 
 /**
  * Side panel component for displaying detailed node information
  */
-export const NodeDetailsPanel: React.FC<NodeDetailsPanelProps> = ({ selectedNode, onClose }) => {
+export const NodeDetailsPanel: React.FC<NodeDetailsPanelProps> = ({ selectedNode, onClose, links = [] }) => {
   if (!selectedNode) return null;
 
   const getAttributesByNodeType = () => {
@@ -170,6 +173,11 @@ export const NodeDetailsPanel: React.FC<NodeDetailsPanelProps> = ({ selectedNode
                 <span className="font-semibold">ID:</span> {selectedNode.id}
               </div>
               {getAttributesByNodeType()}
+              
+              {/* Add the flow charts if we have links */}
+              {links && links.length > 0 && (
+                <FlowCharts node={selectedNode} links={links} />
+              )}
             </div>
           </div>
         </div>
