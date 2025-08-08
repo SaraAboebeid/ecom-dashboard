@@ -195,9 +195,8 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
       })
       .attr('fill', (d: Node) => NODE_COLORS[d.type])
       .attr('stroke', 'white')
-      .attr('stroke-width', '1.5')
+      .attr('stroke-width', '1')
       .attr('stroke-opacity', '0.8')
-      .style('transition', 'all 0.3s ease')
       .style('filter', 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))');
 
     // Add SVG icons inside nodes with caching

@@ -98,16 +98,11 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
   // Choose background image based on theme
   const backgroundImage = isDarkMode ? "/3d_topview_dark.png" : "/3d_topview.png";
 
-  // Debug: Log the current theme and image path
-  if (isDarkMode) {
-    console.log('Dark mode: true, Image:', backgroundImage);
-  }
-
   return (
     <svg
       ref={svgRef}
       className="w-full h-full"
-      style={{ background: 'transparent' }}
+      style={{ background: 'transparent', contain: 'layout paint style' }}
     >
       {/* SVG definitions for filters, gradients, and markers removed for simple edges */}
 

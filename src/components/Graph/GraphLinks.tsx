@@ -173,7 +173,6 @@ export const GraphLinks: React.FC<GraphLinksProps> = ({
         const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;
         return flowValue > 0 ? 'pointer' : 'default';
       })
-      .style('transition', 'all 300ms ease')
       .on('mouseover', function(this: SVGLineElement, event: MouseEvent, d: any) {
         // Only show tooltip for links with energy flow
         const flowValue = d.flow && d.flow[currentHour] ? Math.abs(d.flow[currentHour]) : 0;

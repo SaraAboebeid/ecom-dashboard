@@ -47,11 +47,16 @@ export const useGraphTooltip = (options: TooltipOptions = {}) => {
     // Add a MutationObserver to update tooltip styles when dark mode changes
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class' && tooltipRef.current) {
+        if (mutation.attributeName === 'class' && tooltipRef.current && !document.documentElement.classList.contains('disable-transitions')) {
           const isDarkMode = document.documentElement.classList.contains('dark');
-          tooltipRef.current.style.background = isDarkMode ? 'rgba(30, 41, 59, 0.9)' : 'rgba(0, 0, 0, 0.8)';
-          tooltipRef.current.style.boxShadow = isDarkMode ? '0 4px 6px -1px rgba(0, 0, 0, 0.5)' : '0 4px 6px -1px rgba(0, 0, 0, 0.3)';
-          tooltipRef.current.style.border = isDarkMode ? '1px solid rgba(75, 85, 99, 0.5)' : 'none';
+          
+          // Use requestAnimationFrame to batch style updates
+          requestAnimationFrame(() => {
+            if (!tooltipRef.current) return;
+            tooltipRef.current.style.background = isDarkMode ? 'rgba(30, 41, 59, 0.9)' : 'rgba(0, 0, 0, 0.8)';
+            tooltipRef.current.style.boxShadow = isDarkMode ? '0 4px 6px -1px rgba(0, 0, 0, 0.5)' : '0 4px 6px -1px rgba(0, 0, 0, 0.3)';
+            tooltipRef.current.style.border = isDarkMode ? '1px solid rgba(75, 85, 99, 0.5)' : 'none';
+          });
         }
       });
     });

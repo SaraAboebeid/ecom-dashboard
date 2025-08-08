@@ -8,6 +8,12 @@ html, body, #root {
   overflow: hidden;
 }
 
+/* Performance optimization for theme switching */
+.disable-transitions * {
+  transition: none !important;
+  animation: none !important;
+}
+
 /* Energy flow animations */
 @keyframes flow {
   0% {

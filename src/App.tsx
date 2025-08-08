@@ -87,11 +87,29 @@ function App() {
   }, []);
 
   const toggleDarkMode = () => {
+    // 1. First update the state (this doesn't cause immediate DOM updates)
     const newDarkMode = !isDarkMode;
     setIsDarkMode(newDarkMode);
-    document.documentElement.classList.toggle('dark', newDarkMode);
-    // Save preference to localStorage
-    localStorage.setItem('theme', newDarkMode ? 'dark' : 'light');
+    
+    // 2. Schedule DOM updates for the next frame
+    requestAnimationFrame(() => {
+      // Add a class that will temporarily disable transitions
+      document.documentElement.classList.add('disable-transitions');
+      
+      // Toggle dark mode class
+      document.documentElement.classList.toggle('dark', newDarkMode);
+      
+      // Save preference to localStorage
+      localStorage.setItem('theme', newDarkMode ? 'dark' : 'light');
+      
+      // Force a reflow to ensure disable-transitions takes effect
+      document.documentElement.scrollTop;
+      
+      // Remove the class that disables transitions after the update
+      requestAnimationFrame(() => {
+        document.documentElement.classList.remove('disable-transitions');
+      });
+    });
   };
 
   const toggleNodeType = (type: string) => {
@@ -153,7 +171,7 @@ function App() {
   }
 
   return (
-    <div className="h-screen overflow-hidden transition-colors duration-300 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <div className="h-screen overflow-hidden contain-layout bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       {/* FPS Counter */}
       <FpsCounter />
       
