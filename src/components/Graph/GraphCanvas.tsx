@@ -6,6 +6,7 @@ import { GraphLinks } from './GraphLinks';
 import { GraphParticles } from './GraphParticles';
 import { useGraphSimulation } from '../../hooks/useGraphSimulation';
 import { detectPerformanceLevel, PERFORMANCE_PRESETS } from '../../utils/performanceConfig';
+import { getScaledImageDimensions, getImageCenter, COMPASS_ORIENTATION } from '../../utils/backgroundConfig';
 
 interface GraphCanvasProps {
   svgRef: React.RefObject<SVGSVGElement | null>;
@@ -89,9 +90,9 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
   // Force GraphNodes with icons for now (instead of checking performance config)
   const NodesComponent = GraphNodes;
 
-  // Background image dimensions
-  const imageWidth = 565.752;
-  const imageHeight = 1276.608;
+  // Background image dimensions (configurable scaling)
+  const { width: imageWidth, height: imageHeight } = getScaledImageDimensions();
+  const imageCenter = getImageCenter();
 
   // Choose background image based on theme
   const backgroundImage = isDarkMode ? "/3d_topview_dark.png" : "/3d_topview.png";
@@ -106,13 +107,14 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
 
       {/* Main container group for zoom/pan transforms */}
       <g ref={containerRef}>
-        {/* Background image positioned at origin (0,0) */}
+        {/* Background image positioned at origin (0,0) with rotation */}
         <image
           href={backgroundImage}
           x={0}
           y={0}
           width={imageWidth}
           height={imageHeight}
+          transform={`rotate(${COMPASS_ORIENTATION} ${imageCenter.x} ${imageCenter.y})`}
         />
 
         {/* Links layer */}

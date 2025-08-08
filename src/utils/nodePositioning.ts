@@ -1,10 +1,11 @@
 import { Node } from '../types';
+import { BACKGROUND_SCALE, COMPASS_ORIENTATION, rotatePoint, getImageCenter } from './backgroundConfig';
 
 /**
- * Fixed positions for specific nodes in the graph
- * These coordinates align with the background image coordinate system
+ * Original fixed positions for specific nodes in the graph
+ * These coordinates align with the original background image coordinate system
  */
-export const FIXED_NODE_POSITIONS: Record<string, { x: number; y: number }> = {
+const ORIGINAL_NODE_POSITIONS: Record<string, { x: number; y: number }> = {
   'SB1': { x: 184.397, y: 717.074 },
   'Edit': { x: 319.370, y: 759.348 },
   'HA': { x: 374.170, y: 593.310 },
@@ -47,6 +48,36 @@ export const FIXED_NODE_POSITIONS: Record<string, { x: number; y: number }> = {
   'Vasa 15': { x: 381.065, y: 334.557 },
   'PV-Plant': { x: 195.531, y: 1079.886 },
 };
+
+/**
+ * Scaled fixed positions for specific nodes in the graph
+ * These coordinates are automatically scaled and rotated based on BACKGROUND_SCALE and COMPASS_ORIENTATION
+ */
+export const FIXED_NODE_POSITIONS: Record<string, { x: number; y: number }> = 
+  Object.fromEntries(
+    Object.entries(ORIGINAL_NODE_POSITIONS).map(([nodeId, position]) => {
+      // First scale the position
+      const scaledPosition = {
+        x: position.x * BACKGROUND_SCALE,
+        y: position.y * BACKGROUND_SCALE
+      };
+      
+      // Then rotate if needed
+      if (COMPASS_ORIENTATION % 360 !== 0) {
+        const center = getImageCenter();
+        const rotatedPosition = rotatePoint(
+          scaledPosition.x,
+          scaledPosition.y,
+          COMPASS_ORIENTATION,
+          center.x,
+          center.y
+        );
+        return [nodeId, rotatedPosition];
+      }
+      
+      return [nodeId, scaledPosition];
+    })
+  );
 
 /**
  * Apply fixed positions to nodes that have predefined locations

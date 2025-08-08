@@ -6,6 +6,7 @@ import { DashboardHeader } from './components/DashboardHeader';
 import { FpsCounter } from './components/FpsCounter';
 import { SankeyDrawer } from './components/SankeyDrawer';
 import { GraphData } from './types';
+import { COMPASS_ORIENTATION } from './utils/backgroundConfig';
 
 function App() {
   const [data, setData] = useState<GraphData | null>(null);
@@ -192,6 +193,16 @@ function App() {
             <FitToViewIcon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
           </button>
           
+          <div
+            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 shadow-md flex items-center justify-center"
+            title={`Compass orientation: ${COMPASS_ORIENTATION}° clockwise`}
+          >
+            <CompassIcon 
+              className="w-6 h-6 text-gray-700 dark:text-gray-300" 
+              rotation={COMPASS_ORIENTATION}
+            />
+          </div>
+          
           <button
             onClick={toggleDarkMode}
             className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-md transition-all duration-300"
@@ -316,6 +327,51 @@ const FitToViewIcon = ({ className = "w-6 h-6" }) => (
       strokeWidth={2}
       d="M4 8V4h4M20 8V4h-4M4 16v4h4M20 16v4h-4"
     />
+  </svg>
+);
+
+const CompassIcon = ({ className = "w-6 h-6", rotation = 0 }) => (
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ transform: `rotate(${rotation}deg)` }}
+  >
+    {/* Compass circle */}
+    <circle
+      cx="12"
+      cy="12"
+      r="10"
+      strokeWidth={2}
+    />
+    {/* North arrow */}
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M12 2 L16 8 L12 6 L8 8 Z"
+      fill="currentColor"
+    />
+    {/* Center dot */}
+    <circle
+      cx="12"
+      cy="12"
+      r="1"
+      fill="currentColor"
+    />
+    {/* N marker */}
+    <text
+      x="12"
+      y="5"
+      fontSize="8"
+      textAnchor="middle"
+      fill="currentColor"
+      fontWeight="bold"
+    >
+      N
+    </text>
   </svg>
 );
 
