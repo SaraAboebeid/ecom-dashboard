@@ -128,6 +128,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
           data={data}
           currentHour={currentHour}
           simulation={simulation}
+          isPlaying={isTimelinePlaying}
           tooltip={tooltip}
         />
 

@@ -58,8 +58,8 @@ export const GraphNodesOptimized: React.FC<GraphNodesOptimizedProps> = ({
     
     nodesContainerRef.current = nodesContainer.node();
 
-    // Create deep copies to avoid modifying original data
-    const nodeData = data.nodes.map(d => ({ ...d }));
+    // Get node data from simulation to ensure positions are synchronized
+    const nodeData = simulation.nodes() as any[];
 
     // Simplified drag functions
     const dragstarted = (event: any, d: any) => {
@@ -167,10 +167,8 @@ export const GraphNodesOptimized: React.FC<GraphNodesOptimizedProps> = ({
         }
       });
 
-    // Update simulation with new data
+    // Set up tick function for position updates
     if (simulation) {
-      simulation.nodes(nodeData as d3.SimulationNodeDatum[]);
-      
       // Optimized tick function with requestAnimationFrame throttling
       let tickScheduled = false;
       simulation.on('tick', () => {

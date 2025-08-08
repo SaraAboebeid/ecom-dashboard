@@ -45,15 +45,24 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
     // Check if data actually changed to prevent unnecessary updates
     const currentDataKey = JSON.stringify(data.nodes.map(n => ({ id: n.id, type: n.type })));
     if (currentDataKey === lastDataRef.current && container.selectAll('.node').size() > 0) {
-      return; // Skip if structure hasn't changed
+      // Even if structure hasn't changed, we need to ensure tick synchronization
+      const existingNodes = container.selectAll('.node');
+      const updateNodePositions = () => {
+        existingNodes.attr('transform', (d: any) => `translate(${d.x || 0},${d.y || 0})`);
+      };
+      
+      // Re-attach tick listener to ensure synchronization
+      simulation.on('tick.nodes', updateNodePositions);
+      updateNodePositions(); // Initial update
+      return;
     }
     lastDataRef.current = currentDataKey;
     
     // Remove existing nodes
     container.selectAll('.node').remove();
 
-    // Create deep copies to avoid modifying original data
-    const nodeData = data.nodes.map(d => ({ ...d }));
+    // Use the same node data from simulation to ensure consistency
+    const nodeData = simulation.nodes() as Node[]; // Use simulation.nodes() directly for better sync
 
     // Drag functions
     const dragstarted = (event: any, d: any) => {
@@ -77,9 +86,9 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
     const nodeSelection = container.append('g')
       .attr('class', 'nodes-container')
       .selectAll('g')
-      .data(nodeData)
+      .data(nodeData as Node[])
       .enter().append('g')
-      .attr('class', d => `node node-${d.type}`)
+      .attr('class', (d: Node) => `node node-${d.type}`)
       .style('cursor', 'pointer')
       .on('click', (event: MouseEvent, d: Node) => {
         event.stopPropagation();
@@ -168,7 +177,7 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
 
     // Main node circle
     nodeSelection.append('circle')
-      .attr('class', d => `node-main node-main-${d.type}`)
+      .attr('class', (d: Node) => `node-main node-main-${d.type}`)
       .attr('r', (d: Node) => {
         let baseRadius = 30;
         switch(d.type) {
@@ -184,7 +193,12 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
             return baseRadius;
         }
       })
-      .attr('fill', d => NODE_COLORS[d.type]);
+      .attr('fill', (d: Node) => NODE_COLORS[d.type])
+      .attr('stroke', 'white')
+      .attr('stroke-width', '1.5')
+      .attr('stroke-opacity', '0.8')
+      .style('transition', 'all 0.3s ease')
+      .style('filter', 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))');
 
     // Add SVG icons inside nodes with caching
     nodeSelection.each(function(d: Node) {
@@ -229,6 +243,9 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
         .attr('font-size', '12px')
         .attr('font-weight', 'bold')
         .attr('pointer-events', 'none')
+        .style('font-family', 'system-ui, -apple-system, sans-serif')
+        .style('text-shadow', '0px 0px 2px rgba(0, 0, 0, 0.8)')
+        .style('user-select', 'none')
         .text(() => {
           const label = d.name || d.id;
           return label.substring(0, 2);
@@ -243,6 +260,9 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
         .attr('font-size', '11px')
         .attr('font-weight', 'bold')
         .attr('pointer-events', 'none')
+        .style('font-family', 'system-ui, -apple-system, sans-serif')
+        .style('text-shadow', '0px 0px 2px rgba(0, 0, 0, 0.8)')
+        .style('user-select', 'none')
         .text(() => {
           switch(d.type) {
             case 'pv':
@@ -280,7 +300,7 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
     nodeSelection.append('text')
       .attr('text-anchor', 'middle')
       .attr('dy', '4em')
-      .attr('fill', d => {
+      .attr('fill', (d: Node) => {
         return d.type === 'pv' ? '#333' : '#fff';
       })
       .attr('font-size', '12px')
@@ -316,9 +336,9 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
     if (simulation) {
       simulation.nodes(nodeData as d3.SimulationNodeDatum[]);
       
-      // Update node positions on simulation tick
-      simulation.on('tick', () => {
-        nodeSelection.attr('transform', (d: any) => `translate(${d.x},${d.y})`);
+      // Update node positions on simulation tick - use namespaced event
+      simulation.on('tick.nodes', () => {
+        nodeSelection.attr('transform', (d: any) => `translate(${d.x || 0},${d.y || 0})`);
       });
     }
 
