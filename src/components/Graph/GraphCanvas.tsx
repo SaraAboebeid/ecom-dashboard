@@ -76,7 +76,7 @@ export const GraphCanvas: React.FC<GraphCanvasProps> = ({
   }, [performanceMode]);
 
   // Use the simulation hook
-  const { simulation } = useGraphSimulation({
+  const { simulation, zoom } = useGraphSimulation({
     svgRef,
     containerRef,
     data,

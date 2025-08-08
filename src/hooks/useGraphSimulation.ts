@@ -27,6 +27,7 @@ export const useGraphSimulation = ({
 }: UseGraphSimulationProps) => {
   const simulationRef = useRef<d3.Simulation<d3.SimulationNodeDatum, undefined> | null>(null);
   const zoomInitializedRef = useRef(false);
+  const zoomRef = useRef<d3.ZoomBehavior<Element, unknown> | null>(null);
 
   // Effect for creating/recreating simulation only when structure changes
   useEffect(() => {
@@ -79,6 +80,9 @@ export const useGraphSimulation = ({
         .on('zoom', (event) => {
           container.attr('transform', event.transform);
         });
+      
+      // Store the zoom behavior in the ref for external access
+      zoomRef.current = zoom;
 
       svg.call(zoom as any);
       zoomInitializedRef.current = true;
@@ -157,7 +161,8 @@ export const useGraphSimulation = ({
   }, [data]);
 
   return {
-    simulation: simulationRef.current
+    simulation: simulationRef.current,
+    zoom: zoomRef.current
   };
 };
 

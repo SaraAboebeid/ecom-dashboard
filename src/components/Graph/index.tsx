@@ -60,8 +60,8 @@ export const Graph: React.FC<GraphProps> = ({
   const fitGraphToView = useCallback(() => {
     if (!svgRef.current) return;
     
+    // Get the current SVG element
     const svg = d3.select(svgRef.current);
-    const zoom = d3.zoom().scaleExtent([0.5, 3]);
     
     // Get all nodes from the processed data
     const nodes = processedData.nodes;
@@ -91,10 +91,37 @@ export const Graph: React.FC<GraphProps> = ({
       .translate(translateX, translateY)
       .scale(scale);
     
-    svg.transition()
-      .duration(1500)
-      .ease(d3.easeQuadOut)
-      .call(zoom.transform as any, optimizedTransform);
+    // Create a temporary zoom behavior just for this transform if needed
+    // We're not storing this zoom instance as it's just for the transform
+    const tempZoom = d3.zoom<SVGSVGElement, unknown>()
+      .scaleExtent([0.5, 3])
+      .on('zoom', (event) => {
+        const g = d3.select(svgRef.current!.querySelector('g'));
+        g.attr('transform', event.transform);
+      });
+    
+    svg.call(tempZoom as any)
+       .transition()
+       .duration(1500)
+       .ease(d3.easeQuadOut)
+       .call(tempZoom.transform as any, optimizedTransform);
+       
+    // This fix makes sure our zoom events keep working after fitting
+    tempZoom.on('end', () => {
+      // Re-enable the original zoom behavior after transition completes
+      svg.on('.zoom', null); // Clear any zoom handlers
+      
+      // Re-initialize the original zoom behavior
+      const newZoom = d3.zoom<SVGSVGElement, unknown>()
+        .scaleExtent([0.5, 3])
+        .on('zoom', (event) => {
+          const g = d3.select(svgRef.current!.querySelector('g'));
+          g.attr('transform', event.transform);
+        });
+      
+      svg.call(newZoom as any)
+         .call(newZoom.transform as any, optimizedTransform);
+    });
   }, [processedData.nodes, dimensions]);
 
   // Expose fitGraphToView function to parent component
