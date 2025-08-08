@@ -197,7 +197,26 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
       .attr('stroke', 'white')
       .attr('stroke-width', '1')
       .attr('stroke-opacity', '0.8')
-      .style('filter', 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))');
+      .attr('opacity', (d: Node) => {
+        // If this node has flow data for the current hour, make it fully opaque
+        const hasFlow = data.links.some(link => {
+          const isInvolved = link.source === d.id || link.target === d.id;
+          const hasCurrentFlow = link.flow && Math.abs(link.flow[currentHour]) > 0;
+          return isInvolved && hasCurrentFlow;
+        });
+        return hasFlow ? 1.0 : 0.5; // 50% opacity for inactive nodes
+      })
+      .style('filter', (d: Node) => {
+        // If this node has flow data for the current hour, add a glow effect
+        const hasFlow = data.links.some(link => {
+          const isInvolved = link.source === d.id || link.target === d.id;
+          const hasCurrentFlow = link.flow && Math.abs(link.flow[currentHour]) > 0;
+          return isInvolved && hasCurrentFlow;
+        });
+        return hasFlow 
+          ? 'drop-shadow(0 0 8px rgba(255,255,255,0.4)) drop-shadow(2px 4px 6px rgba(0,0,0,0.3))' 
+          : 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))';
+      });
 
     // Add SVG icons inside nodes with caching
     nodeSelection.each(function(d: Node) {
@@ -230,7 +249,16 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
           .attr('width', iconSize * 2)
           .attr('height', iconSize * 2)
           .attr('transform', `translate(${-iconSize}, ${-iconSize - 8})`)
-          .attr('fill', 'white');
+          .attr('fill', 'white')
+          .attr('opacity', () => {
+            // Check if this node has any active energy flow
+            const hasFlow = data.links.some(link => {
+              const isInvolved = link.source === d.id || link.target === d.id;
+              const hasCurrentFlow = link.flow && Math.abs(link.flow[currentHour]) > 0;
+              return isInvolved && hasCurrentFlow;
+            });
+            return hasFlow ? 1.0 : 0.7; // Slightly fade icons for inactive nodes
+          });
       }
       
       // Add text label inside the node
@@ -346,16 +374,16 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
 
   }, [containerRef, simulation, data.nodes, data.links, selectedNode, onNodeClick, tooltip]);
 
-  // Removed automatic hour-based updates for better performance
-  // useEffect(() => {
-  //   if (!containerRef.current) return;
+  // Update node styling when the current hour changes
+  useEffect(() => {
+    if (!containerRef.current) return;
 
-  //   const container = d3.select(containerRef.current);
-  //   const nodeSelection = container.selectAll('.node');
+    const container = d3.select(containerRef.current);
+    const nodeSelection = container.selectAll('.node');
     
-  //   updateNodeStyling(nodeSelection, currentHour);
+    updateNodeStyling(nodeSelection, currentHour);
 
-  // }, [currentHour, containerRef]);
+  }, [currentHour, containerRef, data.links]);
 
   // Helper function to update node styling based on current hour and energy flows
   const updateNodeStyling = (nodeSelection: d3.Selection<any, any, any, any>, hour: number) => {
@@ -363,9 +391,33 @@ export const GraphNodes: React.FC<GraphNodesProps> = ({
       // Base radius for calculations
       const baseRadius = 30;
       
-      // Use fixed radius with no transitions for better performance
-      d3.select(this).select('.node-main')
-        .attr('r', baseRadius);
+      const nodeElement = d3.select(this);
+      const nodeCircle = nodeElement.select('.node-main');
+      
+      // Check if this node has any active energy flow at current hour
+      const hasFlow = data.links.some(link => {
+        const isInvolved = link.source === d.id || link.target === d.id;
+        const hasCurrentFlow = link.flow && Math.abs(link.flow[hour]) > 0;
+        return isInvolved && hasCurrentFlow;
+      });
+      
+      // Update node circle
+      nodeCircle
+        .attr('r', baseRadius)
+        .attr('opacity', hasFlow ? 1.0 : 0.5)
+        .style('filter', hasFlow 
+          ? 'drop-shadow(0 0 8px rgba(255,255,255,0.4)) drop-shadow(2px 4px 6px rgba(0,0,0,0.3))' 
+          : 'drop-shadow(2px 4px 6px rgba(0,0,0,0.3))');
+      
+      // Update icon opacity if it exists
+      const nodeIcon = nodeElement.select('svg');
+      if (!nodeIcon.empty()) {
+        nodeIcon.attr('opacity', hasFlow ? 1.0 : 0.7);
+      }
+      
+      // Update text elements
+      nodeElement.selectAll('text')
+        .attr('opacity', hasFlow ? 1.0 : 0.7);
     });
   };
 
