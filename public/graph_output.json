@@ -1456,7 +1456,7 @@
       "type": "pv"
     },
     {
-      "id": "PV_community PV-Plant",
+      "id": "PV_PV-Plant",
       "DEFAULT_LAT": 57.68873,
       "DEFAULT_LON": 11.977887,
       "DEFAULT_NAME": "Default PV Plant",
@@ -1466,12 +1466,12 @@
       "azimuth": 31.999458602157308,
       "custom_slope": null,
       "hourly_df": "       hoy  value\n0        1    0.0\n1        2    0.0\n2        3    0.0\n3        4    0.0\n4        5    0.0\n...    ...    ...\n8755  8756    0.0\n8756  8757    0.0\n8757  8758    0.0\n8758  8759    0.0\n8759  8760    0.0\n\n[8760 rows x 2 columns]",
-      "hourly_result": "Hourly PV Production for community PV-Plant\nCategory: ENERGY\nUnits: KILOWATT_HOUR\nSource: community PV-Plant\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 53,053.68 kWh, Avg: 6.06 kWh, Max: 46.89 kWh, Min: 0.00 kWh",
+      "hourly_result": "Hourly PV Production for PV-Plant\nCategory: ENERGY\nUnits: KILOWATT_HOUR\nSource: PV-Plant\nShape: (8760, 2)\nColumns: hoy, value\nFirst row: hoy: 1.0, value: 0.0\nvalue | Total: 53,053.68 kWh, Avg: 6.06 kWh, Max: 46.89 kWh, Min: 0.00 kWh",
       "installed_capacity": 65.45,
       "lat": 57.68873,
       "lon": 11.977887,
       "module_count": 187,
-      "name": "community PV-Plant",
+      "name": "PV-Plant",
       "percentage": 100.0,
       "pv_module": "PV Module: MC2 350W Panel\nRated Power: 350.0 W\nArea: 2.00 m\u00b2 | Efficiency: 17.50 %\nTotal Cost: 1085.00 SEK/panel\nTotal Embodied CO\u2082: 215.25 kgCO\u2082e/panel",
       "slope": 0.4689290943340946,
@@ -86531,7 +86531,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Fysik origo",
       "flow": [
         0.0,
@@ -86585,7 +86585,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "IT",
       "flow": [
         0.0,
@@ -86639,7 +86639,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Elkraftteknik",
       "flow": [
         0.0,
@@ -86693,7 +86693,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Id\u00e9l\u00e4ra",
       "flow": [
         0.0,
@@ -86747,7 +86747,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "HC",
       "flow": [
         0.0,
@@ -86801,7 +86801,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "HA",
       "flow": [
         0.0,
@@ -86855,7 +86855,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "SB2",
       "flow": [
         0.0,
@@ -86909,7 +86909,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Edit",
       "flow": [
         0.0,
@@ -86963,7 +86963,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "HB",
       "flow": [
         0.0,
@@ -87017,7 +87017,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "SB1",
       "flow": [
         0.0,
@@ -87071,7 +87071,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "SB3",
       "flow": [
         0.0,
@@ -87125,7 +87125,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Maskinteknik",
       "flow": [
         0.0,
@@ -87179,7 +87179,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Gamla matte",
       "flow": [
         0.0,
@@ -87233,7 +87233,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Lokalkontor",
       "flow": [
         0.0,
@@ -87287,7 +87287,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "CA-Huset",
       "flow": [
         0.0,
@@ -87341,7 +87341,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "CSB Chabo",
       "flow": [
         0.0,
@@ -87395,7 +87395,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "CSB Gibraltarvallen guesthouse",
       "flow": [
         0.0,
@@ -87449,7 +87449,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "CSB Holtermansgatan",
       "flow": [
         0.0,
@@ -87503,7 +87503,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Emils k\u00e5rhus",
       "flow": [
         0.0,
@@ -87557,7 +87557,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "JSP",
       "flow": [
         0.0,
@@ -87611,7 +87611,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "K\u00e5rhus entr\u00e9",
       "flow": [
         0.0,
@@ -87665,7 +87665,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "K\u00e5rresturangen",
       "flow": [
         0.0,
@@ -87719,7 +87719,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "MC2",
       "flow": [
         0.0,
@@ -87773,7 +87773,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Nya Matte",
       "flow": [
         0.0,
@@ -87827,7 +87827,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Reaktorfysik",
       "flow": [
         0.0,
@@ -87881,7 +87881,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Teknikparken",
       "flow": [
         0.0,
@@ -87935,7 +87935,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Vasa 1",
       "flow": [
         0.0,
@@ -87989,7 +87989,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Vasa 4",
       "flow": [
         0.0,
@@ -88043,7 +88043,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Vasa 7",
       "flow": [
         0.0,
@@ -88097,7 +88097,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Vasa 8",
       "flow": [
         0.0,
@@ -88151,7 +88151,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Vasa 9",
       "flow": [
         0.0,
@@ -88205,7 +88205,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Vasa 10",
       "flow": [
         0.0,
@@ -88259,7 +88259,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Vasa 11",
       "flow": [
         0.0,
@@ -88313,7 +88313,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Vasa 12",
       "flow": [
         0.0,
@@ -88367,7 +88367,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Vasa 13",
       "flow": [
         0.0,
@@ -88421,7 +88421,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Vasa 15",
       "flow": [
         0.0,
@@ -88475,7 +88475,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "AWL",
       "flow": [
         0.0,
@@ -88529,7 +88529,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Bibliotek",
       "flow": [
         0.0,
@@ -88583,7 +88583,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "Kemi",
       "flow": [
         0.0,
@@ -88637,7 +88637,7 @@
       ]
     },
     {
-      "source": "PV_community PV-Plant",
+      "source": "PV_PV-Plant",
       "target": "GRID",
       "flow": [
         0.0,
